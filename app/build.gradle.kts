@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -5,6 +8,10 @@ plugins {
     id("kotlin-parcelize")
     id("com.google.devtools.ksp")
 }
+val apiKeyPropertiesFile = rootProject.file("local.properties")
+val apiKeyProperties = Properties()
+apiKeyProperties.load(FileInputStream(apiKeyPropertiesFile))
+
 
 android {
     namespace = "com.barryzea.androidflavours"
@@ -18,6 +25,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        //Api key desde local properties
+        buildConfigField("String","MY_API_KEY",apiKeyProperties.getProperty("MY_API_KEY")?:"")
     }
 
     buildTypes {
@@ -28,6 +38,9 @@ android {
                 "proguard-rules.pro"
             )
         }
+    }
+    buildFeatures{
+        buildConfig = true
     }
     //En gradle kts se usa de esta forma
     //para organizar las variantes dentro de una categoría usamos las dimensiones
