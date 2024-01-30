@@ -26,6 +26,37 @@ android {
             )
         }
     }
+    //En gradle kts se usa de esta forma
+    //para organizar las variantes dentro de una categoría usamos las dimensiones
+    //podemos agregar las que necesitemos
+    flavorDimensions.add("version")
+    productFlavors{
+        create("free"){
+            dimension = "version"
+            applicationId = "com.barryzea.androidflavours.free"
+            //Podemos  establecer el nombre de la app para cada tipo de producto directamente en el archivo AndroidManifest.xml
+            manifestPlaceholders["appLabel"] = "TMDBFree"
+            /* y en el manifest lo siguiente
+            <application>
+              android:label="${appLabel}"
+              ...
+              >
+                <activity
+                android:name=".MainActivity"
+                android:label="${appLabel}"
+                ...
+
+            * */
+
+        }
+        create("paid"){
+            dimension = "version"
+            applicationId = "com.barryzea.androidflavours.paid"
+            manifestPlaceholders["appLabel"] = "TMDBPro"
+        }
+
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
