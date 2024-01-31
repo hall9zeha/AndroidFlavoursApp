@@ -41,6 +41,7 @@ android {
     }
     buildFeatures{
         buildConfig = true
+        viewBinding = true
     }
     //En gradle kts se usa de esta forma
     //para organizar las variantes dentro de una categoría usamos las dimensiones
