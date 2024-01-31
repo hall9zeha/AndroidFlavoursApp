@@ -6,7 +6,6 @@ import com.barryzea.androidflavours.data.repository.Repository
 /**
  * Project AndroidFlavours
  * Created by Barry Zea H. on 31/01/2024.
- * Copyright (c)  All rights reserved.
  **/
 
 class FetchMovies(private val repository: Repository):UseCases {

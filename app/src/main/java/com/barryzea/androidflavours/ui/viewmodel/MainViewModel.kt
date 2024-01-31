@@ -13,7 +13,6 @@ import javax.inject.Inject
 /**
  * Project AndroidFlavours
  * Created by Barry Zea H. on 31/01/2024.
- * Copyright (c)  All rights reserved.
  **/
 
 @HiltViewModel
