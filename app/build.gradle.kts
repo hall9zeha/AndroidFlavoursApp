@@ -88,6 +88,7 @@ val room_version = "2.6.1"
 val splash_scree_version ="1.0.1"
 val retrofit_version = "2.9.0"
 val glide_version = "4.16.0"
+val okhttp_bom = "4.11.0"
 
 dependencies {
 
@@ -98,6 +99,8 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation ("androidx.activity:activity-ktx:1.8.2")
+    implementation ("androidx.fragment:fragment-ktx:1.6.2")
 
     //Dagger hilt
     implementation("com.google.dagger:hilt-android:${hilt_version}")
@@ -116,6 +119,11 @@ dependencies {
     //Retrofit
     implementation ("com.squareup.retrofit2:retrofit:$retrofit_version")
     implementation ("com.squareup.retrofit2:converter-gson:$retrofit_version")
+
+    //Okhttp
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:$okhttp_bom"))
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
 
     //Glide
     implementation ("com.github.bumptech.glide:glide:$glide_version")

@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
  * Project AndroidFlavours
  * Created by Barry Zea H. on 30/01/2024.
  **/
-data class TmdbMovieResult(
+data class TmdbResult(
     val pages:Int=0,
     @SerializedName("results")val movies:ArrayList<Movie> = arrayListOf<Movie>(),
     @SerializedName("total_pages")val total_pages:Int=0,
