@@ -6,4 +6,7 @@
     </style>
 
     <style name="Theme.AndroidFlavours" parent="Base.Theme.AndroidFlavours" />
+    <style name="ImageView_CornerRadiuos" parent="">
+        <item name="cornerSize">8dp</item>
+    </style>
 </resources>
