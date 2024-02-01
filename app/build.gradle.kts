@@ -90,6 +90,7 @@ val splash_scree_version ="1.0.1"
 val retrofit_version = "2.9.0"
 val glide_version = "4.16.0"
 val okhttp_bom = "4.11.0"
+val shimer_layout_version = "0.5.0"
 
 dependencies {
 
@@ -129,5 +130,8 @@ dependencies {
     //Glide
     implementation ("com.github.bumptech.glide:glide:$glide_version")
     ksp ("com.github.bumptech.glide:compiler:$glide_version")
+
+    //Shimmer layout
+    implementation ("com.facebook.shimmer:shimmer:$shimer_layout_version")
 
 }

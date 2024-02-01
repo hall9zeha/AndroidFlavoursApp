@@ -1,8 +1,10 @@
-package com.barryzea.androidflavours
+package com.barryzea.androidflavours.ui.activities
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.barryzea.androidflavours.databinding.ActivityMainBinding
@@ -20,9 +22,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bind= ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
+        setUpShimmerLayout(true)
         setUpAdapter()
         viewModel.fetchMovies(1)
         viewModel.movies.observe(this){
+            setUpShimmerLayout(false)
             movieAdapter?.addAll(it.movies)
         }
         viewModel.infoMsg.observe(this){
@@ -30,12 +34,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun setUpAdapter(){
+
         movieAdapter = MovieAdapter()
         mLayoutManager=GridLayoutManager(this@MainActivity,3)
         bind.rvMovies.apply {
             layoutManager = mLayoutManager
             setHasFixedSize(true)
             adapter=movieAdapter
+        }
+    }
+    private fun setUpShimmerLayout(enable:Boolean){
+        if(enable){
+            bind.shimmerLoading.shimmerLoading.startShimmer()
+        }else{
+            bind.shimmerLoading.shimmerLoading.stopShimmer()
+            bind.shimmerLoading.shimmerLoading.visibility = View.GONE
         }
     }
 }
