@@ -10,11 +10,11 @@ import kotlinx.parcelize.Parcelize
  **/
 data class TmdbResult(
     val pages:Int=0,
-    @SerializedName("results")val movies:ArrayList<Movie> = arrayListOf<Movie>(),
+    @SerializedName("results")val movies:ArrayList<TmdbMovie> = arrayListOf<TmdbMovie>(),
     @SerializedName("total_pages")val total_pages:Int=0,
     @SerializedName("total_result")val total_result:Int=0)
 @Parcelize
-data class Movie(
+data class TmdbMovie(
     val adult:Boolean=false,
     @SerializedName("backdrop_path") val backdropPath:String?="",
     @SerializedName("genre_ids")val genreIds:List<Int> = listOf(),
@@ -34,7 +34,7 @@ data class Movie(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as Movie
+        other as TmdbMovie
 
         return id == other.id
     }
