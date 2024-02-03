@@ -14,7 +14,7 @@ import com.barryzea.androidflavours.databinding.ItemMovieBinding
  * Created by Barry Zea H. on 01/02/2024.
  **/
 
-class MovieAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MovieAdapter(private val onItemClick:(TmdbMovie)->Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var listMovies:MutableList<TmdbMovie> = arrayListOf()
     private var isLoading = false
     private val VIEW_TYPE_MOVIE = 1
@@ -38,6 +38,7 @@ class MovieAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             VIEW_TYPE_MOVIE->{
                 (holder as ViewHolder).itemBind.apply{
                     ivMovie.loadUrl("https://image.tmdb.org/t/p/w185/${movie.posterPath}")
+                    root.setOnClickListener { onItemClick(movie) }
                 }
             }
         }

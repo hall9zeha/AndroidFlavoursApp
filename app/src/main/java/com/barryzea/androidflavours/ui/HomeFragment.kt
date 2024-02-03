@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.barryzea.androidflavours.R
 import com.barryzea.androidflavours.common.utils.PaginationRecyclerView
+import com.barryzea.androidflavours.data.entities.TmdbMovie
 import com.barryzea.androidflavours.data.entities.TmdbResult
 import com.barryzea.androidflavours.databinding.FragmentHomeBinding
 import com.barryzea.androidflavours.ui.adapters.MovieAdapter
@@ -82,7 +84,7 @@ class HomeFragment : Fragment() {
     }
     private fun setUpAdapter(){
 
-        movieAdapter = MovieAdapter()
+        movieAdapter = MovieAdapter(::onItemClick)
         mLayoutManager=GridLayoutManager(context,3)
         bind.rvMovies.apply {
             layoutManager = mLayoutManager
@@ -90,6 +92,11 @@ class HomeFragment : Fragment() {
             adapter=movieAdapter
         }
     }
+
+    private fun onItemClick(movie: TmdbMovie) {
+        Navigation.findNavController(bind.root).navigate(R.id.action_home_to_detail)
+    }
+
     private fun setUpShimmerLayout(enable:Boolean){
         if(enable){
             bind.shimmerLoading.shimmerLoading.startShimmer()
