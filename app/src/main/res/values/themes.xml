@@ -4,10 +4,11 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.AndroidFlavours" parent="Base.Theme.AndroidFlavours" />
-    <style name="ImageView_CornerRadiuos" parent="">
+    <style name="ImageView_CornerRadius" parent="">
         <item name="cornerSize">8dp</item>
     </style>
 </resources>

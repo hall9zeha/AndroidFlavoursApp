@@ -11,7 +11,6 @@ import com.google.android.material.textview.MaterialTextView
 /**
  * Project AndroidFlavours
  * Created by Barry Zea H. on 03/02/2024.
- * Copyright (c)  All rights reserved.
  **/
 
 class MovieDetailInfo @JvmOverloads constructor(
