@@ -28,6 +28,7 @@
 
         <activity
             android:name=".ui.activities.DetailActivity"
+            android:theme="@style/Base.Theme.AndroidFlavours.NoActionBar"
             android:exported="false" />
     </application>
 

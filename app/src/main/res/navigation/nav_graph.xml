@@ -16,7 +16,8 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right">
+        </action>
 
     </fragment>
 
@@ -25,7 +26,20 @@
         android:id="@+id/detailActivity"
         android:name="com.barryzea.androidflavours.ui.activities.DetailActivity"
         android:label="activity_detail"
-        tools:layout="@layout/activity_detail" />
+        tools:layout="@layout/activity_detail" >
+
+        <!-- Estamos compartiendo nuestra entidad TmdbMovies(que es una clase parcelable para este propósito)
+            a través del componente de navegación, podríamos compartir  el id(app:argType="integer") y recuperar los datos en la actividad de detalle
+            pero la intención de complicarnos la vida con un parcelable es aprender -->
+        <!-- Ya que detailActivity es el punto final de nuestra acción que se origina en homeFragment
+         es aquí donde recibiremos los argumentos, por eso los declaramos aquí y no en homeFragment-->
+        <argument
+            android:name="movie"
+            app:argType="com.barryzea.androidflavours.data.entities.TmdbMovie"
+            android:defaultValue="@null"
+            app:nullable="true"
+            />
+    </activity>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.barryzea.androidflavours.SettingsFragment"

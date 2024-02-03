@@ -7,6 +7,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
     id("com.google.devtools.ksp")
+    id("androidx.navigation.safeargs.kotlin")
 }
 val apiKeyPropertiesFile = rootProject.file("local.properties")
 val apiKeyProperties = Properties()

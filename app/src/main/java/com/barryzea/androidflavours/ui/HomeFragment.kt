@@ -94,7 +94,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun onItemClick(movie: TmdbMovie) {
-        Navigation.findNavController(bind.root).navigate(R.id.action_home_to_detail)
+        //Al usar la librería safeArgs con navigation se creará una clase con el nombre de nuestro fragment o activity de origen
+        //donde tengamos una acción establecida como en este caso que es (HomeFragment), estas clases siempre llevaran adjunto el nombre
+        //Directions (HomeFragmentDirections) y nuestra acción recivirá un argumento de tipo "TmdbMovie" (.actionHomeToDetail(movie))
+        val action = HomeFragmentDirections.actionHomeToDetail(movie)
+        Navigation.findNavController(bind.root).navigate(action)
     }
 
     private fun setUpShimmerLayout(enable:Boolean){
