@@ -1,5 +1,6 @@
 package com.barryzea.androidflavours.ui.activities
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +20,7 @@ class DetailActivity : AppCompatActivity() {
         bind = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(bind.root)
         setUpDetail()
+
     }
     private fun setUpDetail()= with(bind) {
         args.movie?.let {m ->
