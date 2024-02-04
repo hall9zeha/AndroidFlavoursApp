@@ -8,4 +8,5 @@ import com.barryzea.androidflavours.data.entities.TmdbResponse
  **/
 interface UseCases {
     suspend fun fetchMovies(page:Int):TmdbResponse
+    suspend fun searchMovie(searchValue:String):TmdbResponse
 }

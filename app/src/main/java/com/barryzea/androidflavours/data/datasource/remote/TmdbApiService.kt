@@ -1,6 +1,8 @@
 package com.barryzea.androidflavours.data.datasource.remote
 
+import com.barryzea.androidflavours.data.entities.TmdbMovie
 import com.barryzea.androidflavours.data.entities.TmdbResult
+import com.barryzea.androidflavours.domain.entities.DomainMovie
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -18,4 +20,10 @@ interface TmdbApiService {
         @Query("page")page:Int,
         @Query("language")language:String
     ):Response<TmdbResult>
+
+    @GET("search/movie")
+    suspend fun searchMovie(
+        @Query("query") searchValue:String,
+        @Query("api_key") apiKey:String
+    ):Response<DomainMovie>
 }

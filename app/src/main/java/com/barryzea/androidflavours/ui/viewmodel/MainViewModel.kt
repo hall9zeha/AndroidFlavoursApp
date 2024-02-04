@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.barryzea.androidflavours.data.entities.TmdbResponse
-import com.barryzea.androidflavours.data.entities.TmdbResult
+import com.barryzea.androidflavours.domain.entities.DomainMovie
 import com.barryzea.androidflavours.domain.usecase.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,7 +18,9 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val useCases: UseCases) :ViewModel() {
 
-    var movies:MutableLiveData<TmdbResult> = MutableLiveData()
+    var movies:MutableLiveData<DomainMovie> = MutableLiveData()
+        private set
+    var moviesFound:MutableLiveData<DomainMovie> = MutableLiveData()
         private set
     var infoMsg:MutableLiveData<String> = MutableLiveData()
         private set
@@ -28,6 +30,18 @@ class MainViewModel @Inject constructor(private val useCases: UseCases) :ViewMod
             when(response){
                 is TmdbResponse.Success->{
                     movies.value= response.tmdbResult
+                }
+                is TmdbResponse.Error->{
+                    infoMsg.value = response.msg
+                }
+            }
+        }
+    }
+    fun searchMovie(searchValue:String){
+        viewModelScope.launch{
+            when(val response = useCases.searchMovie(searchValue)){
+                is TmdbResponse.Success->{
+                    moviesFound.value= response.tmdbResult
                 }
                 is TmdbResponse.Error->{
                     infoMsg.value = response.msg

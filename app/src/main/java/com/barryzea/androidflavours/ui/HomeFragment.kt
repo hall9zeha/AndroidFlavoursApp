@@ -16,6 +16,7 @@ import com.barryzea.androidflavours.common.utils.PaginationRecyclerView
 import com.barryzea.androidflavours.data.entities.TmdbMovie
 import com.barryzea.androidflavours.data.entities.TmdbResult
 import com.barryzea.androidflavours.databinding.FragmentHomeBinding
+import com.barryzea.androidflavours.domain.entities.DomainMovie
 import com.barryzea.androidflavours.ui.adapters.MovieAdapter
 import com.barryzea.androidflavours.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -73,12 +74,13 @@ class HomeFragment : Fragment() {
         viewModel.infoMsg.observe(viewLifecycleOwner){
             Log.e("ERROR", it )
         }
+
     }
-    private fun updateUi(tmdbResult: TmdbResult?) {
-        tmdbResult?.let {
+    private fun updateUi(domainMovie: DomainMovie?) {
+        domainMovie?.let {
             setUpShimmerLayout(false)
             if(isLoading && it.movies.isNotEmpty())movieAdapter?.removeLoadingItem()
-            totalPages=it.total_pages
+            totalPages=it.totalPages
             isLastPage=(currentPage >=totalPages)
             isLoading=false
             movieAdapter?.addAll(it.movies)
