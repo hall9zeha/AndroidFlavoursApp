@@ -28,5 +28,16 @@
         <item name="android:windowTranslucentStatus">true</item>
 
     </style>
+    <style name="mySearchBoxStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:textSize">16sp</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/common_padding_max</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/common_padding_max</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/common_padding_max</item>
+        <item name="boxCornerRadiusTopStart">@dimen/common_padding_max</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeColor">@color/white</item>
+    </style>
+
 
 </resources>

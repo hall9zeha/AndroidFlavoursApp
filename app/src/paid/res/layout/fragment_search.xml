@@ -5,17 +5,26 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SearchFragment">
-
-    <TextView
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Fragment search"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:boxStrokeColor="#FF9800"
+        app:hintEnabled="false"
+        app:endIconMode="custom"
 
-        />
-
+        android:layout_marginStart="@dimen/common_padding_micro"
+        android:layout_marginEnd="@dimen/common_padding_micro"
+        app:endIconDrawable="@drawable/ic_search"
+        style="@style/mySearchBoxStyle"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingresa tu búsqueda"
+            android:imeOptions="actionSearch"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

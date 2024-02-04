@@ -65,9 +65,10 @@ class HomeFragment : Fragment() {
         setUpShimmerLayout(true)
         setUpAdapter()
         setUpPagination()
-        if(savedInstanceState==null) {
+        //if(savedInstanceState==null) {
             viewModel.fetchMovies(1)
-        }
+            currentPage=1
+        //}
         viewModel.movies.observe(viewLifecycleOwner, Observer(::updateUi))
         viewModel.infoMsg.observe(viewLifecycleOwner){
             Log.e("ERROR", it )
