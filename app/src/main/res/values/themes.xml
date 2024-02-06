@@ -39,5 +39,8 @@
         <item name="boxStrokeColor">@color/white</item>
     </style>
 
-
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/yellow</item>
+    </style>
 </resources>

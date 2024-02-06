@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardMovie"
@@ -12,22 +12,53 @@
     app:cardCornerRadius="@dimen/common_padding_min"
     app:cardElevation="@dimen/common_padding_micro"
     android:layout_margin="@dimen/common_padding_micro"
-
     >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.google.android.material.imageview.ShapeableImageView
+        android:layout_height="match_parent">
+        <com.barryzea.androidflavours.ui.components.ImageViewCustom
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:id="@+id/ivMovie"
             tools:src="@mipmap/ic_launcher"
             tools:scaleType="centerCrop"
+            app:ratio="1.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#80121212"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingBar"
+            android:clickable="false"
+            tools:rating="4"
+            android:theme="@style/RatingBar"
+            android:layout_marginTop="@dimen/common_padding_min"
+            android:layout_marginStart="@dimen/common_padding_micro"
+            style="?android:attr/ratingBarStyleSmall"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+        <TextView
+            android:id="@+id/tvTittle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/ivMovie"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:shapeAppearanceOverlay="@style/ImageView_CornerRadius"
+            android:layout_margin="@dimen/common_padding_micro"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

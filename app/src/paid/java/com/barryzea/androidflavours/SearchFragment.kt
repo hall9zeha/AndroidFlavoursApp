@@ -62,10 +62,13 @@ class SearchFragment : Fragment() {
     }
     private fun setUpObservers(){
         viewModel.moviesFound.observe(viewLifecycleOwner){
-            it?.let{result->
+           it?.let{result->
                 if(result.movies.isNotEmpty()){
-                    movieAdapter.clear()
+                    setUpShimmerLayout(false)
                     movieAdapter.addAll(result.movies)
+                }else{
+                    setUpShimmerLayout(false)
+                    bind.root.showSnackbar("No hay  resultados para ${bind.edtSearch.text}")
                 }
             }
         }
@@ -84,16 +87,31 @@ class SearchFragment : Fragment() {
     }
     private fun setUpListeners()=with(bind){
         tilSearch.setEndIconOnClickListener {
-            if(edtSearch.text.toString().isNotEmpty()) viewModel.searchMovie(edtSearch.text.toString())
+            if(edtSearch.text.toString().isNotEmpty()){
+                movieAdapter.clear()
+                viewModel.searchMovie(edtSearch.text.toString())}
             edtSearch.onEditorAction(EditorInfo.IME_ACTION_DONE)
+            setUpShimmerLayout(true)
         }
         edtSearch.setOnEditorActionListener{_,actionId,_->
             if(actionId==EditorInfo.IME_ACTION_SEARCH){
-                if(edtSearch.text.toString().isNotEmpty()) viewModel.searchMovie(edtSearch.text.toString())
+                setUpShimmerLayout(true)
+                if(edtSearch.text.toString().isNotEmpty()){
+                    movieAdapter.clear()
+                    viewModel.searchMovie(edtSearch.text.toString())}
                 edtSearch.onEditorAction(EditorInfo.IME_ACTION_DONE)
             }
 
             false
+        }
+    }
+    private fun setUpShimmerLayout(enable:Boolean){
+        if(enable){
+            bind.shimmerLoading.shimmerLoading.visibility=View.VISIBLE
+            bind.shimmerLoading.shimmerLoading.startShimmer()
+        }else{
+            bind.shimmerLoading.shimmerLoading.stopShimmer()
+            bind.shimmerLoading.shimmerLoading.visibility = View.GONE
         }
     }
     private fun onItemClick(movie: TmdbMovie) {

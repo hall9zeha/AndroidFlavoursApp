@@ -38,6 +38,8 @@ class MovieAdapter(private val onItemClick:(TmdbMovie)->Unit): RecyclerView.Adap
             VIEW_TYPE_MOVIE->{
                 (holder as ViewHolder).itemBind.apply{
                     ivMovie.loadUrl("https://image.tmdb.org/t/p/w185/${movie.posterPath}")
+                    tvTittle.text=movie.title
+                    ratingBar.rating=(movie.voteAverage.toFloat() /2)
                     root.setOnClickListener { onItemClick(movie) }
                 }
             }
