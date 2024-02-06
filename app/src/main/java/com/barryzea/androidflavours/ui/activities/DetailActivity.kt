@@ -19,11 +19,12 @@ class DetailActivity : AppCompatActivity() {
 
     }
     private fun setUpDetail()= with(bind) {
-        args.movie?.let {m ->
-            ivMovieDetail.loadUrl("https://image.tmdb.org/t/p/w780${m.backdropPath}")
-            tvMovieDetailDesc.text=m.overview
-            toolbarDetail.title=m.title
-            tvDetail.setMovieInfo(m)
-        }
+         val m = args.movie
+        //args.movie?.let {m ->
+            ivMovieDetail.loadUrl("https://image.tmdb.org/t/p/w780${m?.backdropPath}")
+            tvMovieDetailDesc.text=m?.overview
+            toolbarDetail.title=m?.title
+            tvDetail.setMovieInfo(m!!)
+        //}
     }
 }

@@ -91,7 +91,7 @@ class HomeFragment : Fragment() {
     private fun setUpAdapter(){
 
         movieAdapter = MovieAdapter(::onItemClick)
-        mLayoutManager=GridLayoutManager(context,3)
+        mLayoutManager=GridLayoutManager(context,2)
         bind.rvMovies.apply {
             layoutManager = mLayoutManager
             setHasFixedSize(true)

@@ -21,6 +21,6 @@ class RepositoryImpl @Inject constructor(retrofit: RetrofitService, private val 
     }
 
     override suspend fun searchMovie(searchValue: String): Response<DomainMovie> {
-        return  apiService.searchMovie(searchValue,apiKey)
+        return  apiService.searchMovie(searchValue,apiKey,lang)
     }
 }

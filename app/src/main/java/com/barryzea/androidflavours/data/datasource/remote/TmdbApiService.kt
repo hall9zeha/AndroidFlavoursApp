@@ -24,6 +24,7 @@ interface TmdbApiService {
     @GET("search/movie")
     suspend fun searchMovie(
         @Query("query") searchValue:String,
-        @Query("api_key") apiKey:String
+        @Query("api_key") apiKey:String,
+        @Query("language")language: String
     ):Response<DomainMovie>
 }
