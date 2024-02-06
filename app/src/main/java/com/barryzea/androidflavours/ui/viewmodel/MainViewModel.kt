@@ -3,6 +3,7 @@ package com.barryzea.androidflavours.ui.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.barryzea.androidflavours.common.utils.SingleMutableLiveData
 import com.barryzea.androidflavours.data.entities.TmdbResponse
 import com.barryzea.androidflavours.domain.entities.DomainMovie
 import com.barryzea.androidflavours.domain.usecase.UseCases
@@ -18,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val useCases: UseCases) :ViewModel() {
 
-    var movies:MutableLiveData<DomainMovie> = MutableLiveData()
+    var movies:SingleMutableLiveData<DomainMovie> = SingleMutableLiveData()
         private set
     var moviesFound:MutableLiveData<DomainMovie> = MutableLiveData()
         private set
@@ -26,8 +27,7 @@ class MainViewModel @Inject constructor(private val useCases: UseCases) :ViewMod
         private set
     fun fetchMovies(page:Int){
         viewModelScope.launch {
-            val response = useCases.fetchMovies(page)
-            when(response){
+            when(val response = useCases.fetchMovies(page)){
                 is TmdbResponse.Success->{
                     movies.value= response.tmdbResult
                 }

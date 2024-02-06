@@ -52,6 +52,13 @@ class MovieAdapter(private val onItemClick:(TmdbMovie)->Unit): RecyclerView.Adap
             }
         }
     }
+    fun clear(){
+        if(listMovies.isNotEmpty()){
+            val size=listMovies.size
+            listMovies.clear()
+            notifyItemRangeRemoved(0,size)
+        }
+    }
     fun addLoadingItem(){
         isLoading = true
         listMovies.add(TmdbMovie())

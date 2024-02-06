@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.barryzea.androidflavours.R
+import com.barryzea.androidflavours.common.showSnackbar
 import com.barryzea.androidflavours.common.utils.PaginationRecyclerView
 import com.barryzea.androidflavours.data.entities.TmdbMovie
 import com.barryzea.androidflavours.data.entities.TmdbResult
@@ -68,11 +69,11 @@ class HomeFragment : Fragment() {
         setUpPagination()
         //if(savedInstanceState==null) {
             viewModel.fetchMovies(1)
-            currentPage=1
+
         //}
         viewModel.movies.observe(viewLifecycleOwner, Observer(::updateUi))
         viewModel.infoMsg.observe(viewLifecycleOwner){
-            Log.e("ERROR", it )
+            bind.root.showSnackbar(it)
         }
 
     }

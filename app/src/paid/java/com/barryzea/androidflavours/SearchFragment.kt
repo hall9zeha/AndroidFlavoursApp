@@ -8,7 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
+import com.barryzea.androidflavours.common.showSnackbar
+import com.barryzea.androidflavours.data.entities.TmdbMovie
 import com.barryzea.androidflavours.databinding.FragmentSearchBinding
+import com.barryzea.androidflavours.ui.HomeFragmentDirections
+import com.barryzea.androidflavours.ui.adapters.MovieAdapter
 import com.barryzea.androidflavours.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +29,8 @@ class SearchFragment : Fragment() {
     private var param2: String? = null
     private var _bind:FragmentSearchBinding?=null
     private val viewModel:MainViewModel by viewModels()
+    private lateinit var movieAdapter: MovieAdapter
+    private lateinit var mLayoutManager: GridLayoutManager
     private val bind get() = _bind!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,14 +57,29 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpListeners()
+        setUpAdapter()
         setUpObservers()
     }
     private fun setUpObservers(){
         viewModel.moviesFound.observe(viewLifecycleOwner){
-            Log.e("SEARCH", it.movies.toString() )
+            it?.let{result->
+                if(result.movies.isNotEmpty()){
+                    movieAdapter.clear()
+                    movieAdapter.addAll(result.movies)
+                }
+            }
         }
         viewModel.infoMsg.observe(viewLifecycleOwner){
-            Log.e("SEARCH-ERROR", it )
+            bind.root.showSnackbar(it)
+        }
+    }
+    private fun setUpAdapter(){
+        movieAdapter = MovieAdapter(::onItemClick)
+        mLayoutManager= GridLayoutManager(context,3)
+        bind.rvSearch.apply {
+            layoutManager = mLayoutManager
+            setHasFixedSize(true)
+            adapter=movieAdapter
         }
     }
     private fun setUpListeners()=with(bind){
@@ -67,10 +90,15 @@ class SearchFragment : Fragment() {
         edtSearch.setOnEditorActionListener{_,actionId,_->
             if(actionId==EditorInfo.IME_ACTION_SEARCH){
                 if(edtSearch.text.toString().isNotEmpty()) viewModel.searchMovie(edtSearch.text.toString())
+                edtSearch.onEditorAction(EditorInfo.IME_ACTION_DONE)
             }
 
             false
         }
+    }
+    private fun onItemClick(movie: TmdbMovie) {
+        val action = SearchFragmentDirections.actionSearchToDetail(movie)
+        Navigation.findNavController(bind.root).navigate(action)
     }
     companion object {
         @JvmStatic
