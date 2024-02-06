@@ -67,15 +67,21 @@ class HomeFragment : Fragment() {
         setUpShimmerLayout(true)
         setUpAdapter()
         setUpPagination()
-        //if(savedInstanceState==null) {
-            viewModel.fetchMovies(1)
+        setUpObservers()
 
+    }
+    private fun setUpObservers(){
+        //if(savedInstanceState==null) {
+        viewModel.fetchMovies(1)
+        viewModel.fetchGenres()
         //}
         viewModel.movies.observe(viewLifecycleOwner, Observer(::updateUi))
         viewModel.infoMsg.observe(viewLifecycleOwner){
             bind.root.showSnackbar(it)
         }
-
+        viewModel.genres.observe(viewLifecycleOwner){
+            Log.e("GENRES", it.toString() )
+        }
     }
     private fun updateUi(domainMovie: DomainMovie?) {
         domainMovie?.let {

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.barryzea.androidflavours.common.utils.SingleMutableLiveData
+import com.barryzea.androidflavours.data.entities.Genres
 import com.barryzea.androidflavours.data.entities.TmdbResponse
 import com.barryzea.androidflavours.domain.entities.DomainMovie
 import com.barryzea.androidflavours.domain.usecase.UseCases
@@ -25,10 +26,12 @@ class MainViewModel @Inject constructor(private val useCases: UseCases) :ViewMod
         private set
     var infoMsg:MutableLiveData<String> = MutableLiveData()
         private set
+    var genres:MutableLiveData<Genres> = MutableLiveData()
+        private set
     fun fetchMovies(page:Int){
         viewModelScope.launch {
             when(val response = useCases.fetchMovies(page)){
-                is TmdbResponse.Success->{
+                is TmdbResponse.Success ->{
                     movies.value= response.tmdbResult
                 }
                 is TmdbResponse.Error->{
@@ -45,6 +48,19 @@ class MainViewModel @Inject constructor(private val useCases: UseCases) :ViewMod
                 }
                 is TmdbResponse.Error->{
                     infoMsg.value = response.msg
+                }
+            }
+        }
+    }
+    fun fetchGenres(){
+        viewModelScope.launch {
+            when(val response = useCases.fetchGenres()){
+                is TmdbResponse.Success->{
+                    genres.value = response.tmdbResult
+                }
+                is TmdbResponse.Error->{
+                    infoMsg.value = response.msg
+
                 }
             }
         }

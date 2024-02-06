@@ -15,3 +15,14 @@ data class TmdbResult(
     @SerializedName("results")val movies:ArrayList<TmdbMovie> = arrayListOf<TmdbMovie>(),
     @SerializedName("total_pages")val total_pages:Int=0,
     @SerializedName("total_result")val total_result:Int=0):Parcelable
+
+@Parcelize
+data class Genres(
+    @SerializedName("genres")val genres:List<Genre> = arrayListOf()
+):Parcelable
+
+@Parcelize
+data class Genre(
+    @SerializedName("id") val id:Int = 0,
+    @SerializedName("name")val name:String=""
+):Parcelable
