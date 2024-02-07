@@ -1,7 +1,6 @@
 package com.barryzea.androidflavours.data.repository
 
 import com.barryzea.androidflavours.data.datasource.remote.RetrofitService
-import com.barryzea.androidflavours.data.entities.Genre
 import com.barryzea.androidflavours.data.entities.Genres
 import com.barryzea.androidflavours.data.entities.TmdbResult
 import com.barryzea.androidflavours.domain.entities.DomainMovie
@@ -26,5 +25,9 @@ class RepositoryImpl @Inject constructor(retrofit: RetrofitService, private val 
     }
     override suspend fun fetchGenres(): Response<Genres> {
         return apiService.fetchGenres(apiKey,lang)
+    }
+
+    override suspend fun fetchMoviesByGenre(genreId: Int,page: Int): Response<DomainMovie> {
+        return apiService.fetchMoviesByGenre(apiKey,genreId,lang,page)
     }
 }

@@ -50,7 +50,6 @@ class SearchFragment : Fragment() {
                 return bind.root
             }
         }
-
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
@@ -127,5 +126,10 @@ class SearchFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _bind = null
     }
 }

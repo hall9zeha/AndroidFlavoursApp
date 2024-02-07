@@ -31,7 +31,16 @@ class FetchMovies(private val repository: Repository):UseCases {
     override suspend fun fetchGenres(): TmdbResponse<Genres> {
         return try{
             val response = repository.fetchGenres()
-            if(response.isSuccessful){TmdbResponse.Success(response.body() as Genres)}
+            if(response.isSuccessful){TmdbResponse.Success(response.body()!!)}
+            else{TmdbResponse.Error(response.message())}
+        }catch(e:Exception){
+            TmdbResponse.Error(e.message.toString())
+        }
+    }
+    override suspend fun fetchMoviesByGenre(genreId: Int,page:Int): TmdbResponse<DomainMovie> {
+        return try{
+            val response = repository.fetchMoviesByGenre(genreId,page)
+            if(response.isSuccessful){TmdbResponse.Success(response.body()!!)}
             else{TmdbResponse.Error(response.message())}
         }catch(e:Exception){
             TmdbResponse.Error(e.message.toString())

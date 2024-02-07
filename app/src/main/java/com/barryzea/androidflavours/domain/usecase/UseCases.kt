@@ -12,4 +12,5 @@ interface UseCases {
     suspend fun fetchMovies(page:Int):TmdbResponse<DomainMovie>
     suspend fun searchMovie(searchValue:String):TmdbResponse<DomainMovie>
     suspend fun fetchGenres(): TmdbResponse<Genres>
+    suspend fun fetchMoviesByGenre(genreId:Int, page:Int):TmdbResponse<DomainMovie>
 }

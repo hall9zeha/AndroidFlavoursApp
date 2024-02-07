@@ -15,7 +15,7 @@ import com.barryzea.androidflavours.databinding.GenreItemBinding
  * Copyright (c)  All rights reserved.
  **/
 
-class GenresAdapter:RecyclerView.Adapter<GenresAdapter.ViewHolder>() {
+class GenresAdapter(private val onClick:(genre:Genre)->Unit):RecyclerView.Adapter<GenresAdapter.ViewHolder>() {
     private val genresList:MutableList<Genre> = arrayListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -38,6 +38,7 @@ class GenresAdapter:RecyclerView.Adapter<GenresAdapter.ViewHolder>() {
         private val bindView = GenreItemBinding.bind(itemView)
         fun onBind(genre:Genre)= with(bindView){
             tvGenreTitle.text=genre.name
+            root.setOnClickListener { onClick(genre) }
         }
     }
 }

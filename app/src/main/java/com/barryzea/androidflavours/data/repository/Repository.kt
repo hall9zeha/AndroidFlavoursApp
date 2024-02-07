@@ -13,4 +13,5 @@ interface Repository {
     suspend fun fetchMovies(page:Int):Response<TmdbResult>
     suspend fun searchMovie(searchValue:String):Response<DomainMovie>
     suspend fun fetchGenres():Response<Genres>
+    suspend fun fetchMoviesByGenre(genreId:Int,page:Int):Response<DomainMovie>
 }

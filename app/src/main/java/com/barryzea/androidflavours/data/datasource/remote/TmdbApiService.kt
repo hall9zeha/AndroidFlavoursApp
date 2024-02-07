@@ -35,4 +35,12 @@ interface TmdbApiService {
         @Query("api_key")apiKey:String,
         @Query("language")language:String
     ):Response<Genres>
+
+    @GET("discover/movie")
+    suspend fun fetchMoviesByGenre(
+        @Query("api_key")apiKey:String,
+        @Query("with_genres")genreId:Int,
+        @Query("language")language:String,
+        @Query("page")page:Int
+    ):Response<DomainMovie>
 }

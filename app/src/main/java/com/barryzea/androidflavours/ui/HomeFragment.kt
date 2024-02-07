@@ -18,6 +18,7 @@ import com.barryzea.androidflavours.R
 import com.barryzea.androidflavours.common.showSnackbar
 import com.barryzea.androidflavours.common.utils.DotsIndicatorDecoration
 import com.barryzea.androidflavours.common.utils.PaginationRecyclerView
+import com.barryzea.androidflavours.data.entities.Genre
 import com.barryzea.androidflavours.data.entities.TmdbMovie
 import com.barryzea.androidflavours.data.entities.TmdbResult
 import com.barryzea.androidflavours.databinding.FragmentHomeBinding
@@ -47,6 +48,8 @@ class HomeFragment : Fragment() {
     private var isLoading=false
     private var totalPages=0
     private var isLastPage=false
+    private var fetchByGenre=false
+    private var genreId=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,6 +94,7 @@ class HomeFragment : Fragment() {
                 it.add(response.genres)
             }
         }
+        viewModel.moviesByGenres.observe(viewLifecycleOwner,Observer(::updateUi))
     }
     private fun updateUi(domainMovie: DomainMovie?) {
         domainMovie?.let {
@@ -106,7 +110,7 @@ class HomeFragment : Fragment() {
     private fun setUpAdapter(){
 
         movieAdapter = MovieAdapter(::onItemClick)
-        genresAdapter = GenresAdapter()
+        genresAdapter = GenresAdapter(::onGenreItemClick)
         mLayoutManager=GridLayoutManager(context,2)
         bind.rvMovies.apply {
             layoutManager = mLayoutManager
@@ -124,6 +128,16 @@ class HomeFragment : Fragment() {
             )
         }
 
+    }
+
+    private fun onGenreItemClick(genre: Genre) {
+       movieAdapter?.let{
+           fetchByGenre=true
+           it.clear()
+           currentPage=1
+           genreId=genre.id
+           viewModel.fetchMoviesByGenre(genreId,currentPage)
+       }
     }
 
     private fun onItemClick(movie: TmdbMovie) {
@@ -149,7 +163,8 @@ class HomeFragment : Fragment() {
                 isLoading=true
                 currentPage+=1
                 movieAdapter?.addLoadingItem()
-                viewModel.fetchMovies(currentPage)
+                if(!fetchByGenre)viewModel.fetchMovies(currentPage)
+                else viewModel.fetchMoviesByGenre(genreId,currentPage)
             }
 
             override fun getTotalPageCount() = totalPages
@@ -169,5 +184,10 @@ class HomeFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _bind =null
     }
 }
