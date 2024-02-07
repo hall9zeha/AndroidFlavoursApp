@@ -24,7 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var bind:ActivityMainBinding
+    internal lateinit var bind:ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
     private lateinit var navController:NavController
 

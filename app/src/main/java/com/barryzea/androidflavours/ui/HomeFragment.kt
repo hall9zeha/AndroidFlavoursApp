@@ -22,6 +22,7 @@ import com.barryzea.androidflavours.data.entities.TmdbMovie
 import com.barryzea.androidflavours.data.entities.TmdbResult
 import com.barryzea.androidflavours.databinding.FragmentHomeBinding
 import com.barryzea.androidflavours.domain.entities.DomainMovie
+import com.barryzea.androidflavours.ui.activities.MainActivity
 import com.barryzea.androidflavours.ui.adapters.GenresAdapter
 import com.barryzea.androidflavours.ui.adapters.MovieAdapter
 import com.barryzea.androidflavours.ui.viewmodel.MainViewModel
@@ -142,7 +143,8 @@ class HomeFragment : Fragment() {
         }
     }
     private fun setUpPagination(){
-        bind.rvMovies.addOnScrollListener(object: PaginationRecyclerView(mLayoutManager){
+        val bottomNav = (activity as? MainActivity )?.bind?.bottomNav
+        bind.rvMovies.addOnScrollListener(object: PaginationRecyclerView(bottomNav,mLayoutManager){
             override fun loadMoreItems() {
                 isLoading=true
                 currentPage+=1

@@ -15,7 +15,7 @@
     </style>
     <style name="mCollapsingToolbarLayoutStyle" parent="Widget.Material3.CollapsingToolbar">
         <item name="collapsedTitleTextColor">@color/red_200</item>
-        <item name="contentScrim">?attr/colorPrimary</item>
+        <!--<item name="contentScrim">?attr/colorPrimary</item>-->
         <item name="collapsedTitleTextAppearance">?attr/textAppearanceBodyLarge</item>
     </style>
 
