@@ -30,9 +30,9 @@ class MainViewModel @Inject constructor(private val useCases: UseCases) :ViewMod
         private set
     var moviesByGenres:SingleMutableLiveData<DomainMovie> = SingleMutableLiveData()
         private set
-    fun fetchMovies(page:Int){
+    fun fetchMovies(genreId:Int?,page:Int){
         viewModelScope.launch {
-            when(val response = useCases.fetchMovies(page)){
+            when(val response = useCases.fetchMovies(genreId,page)){
                 is TmdbResponse.Success ->{
                     movies.value= response.tmdbResult
                 }
@@ -67,16 +67,5 @@ class MainViewModel @Inject constructor(private val useCases: UseCases) :ViewMod
             }
         }
     }
-    fun fetchMoviesByGenre(genreId:Int, page:Int){
-        viewModelScope.launch {
-            when (val response = useCases.fetchMoviesByGenre(genreId,page)) {
-                is TmdbResponse.Success->{
-                    moviesByGenres.value = response.tmdbResult
-                }
-                is TmdbResponse.Error->{
-                    infoMsg.value = response.msg
-                }
-            }
-        }
-    }
+
 }

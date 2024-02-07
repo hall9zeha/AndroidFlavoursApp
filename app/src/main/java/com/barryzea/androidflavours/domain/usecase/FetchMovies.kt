@@ -12,8 +12,8 @@ import com.barryzea.androidflavours.domain.entities.toDomain
  * Created by Barry Zea H. on 31/01/2024.
  **/
 class FetchMovies(private val repository: Repository):UseCases {
-    override suspend fun fetchMovies(page: Int) =  try {
-            val response = repository.fetchMovies(page)
+    override suspend fun fetchMovies(genreId:Int?,page: Int) =  try {
+            val response = repository.fetchMovies(genreId,page)
             if (response.isSuccessful){ TmdbResponse.Success(response.body()!!.toDomain())}
             else{ TmdbResponse.Error(response.message())}
           }catch(e:Exception){
@@ -37,13 +37,5 @@ class FetchMovies(private val repository: Repository):UseCases {
             TmdbResponse.Error(e.message.toString())
         }
     }
-    override suspend fun fetchMoviesByGenre(genreId: Int,page:Int): TmdbResponse<DomainMovie> {
-        return try{
-            val response = repository.fetchMoviesByGenre(genreId,page)
-            if(response.isSuccessful){TmdbResponse.Success(response.body()!!)}
-            else{TmdbResponse.Error(response.message())}
-        }catch(e:Exception){
-            TmdbResponse.Error(e.message.toString())
-        }
-    }
+
 }

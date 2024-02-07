@@ -17,12 +17,12 @@ import retrofit2.http.Query
 //Api service
 interface TmdbApiService {
     @GET("discover/movie")
-    suspend fun listMovies(
-        @Query("api_key") apiKey:String,
-        @Query("page")page:Int,
-        @Query("language")language:String
+    suspend fun fetchMovies(
+        @Query("api_key")apiKey:String,
+        @Query("with_genres")genreId:Int?,
+        @Query("language")language:String,
+        @Query("page")page:Int
     ):Response<TmdbResult>
-
     @GET("search/movie")
     suspend fun searchMovie(
         @Query("query") searchValue:String,
@@ -36,11 +36,4 @@ interface TmdbApiService {
         @Query("language")language:String
     ):Response<Genres>
 
-    @GET("discover/movie")
-    suspend fun fetchMoviesByGenre(
-        @Query("api_key")apiKey:String,
-        @Query("with_genres")genreId:Int,
-        @Query("language")language:String,
-        @Query("page")page:Int
-    ):Response<DomainMovie>
 }

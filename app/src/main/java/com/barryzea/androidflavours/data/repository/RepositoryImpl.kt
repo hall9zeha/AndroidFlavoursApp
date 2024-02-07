@@ -15,10 +15,11 @@ import javax.inject.Inject
 class RepositoryImpl @Inject constructor(retrofit: RetrofitService, private val apiKey: String, private val lang:String):Repository {
     private val apiService = retrofit.retrofitService()
     override suspend fun fetchMovies(
+        genreId: Int?,
         page: Int,
 
     ):Response<TmdbResult> {
-        return apiService.listMovies(apiKey,page,lang)
+        return apiService.fetchMovies(apiKey,genreId,lang,page)
     }
     override suspend fun searchMovie(searchValue: String): Response<DomainMovie> {
         return  apiService.searchMovie(searchValue,apiKey,lang)
@@ -27,7 +28,4 @@ class RepositoryImpl @Inject constructor(retrofit: RetrofitService, private val 
         return apiService.fetchGenres(apiKey,lang)
     }
 
-    override suspend fun fetchMoviesByGenre(genreId: Int,page: Int): Response<DomainMovie> {
-        return apiService.fetchMoviesByGenre(apiKey,genreId,lang,page)
-    }
 }

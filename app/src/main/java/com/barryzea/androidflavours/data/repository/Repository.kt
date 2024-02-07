@@ -10,8 +10,8 @@ import retrofit2.Response
  * Created by Barry Zea H. on 31/01/2024.
  **/
 interface Repository {
-    suspend fun fetchMovies(page:Int):Response<TmdbResult>
+    suspend fun fetchMovies(genreId:Int?,page:Int):Response<TmdbResult>
     suspend fun searchMovie(searchValue:String):Response<DomainMovie>
     suspend fun fetchGenres():Response<Genres>
-    suspend fun fetchMoviesByGenre(genreId:Int,page:Int):Response<DomainMovie>
+
 }

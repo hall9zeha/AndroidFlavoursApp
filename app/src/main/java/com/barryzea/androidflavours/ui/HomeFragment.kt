@@ -1,13 +1,10 @@
 package com.barryzea.androidflavours.ui
 
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -20,7 +17,6 @@ import com.barryzea.androidflavours.common.utils.DotsIndicatorDecoration
 import com.barryzea.androidflavours.common.utils.PaginationRecyclerView
 import com.barryzea.androidflavours.data.entities.Genre
 import com.barryzea.androidflavours.data.entities.TmdbMovie
-import com.barryzea.androidflavours.data.entities.TmdbResult
 import com.barryzea.androidflavours.databinding.FragmentHomeBinding
 import com.barryzea.androidflavours.domain.entities.DomainMovie
 import com.barryzea.androidflavours.ui.activities.MainActivity
@@ -77,14 +73,16 @@ class HomeFragment : Fragment() {
         setUpShimmerLayout(true)
         setUpAdapter()
         setUpPagination()
-        setUpObservers()
+        setUpObservers(savedInstanceState)
 
     }
-    private fun setUpObservers(){
-        //if(savedInstanceState==null) {
-        viewModel.fetchMovies(1)
-        viewModel.fetchGenres()
-        //}
+    private fun setUpObservers(savedInstanceState: Bundle?) {
+        if(savedInstanceState==null) {
+            currentPage = 1
+            if(!fetchByGenre) viewModel.fetchMovies(null,currentPage)
+            else viewModel.fetchMovies(genreId,currentPage)
+            viewModel.fetchGenres()
+        }
         viewModel.movies.observe(viewLifecycleOwner, Observer(::updateUi))
         viewModel.infoMsg.observe(viewLifecycleOwner){
             bind.root.showSnackbar(it)
@@ -136,7 +134,7 @@ class HomeFragment : Fragment() {
            it.clear()
            currentPage=1
            genreId=genre.id
-           viewModel.fetchMoviesByGenre(genreId,currentPage)
+           viewModel.fetchMovies(genreId,currentPage)
        }
     }
 
@@ -163,8 +161,8 @@ class HomeFragment : Fragment() {
                 isLoading=true
                 currentPage+=1
                 movieAdapter?.addLoadingItem()
-                if(!fetchByGenre)viewModel.fetchMovies(currentPage)
-                else viewModel.fetchMoviesByGenre(genreId,currentPage)
+                if(!fetchByGenre)viewModel.fetchMovies(null,currentPage)
+                else viewModel.fetchMovies(genreId,currentPage)
             }
 
             override fun getTotalPageCount() = totalPages
