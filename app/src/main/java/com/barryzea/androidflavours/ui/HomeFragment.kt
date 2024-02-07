@@ -1,5 +1,6 @@
 package com.barryzea.androidflavours.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,17 +8,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.barryzea.androidflavours.R
 import com.barryzea.androidflavours.common.showSnackbar
+import com.barryzea.androidflavours.common.utils.DotsIndicatorDecoration
 import com.barryzea.androidflavours.common.utils.PaginationRecyclerView
 import com.barryzea.androidflavours.data.entities.TmdbMovie
 import com.barryzea.androidflavours.data.entities.TmdbResult
 import com.barryzea.androidflavours.databinding.FragmentHomeBinding
 import com.barryzea.androidflavours.domain.entities.DomainMovie
+import com.barryzea.androidflavours.ui.adapters.GenresAdapter
 import com.barryzea.androidflavours.ui.adapters.MovieAdapter
 import com.barryzea.androidflavours.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +40,7 @@ class HomeFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModels()
     private  var movieAdapter: MovieAdapter?=null
+    private var genresAdapter:GenresAdapter?= null
     private lateinit var mLayoutManager: GridLayoutManager
     private var currentPage=1
     private var isLoading=false
@@ -79,8 +85,10 @@ class HomeFragment : Fragment() {
         viewModel.infoMsg.observe(viewLifecycleOwner){
             bind.root.showSnackbar(it)
         }
-        viewModel.genres.observe(viewLifecycleOwner){
-            Log.e("GENRES", it.toString() )
+        viewModel.genres.observe(viewLifecycleOwner){response->
+            genresAdapter?.let{
+                it.add(response.genres)
+            }
         }
     }
     private fun updateUi(domainMovie: DomainMovie?) {
@@ -97,12 +105,24 @@ class HomeFragment : Fragment() {
     private fun setUpAdapter(){
 
         movieAdapter = MovieAdapter(::onItemClick)
+        genresAdapter = GenresAdapter()
         mLayoutManager=GridLayoutManager(context,2)
         bind.rvMovies.apply {
             layoutManager = mLayoutManager
             setHasFixedSize(true)
             adapter=movieAdapter
         }
+        bind.rvGenres.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter=genresAdapter
+            addItemDecoration(
+                DotsIndicatorDecoration(
+                    colorActive = ContextCompat.getColor(context,R.color.purple),
+                    colorInactive = ContextCompat.getColor(context, R.color.purple_200)
+                )
+            )
+        }
+
     }
 
     private fun onItemClick(movie: TmdbMovie) {
