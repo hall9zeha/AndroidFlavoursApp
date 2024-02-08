@@ -1,7 +1,6 @@
 package com.barryzea.androidflavours
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +14,6 @@ import com.barryzea.androidflavours.common.utils.PaginationRecyclerView
 import com.barryzea.androidflavours.data.entities.TmdbMovie
 import com.barryzea.androidflavours.databinding.FragmentSearchBinding
 import com.barryzea.androidflavours.domain.entities.DomainMovie
-import com.barryzea.androidflavours.ui.HomeFragmentDirections
 import com.barryzea.androidflavours.ui.activities.MainActivity
 import com.barryzea.androidflavours.ui.adapters.MovieAdapter
 import com.barryzea.androidflavours.ui.viewmodel.MainViewModel
@@ -67,7 +65,7 @@ class SearchFragment : Fragment() {
         setUpPagination()
         setUpObservers()
     }
-    private fun setUpObservers(){
+    private fun setUpObservers() {
         viewModel.moviesFound.observe(viewLifecycleOwner){
            it?.let{result->
                 if(result.movies.isNotEmpty()){
@@ -147,7 +145,7 @@ class SearchFragment : Fragment() {
                 isLoading=true
                 currentPage+=1
                 movieAdapter?.addLoadingItem()
-                viewModel.searchMovie(searchValue,currentPage)
+                viewModel.searchMovie(bind.edtSearch.text.toString(),currentPage)
 
             }
 
