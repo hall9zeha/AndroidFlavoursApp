@@ -28,13 +28,24 @@ class MainViewModel @Inject constructor(private val useCases: UseCases) :ViewMod
         private set
     var genres:MutableLiveData<Genres> = MutableLiveData()
         private set
-    var moviesByGenres:SingleMutableLiveData<DomainMovie> = SingleMutableLiveData()
-        private set
+
     fun fetchMovies(genreId:Int?,page:Int){
         viewModelScope.launch {
             when(val response = useCases.fetchMovies(genreId,page)){
                 is TmdbResponse.Success ->{
                     movies.value= response.tmdbResult
+                }
+                is TmdbResponse.Error->{
+                    infoMsg.value = response.msg
+                }
+            }
+        }
+    }
+    fun fetchMoviesSortedBy(sortedValue:String, page: Int){
+        viewModelScope.launch {
+            when(val response = useCases.fetchMoviesSortedBy(sortedValue,page)){
+                is TmdbResponse.Success ->{
+                    movies.value=response.tmdbResult
                 }
                 is TmdbResponse.Error->{
                     infoMsg.value = response.msg

@@ -45,16 +45,30 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     />
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rvGenres"
+                    android:scrollbars="none">
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/chipContent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    app:singleSelection="true"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rvGenres"
                     android:layout_marginStart="@dimen/common_padding_micro"
                     android:layout_marginEnd="@dimen/common_padding_micro"
                     >
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipUpcoming"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:chipCornerRadius="@dimen/common_padding_default"
+                        android:text="Upcoming"/>
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipLatest"
                         android:layout_width="wrap_content"
@@ -74,6 +88,7 @@
                         app:chipCornerRadius="@dimen/common_padding_default"
                         android:text="Top rated"/>
                 </com.google.android.material.chip.ChipGroup>
+                </HorizontalScrollView>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

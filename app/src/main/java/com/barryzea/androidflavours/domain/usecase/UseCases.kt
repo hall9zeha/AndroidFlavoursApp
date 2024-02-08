@@ -11,6 +11,7 @@ import com.barryzea.androidflavours.domain.entities.DomainMovie
 interface UseCases {
     suspend fun fetchMovies( genreId: Int?,page:Int):TmdbResponse<DomainMovie>
     suspend fun searchMovie(searchValue:String,page:Int?):TmdbResponse<DomainMovie>
+    suspend fun fetchMoviesSortedBy(sortValue:String, page:Int):TmdbResponse<DomainMovie>
     suspend fun fetchGenres(): TmdbResponse<Genres>
 
 }

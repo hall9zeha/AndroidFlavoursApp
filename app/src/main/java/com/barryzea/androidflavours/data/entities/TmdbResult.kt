@@ -11,11 +11,14 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class TmdbResult(
+    val dates:Dates = Dates(),
     val pages:Int=0,
     @SerializedName("results")val movies:ArrayList<TmdbMovie> = arrayListOf<TmdbMovie>(),
     @SerializedName("total_pages")val total_pages:Int=0,
     @SerializedName("total_result")val total_result:Int=0):Parcelable
 
+@Parcelize
+data class Dates(val maximum:String="", val minimum:String=""):Parcelable
 @Parcelize
 data class Genres(
     @SerializedName("genres")val genres:List<Genre> = arrayListOf()

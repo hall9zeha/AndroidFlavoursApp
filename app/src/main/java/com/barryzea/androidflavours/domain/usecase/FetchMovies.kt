@@ -2,7 +2,6 @@ package com.barryzea.androidflavours.domain.usecase
 
 import com.barryzea.androidflavours.data.entities.Genres
 import com.barryzea.androidflavours.data.entities.TmdbResponse
-import com.barryzea.androidflavours.data.entities.TmdbResult
 import com.barryzea.androidflavours.data.repository.Repository
 import com.barryzea.androidflavours.domain.entities.DomainMovie
 import com.barryzea.androidflavours.domain.entities.toDomain
@@ -27,6 +26,19 @@ class FetchMovies(private val repository: Repository):UseCases {
         }catch(e:Exception){
             TmdbResponse.Error(e.message.toString())
         }
+
+    override suspend fun fetchMoviesSortedBy(
+        sortValue: String,
+        page: Int
+    ): TmdbResponse<DomainMovie> {
+        return try{
+            val response = repository.fetchMoviesSortedBy(sortValue,page)
+            if(response.isSuccessful){TmdbResponse.Success(response.body()!!.toDomain())}
+            else{TmdbResponse.Error(response.message())}
+        }catch(e:Exception){
+            TmdbResponse.Error(e.message.toString())
+        }
+    }
 
     override suspend fun fetchGenres(): TmdbResponse<Genres> {
         return try{
