@@ -11,7 +11,7 @@ import retrofit2.Response
  **/
 interface Repository {
     suspend fun fetchMovies(genreId:Int?,page:Int):Response<TmdbResult>
-    suspend fun searchMovie(searchValue:String):Response<DomainMovie>
+    suspend fun searchMovie(searchValue:String,page:Int?):Response<DomainMovie>
     suspend fun fetchGenres():Response<Genres>
 
 }

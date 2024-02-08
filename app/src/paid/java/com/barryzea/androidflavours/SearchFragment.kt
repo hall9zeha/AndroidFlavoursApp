@@ -11,13 +11,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.barryzea.androidflavours.common.showSnackbar
+import com.barryzea.androidflavours.common.utils.PaginationRecyclerView
 import com.barryzea.androidflavours.data.entities.TmdbMovie
 import com.barryzea.androidflavours.databinding.FragmentSearchBinding
+import com.barryzea.androidflavours.domain.entities.DomainMovie
 import com.barryzea.androidflavours.ui.HomeFragmentDirections
+import com.barryzea.androidflavours.ui.activities.MainActivity
 import com.barryzea.androidflavours.ui.adapters.MovieAdapter
 import com.barryzea.androidflavours.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -31,6 +33,11 @@ class SearchFragment : Fragment() {
     private val viewModel:MainViewModel by viewModels()
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var mLayoutManager: GridLayoutManager
+    private var currentPage=1
+    private var isLoading=false
+    private var totalPages=0
+    private var isLastPage=false
+    private var searchValue:String=""
     private val bind get() = _bind!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +64,7 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpListeners()
         setUpAdapter()
+        setUpPagination()
         setUpObservers()
     }
     private fun setUpObservers(){
@@ -64,7 +72,7 @@ class SearchFragment : Fragment() {
            it?.let{result->
                 if(result.movies.isNotEmpty()){
                     setUpShimmerLayout(false)
-                    movieAdapter.addAll(result.movies)
+                    updateUi(result)
                 }else{
                     setUpShimmerLayout(false)
                     bind.root.showSnackbar("No hay  resultados para ${bind.edtSearch.text}")
@@ -88,7 +96,8 @@ class SearchFragment : Fragment() {
         tilSearch.setEndIconOnClickListener {
             if(edtSearch.text.toString().isNotEmpty()){
                 movieAdapter.clear()
-                viewModel.searchMovie(edtSearch.text.toString())}
+                searchValue=edtSearch.text.toString()
+                viewModel.searchMovie(searchValue,page=null)}
             edtSearch.onEditorAction(EditorInfo.IME_ACTION_DONE)
             setUpShimmerLayout(true)
         }
@@ -97,7 +106,8 @@ class SearchFragment : Fragment() {
                 setUpShimmerLayout(true)
                 if(edtSearch.text.toString().isNotEmpty()){
                     movieAdapter.clear()
-                    viewModel.searchMovie(edtSearch.text.toString())}
+                    searchValue=edtSearch.text.toString()
+                    viewModel.searchMovie(searchValue,page=null)}
                 edtSearch.onEditorAction(EditorInfo.IME_ACTION_DONE)
             }
 
@@ -116,6 +126,37 @@ class SearchFragment : Fragment() {
     private fun onItemClick(movie: TmdbMovie) {
         val action = SearchFragmentDirections.actionSearchToDetail(movie)
         Navigation.findNavController(bind.root).navigate(action)
+    }
+    private fun updateUi(domainMovie: DomainMovie?) {
+        domainMovie?.let {
+            setUpShimmerLayout(false)
+            if(isLoading && it.movies.isNotEmpty())movieAdapter?.removeLoadingItem()
+            totalPages=it.totalPages
+            isLastPage=(currentPage >=totalPages)
+            isLoading=false
+            movieAdapter.addAll(it.movies)
+
+        }
+    }
+    private fun setUpPagination(){
+        //Obtenemos la referencia a nuestro bottomNavigationView que está en MainActivity para enviarla a nuestro paginador
+        //del recyclerView y pueda mostrarlo u ocultarlo mientras nos desplazamos.
+        val bottomNav = (activity as? MainActivity)?.bind?.bottomNav
+        bind.rvSearch.addOnScrollListener(object: PaginationRecyclerView(bottomNav,mLayoutManager){
+            override fun loadMoreItems() {
+                isLoading=true
+                currentPage+=1
+                movieAdapter?.addLoadingItem()
+                viewModel.searchMovie(searchValue,currentPage)
+
+            }
+
+            override fun getTotalPageCount() = totalPages
+
+            override fun isLastPage() = isLastPage
+
+            override fun isLoading() = isLoading
+        })
     }
     companion object {
         @JvmStatic

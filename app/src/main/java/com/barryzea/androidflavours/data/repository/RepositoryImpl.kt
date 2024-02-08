@@ -21,8 +21,8 @@ class RepositoryImpl @Inject constructor(retrofit: RetrofitService, private val 
     ):Response<TmdbResult> {
         return apiService.fetchMovies(apiKey,genreId,lang,page)
     }
-    override suspend fun searchMovie(searchValue: String): Response<DomainMovie> {
-        return  apiService.searchMovie(searchValue,apiKey,lang)
+    override suspend fun searchMovie(searchValue: String,page:Int?): Response<DomainMovie> {
+        return  apiService.searchMovie(searchValue,apiKey,lang,page)
     }
     override suspend fun fetchGenres(): Response<Genres> {
         return apiService.fetchGenres(apiKey,lang)

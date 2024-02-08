@@ -42,9 +42,9 @@ class MainViewModel @Inject constructor(private val useCases: UseCases) :ViewMod
             }
         }
     }
-    fun searchMovie(searchValue:String){
+    fun searchMovie(searchValue:String,page: Int?){
         viewModelScope.launch{
-            when(val response = useCases.searchMovie(searchValue)){
+            when(val response = useCases.searchMovie(searchValue,page)){
                 is TmdbResponse.Success->{
                     moviesFound.value= response.tmdbResult
                 }

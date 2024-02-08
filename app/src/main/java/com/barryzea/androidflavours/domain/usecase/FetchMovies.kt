@@ -19,8 +19,8 @@ class FetchMovies(private val repository: Repository):UseCases {
           }catch(e:Exception){
             TmdbResponse.Error(e.message.toString())
         }
-    override suspend fun searchMovie(searchValue: String) = try {
-            val response = repository.searchMovie(searchValue)
+    override suspend fun searchMovie(searchValue: String,page:Int?) = try {
+            val response = repository.searchMovie(searchValue,page)
             if(response.isSuccessful){TmdbResponse.Success(response.body()!!)}
             else{TmdbResponse.Error(response.message())}
 
