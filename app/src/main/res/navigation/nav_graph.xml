@@ -47,7 +47,7 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.barryzea.androidflavours.SearchFragment"
+        android:name="com.barryzea.androidflavours.ui.fragments.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search">
         <action

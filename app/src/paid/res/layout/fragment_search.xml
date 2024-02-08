@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".SearchFragment">
+    tools:context=".ui.fragments.SearchFragment">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarSearch"
         android:layout_width="match_parent"

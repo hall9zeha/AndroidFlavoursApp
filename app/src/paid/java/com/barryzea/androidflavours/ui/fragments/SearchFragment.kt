@@ -1,14 +1,15 @@
-package com.barryzea.androidflavours
+package com.barryzea.androidflavours.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
+
 import com.barryzea.androidflavours.common.showSnackbar
 import com.barryzea.androidflavours.common.utils.PaginationRecyclerView
 import com.barryzea.androidflavours.data.entities.TmdbMovie
@@ -21,14 +22,13 @@ import dagger.hilt.android.AndroidEntryPoint
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private var param1: String? = null
     private var param2: String? = null
-    private var _bind:FragmentSearchBinding?=null
-    private val viewModel:MainViewModel by viewModels()
+    private var _bind: FragmentSearchBinding?=null
+    private val viewModel: MainViewModel by viewModels()
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var mLayoutManager: GridLayoutManager
     private var currentPage=1
@@ -50,7 +50,7 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         activity?.let{
-            _bind = FragmentSearchBinding.inflate(inflater, container,false)
+            _bind = FragmentSearchBinding.inflate(inflater, container, false)
             _bind?.let {
                 return bind.root
             }
@@ -83,7 +83,7 @@ class SearchFragment : Fragment() {
     }
     private fun setUpAdapter(){
         movieAdapter = MovieAdapter(::onItemClick)
-        mLayoutManager= GridLayoutManager(context,3)
+        mLayoutManager= GridLayoutManager(context, 3)
         bind.rvSearch.apply {
             layoutManager = mLayoutManager
             setHasFixedSize(true)
@@ -100,7 +100,7 @@ class SearchFragment : Fragment() {
             setUpShimmerLayout(true)
         }
         edtSearch.setOnEditorActionListener{_,actionId,_->
-            if(actionId==EditorInfo.IME_ACTION_SEARCH){
+            if(actionId== EditorInfo.IME_ACTION_SEARCH){
                 setUpShimmerLayout(true)
                 if(edtSearch.text.toString().isNotEmpty()){
                     movieAdapter.clear()
@@ -114,7 +114,7 @@ class SearchFragment : Fragment() {
     }
     private fun setUpShimmerLayout(enable:Boolean){
         if(enable){
-            bind.shimmerLoading.shimmerLoading.visibility=View.VISIBLE
+            bind.shimmerLoading.shimmerLoading.visibility= View.VISIBLE
             bind.shimmerLoading.shimmerLoading.startShimmer()
         }else{
             bind.shimmerLoading.shimmerLoading.stopShimmer()
