@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.barryzea.androidflavours.R
+import com.barryzea.androidflavours.common.loadRes
 import com.barryzea.androidflavours.data.entities.Genre
-import com.barryzea.androidflavours.data.entities.Genres
 import com.barryzea.androidflavours.databinding.GenreItemBinding
 
 /**
@@ -37,8 +37,13 @@ class GenresAdapter(private val onClick:(genre:Genre)->Unit):RecyclerView.Adapte
     inner class ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
         private val bindView = GenreItemBinding.bind(itemView)
         fun onBind(genre:Genre)= with(bindView){
+            val uri = "@drawable/genre_${genre.id}"
+            val imageSource = root.context.resources.getIdentifier(uri,null,root.context.packageName)
+
             tvGenreTitle.text=genre.name
+            ivGenre.loadRes(imageSource)
             root.setOnClickListener { onClick(genre) }
+
         }
     }
 }

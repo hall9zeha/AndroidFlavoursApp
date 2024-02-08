@@ -26,12 +26,13 @@
     -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:id="@+id/bottom_nav"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_gravity="bottom"
         app:menu="@menu/main_menu"
+        app:labelVisibilityMode="unlabeled"
         />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

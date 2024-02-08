@@ -82,6 +82,13 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    sourceSets {
+        getByName("main") {
+            res {
+                srcDirs("src\\main\\res", "src\\main\\res\\genres")
+            }
+        }
+    }
 }
 val hilt_version = "2.48"
 val ksp_version ="1.9.10-1.0.13"

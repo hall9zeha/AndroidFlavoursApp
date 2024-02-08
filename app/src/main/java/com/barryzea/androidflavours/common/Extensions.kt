@@ -21,5 +21,13 @@ fun ImageView.loadUrl(url:String)=
         .error(R.drawable.placeholder_movie)
         .centerCrop()
         .into(this)
+fun ImageView.loadRes(resource:Int)=
+    Glide.with(this)
+        .load(resource)
+        .placeholder(R.drawable.placeholder_movie)
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .error(R.drawable.placeholder_movie)
+        .centerCrop()
+        .into(this)
 fun View.showSnackbar(msg:String, duration:Int=Snackbar.LENGTH_SHORT)=
     run { Snackbar.make(this,msg,duration).show() }

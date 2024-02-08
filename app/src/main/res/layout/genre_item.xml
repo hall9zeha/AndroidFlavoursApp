@@ -12,14 +12,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/ctlContent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivGenre"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:src="@drawable/genre_12"/>
         <TextView
             android:id="@+id/tvGenreTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#80121212"
+            android:background="#50121212"
             android:gravity="center"
             tools:text="Género"
             android:textColor="@color/white"
+            android:paddingTop="@dimen/common_padding_micro"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
