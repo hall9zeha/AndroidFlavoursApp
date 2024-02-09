@@ -87,6 +87,10 @@ class SearchFragment : Fragment() {
                     //por eso traemos la siguiente vista
                     val view = activity?.window?.decorView?.findViewById<View>(android.R.id.content)
                     view?.showSnackbar("No hay  resultados para ${bind.edtSearch.text}")
+                    bind.amountFoundChip.apply {
+                        visibility=View.GONE
+                        text=""
+                    }
                 }
             }
         }
@@ -109,21 +113,19 @@ class SearchFragment : Fragment() {
             if(edtSearch.text.toString().isNotEmpty()){
                 movieAdapter.clear()
                 viewModel.setSearchValue(edtSearch.text.toString())
-
+                setUpShimmerLayout(true)
             }
             edtSearch.onEditorAction(EditorInfo.IME_ACTION_DONE)
-            setUpShimmerLayout(true)
         }
         edtSearch.setOnEditorActionListener{_,actionId,_->
             if(actionId== EditorInfo.IME_ACTION_SEARCH){
-                setUpShimmerLayout(true)
                 if(edtSearch.text.toString().isNotEmpty()){
                     movieAdapter.clear()
                     viewModel.setSearchValue(edtSearch.text.toString())
+                    setUpShimmerLayout(true)
                 }
                 edtSearch.onEditorAction(EditorInfo.IME_ACTION_DONE)
             }
-
             false
         }
     }
