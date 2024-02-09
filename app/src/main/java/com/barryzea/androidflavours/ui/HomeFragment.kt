@@ -185,7 +185,7 @@ class HomeFragment : Fragment() {
         //del recyclerView y pueda mostrarlo u ocultarlo mientras nos desplazamos.
         val bottomNav = (activity as? MainActivity )?.bind?.bottomNav
         bind.rvMovies.addOnScrollListener(object: PaginationRecyclerView(bottomNav,mLayoutManager){
-            override fun loadMoreItems() {//TODO manejar el paginado para cuando sea por orden de popular, top rated, etc
+            override fun loadMoreItems() {
                 isLoading=true
                 currentPage+=1
                 movieAdapter?.addLoadingItem()
