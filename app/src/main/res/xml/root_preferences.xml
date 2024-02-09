@@ -4,7 +4,9 @@
 
         <SwitchPreferenceCompat
             app:key="darkTheme"
-            app:title="@string/theme_title" />
+            app:title="@string/theme_title"
+            app:widgetLayout="@layout/material_switch_layout"
+            />
 
         <Preference
             app:title="@string/about_this"
