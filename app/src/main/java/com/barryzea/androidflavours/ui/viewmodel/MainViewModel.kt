@@ -22,11 +22,13 @@ class MainViewModel @Inject constructor(private val useCases: UseCases) :ViewMod
 
     var movies:SingleMutableLiveData<DomainMovie> = SingleMutableLiveData()
         private set
-    var moviesFound:MutableLiveData<DomainMovie> = MutableLiveData()
+    var moviesFound:SingleMutableLiveData<DomainMovie> = SingleMutableLiveData()
         private set
     var infoMsg:MutableLiveData<String> = MutableLiveData()
         private set
     var genres:MutableLiveData<Genres> = MutableLiveData()
+        private set
+    var searchValue:MutableLiveData<String> = MutableLiveData()
         private set
 
     fun fetchMovies(genreId:Int?,page:Int){
@@ -76,6 +78,11 @@ class MainViewModel @Inject constructor(private val useCases: UseCases) :ViewMod
 
                 }
             }
+        }
+    }
+    fun setSearchValue(stringValue:String){
+        viewModelScope.launch {
+            searchValue.value=stringValue
         }
     }
 

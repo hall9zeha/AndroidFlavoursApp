@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName
 data class DomainMovie(
     @SerializedName("page") val page:Int=0,
     @SerializedName("total_pages") val totalPages:Int=0,
-    @SerializedName("total_result")val totalResult:Int=0,
+    @SerializedName("total_results")val totalResult:Int=0,
     @SerializedName("results") val movies:List<TmdbMovie> = arrayListOf()
 )
 fun TmdbResult.toDomain()=

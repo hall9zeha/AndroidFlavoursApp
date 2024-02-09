@@ -15,7 +15,7 @@ data class TmdbResult(
     val pages:Int=0,
     @SerializedName("results")val movies:ArrayList<TmdbMovie> = arrayListOf<TmdbMovie>(),
     @SerializedName("total_pages")val total_pages:Int=0,
-    @SerializedName("total_result")val total_result:Int=0):Parcelable
+    @SerializedName("total_results")val total_result:Int=0):Parcelable
 
 @Parcelize
 data class Dates(val maximum:String="", val minimum:String=""):Parcelable

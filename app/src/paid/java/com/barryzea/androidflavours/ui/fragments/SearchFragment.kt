@@ -1,10 +1,12 @@
 package com.barryzea.androidflavours.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -63,9 +65,17 @@ class SearchFragment : Fragment() {
         setUpListeners()
         setUpAdapter()
         setUpPagination()
-        setUpObservers()
+        setUpObservers(savedInstanceState)
     }
-    private fun setUpObservers() {
+    private fun setUpObservers(savedInstanceState: Bundle?) {
+        if(savedInstanceState !=null){
+            currentPage=1
+            movieAdapter.clear()
+
+        }
+        viewModel.searchValue.observe(viewLifecycleOwner){
+            viewModel.searchMovie(it,page=null)
+        }
         viewModel.moviesFound.observe(viewLifecycleOwner){
            it?.let{result->
                 if(result.movies.isNotEmpty()){
@@ -73,13 +83,17 @@ class SearchFragment : Fragment() {
                     updateUi(result)
                 }else{
                     setUpShimmerLayout(false)
-                    bind.root.showSnackbar("No hay  resultados para ${bind.edtSearch.text}")
+                    //Si usamos cualquier vista dentro del coordinator layuot el snackbar no se lanzará
+                    //por eso traemos la siguiente vista
+                    val view = activity?.window?.decorView?.findViewById<View>(android.R.id.content)
+                    view?.showSnackbar("No hay  resultados para ${bind.edtSearch.text}")
                 }
             }
         }
         viewModel.infoMsg.observe(viewLifecycleOwner){
             bind.root.showSnackbar(it)
         }
+
     }
     private fun setUpAdapter(){
         movieAdapter = MovieAdapter(::onItemClick)
@@ -94,8 +108,9 @@ class SearchFragment : Fragment() {
         tilSearch.setEndIconOnClickListener {
             if(edtSearch.text.toString().isNotEmpty()){
                 movieAdapter.clear()
-                searchValue=edtSearch.text.toString()
-                viewModel.searchMovie(searchValue,page=null)}
+                viewModel.setSearchValue(edtSearch.text.toString())
+
+            }
             edtSearch.onEditorAction(EditorInfo.IME_ACTION_DONE)
             setUpShimmerLayout(true)
         }
@@ -104,8 +119,8 @@ class SearchFragment : Fragment() {
                 setUpShimmerLayout(true)
                 if(edtSearch.text.toString().isNotEmpty()){
                     movieAdapter.clear()
-                    searchValue=edtSearch.text.toString()
-                    viewModel.searchMovie(searchValue,page=null)}
+                    viewModel.setSearchValue(edtSearch.text.toString())
+                }
                 edtSearch.onEditorAction(EditorInfo.IME_ACTION_DONE)
             }
 
@@ -127,6 +142,10 @@ class SearchFragment : Fragment() {
     }
     private fun updateUi(domainMovie: DomainMovie?) {
         domainMovie?.let {
+            bind.amountFoundChip.apply {
+                visibility=View.VISIBLE
+                text=domainMovie.totalResult.toString()
+            }
             setUpShimmerLayout(false)
             if(isLoading && it.movies.isNotEmpty())movieAdapter?.removeLoadingItem()
             totalPages=it.totalPages
@@ -148,11 +167,8 @@ class SearchFragment : Fragment() {
                 viewModel.searchMovie(bind.edtSearch.text.toString(),currentPage)
 
             }
-
             override fun getTotalPageCount() = totalPages
-
             override fun isLastPage() = isLastPage
-
             override fun isLoading() = isLoading
         })
     }
@@ -166,7 +182,6 @@ class SearchFragment : Fragment() {
                 }
             }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _bind = null
