@@ -10,3 +10,6 @@ const val LATEST ="latest"
 const val POPULAR = "popular"
 const val TOP_RATED = "top_rated"
 const val UPCOMING = "upcoming"
+const val BY_GENRE = 10
+const val BY_CATEGORY = 11
+const val NONE =0

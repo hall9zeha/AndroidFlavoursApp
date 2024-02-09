@@ -15,7 +15,10 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.barryzea.androidflavours.R
+import com.barryzea.androidflavours.common.BY_CATEGORY
+import com.barryzea.androidflavours.common.BY_GENRE
 import com.barryzea.androidflavours.common.LATEST
+import com.barryzea.androidflavours.common.NONE
 import com.barryzea.androidflavours.common.POPULAR
 import com.barryzea.androidflavours.common.TOP_RATED
 import com.barryzea.androidflavours.common.UPCOMING
@@ -52,8 +55,10 @@ class HomeFragment : Fragment() {
     private var isLoading=false
     private var totalPages=0
     private var isLastPage=false
-    private var fetchByGenre=false
+    private var fetchBy=0
     private var genreId=0
+    private var CATEGORY=""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,16 +92,28 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUpListeners() {
-        bind.chipPopular.setOnClickListener { movieAdapter?.clear();viewModel.fetchMoviesSortedBy(POPULAR, 1) }
-        bind.chipTopRated.setOnClickListener {movieAdapter?.clear(); viewModel.fetchMoviesSortedBy(TOP_RATED, 1) }
-        bind.chipLatest.setOnClickListener { movieAdapter?.clear();viewModel.fetchMoviesSortedBy(LATEST, 1) }
-        bind.chipUpcoming.setOnClickListener { movieAdapter?.clear();viewModel.fetchMoviesSortedBy(UPCOMING, 1) }
+        bind.chipPopular.setOnClickListener { fetchMoviesByCategory(POPULAR) }
+        bind.chipTopRated.setOnClickListener {fetchMoviesByCategory(TOP_RATED) }
+        bind.chipDiscover.setOnClickListener {
+            fetchBy= NONE
+            movieAdapter?.clear()
+            viewModel.fetchMovies(null,1) }
+        bind.chipUpcoming.setOnClickListener {fetchMoviesByCategory(UPCOMING) }
+    }
+    private fun fetchMoviesByCategory(category:String){
+        fetchBy = BY_CATEGORY
+        CATEGORY = category
+        movieAdapter?.clear()
+        viewModel.fetchMoviesSortedBy(category,1)
     }
     private fun setUpObservers(savedInstanceState: Bundle?) {
         if(savedInstanceState==null) {
             currentPage = 1
-            if(!fetchByGenre) viewModel.fetchMovies(null,currentPage)
-            else viewModel.fetchMovies(genreId,currentPage)
+            when(fetchBy){
+                BY_GENRE->{viewModel.fetchMovies(genreId,currentPage)}
+                BY_CATEGORY->{viewModel.fetchMoviesSortedBy(CATEGORY,currentPage)}
+                else->{viewModel.fetchMovies(null,currentPage)}
+            }
             viewModel.fetchGenres()
         }
         viewModel.movies.observe(viewLifecycleOwner, Observer(::updateUi))
@@ -108,7 +125,6 @@ class HomeFragment : Fragment() {
                 it.add(response.genres)
             }
         }
-
     }
     private fun updateUi(domainMovie: DomainMovie?) {
         domainMovie?.let {
@@ -118,11 +134,9 @@ class HomeFragment : Fragment() {
             isLastPage=(currentPage >=totalPages)
             isLoading=false
             movieAdapter?.addAll(it.movies)
-
         }
     }
     private fun setUpAdapter(){
-
         movieAdapter = MovieAdapter(::onItemClick)
         genresAdapter = GenresAdapter(::onGenreItemClick)
         mLayoutManager=GridLayoutManager(context,2)
@@ -141,19 +155,16 @@ class HomeFragment : Fragment() {
                 )
             )
         }
-
     }
-
     private fun onGenreItemClick(genre: Genre) {
        movieAdapter?.let{
-           fetchByGenre=true
+           fetchBy= BY_GENRE
            it.clear()
            currentPage=1
            genreId=genre.id
            viewModel.fetchMovies(genreId,currentPage)
        }
     }
-
     private fun onItemClick(movie: TmdbMovie) {
         //Al usar la librería safeArgs con navigation se creará una clase con el nombre de nuestro fragment o activity de origen
         //donde tengamos una acción establecida como en este caso que es (HomeFragment), estas clases siempre llevaran adjunto el nombre
@@ -161,7 +172,6 @@ class HomeFragment : Fragment() {
         val action = HomeFragmentDirections.actionHomeToDetail(movie)
         Navigation.findNavController(bind.root).navigate(action)
     }
-
     private fun setUpShimmerLayout(enable:Boolean){
         if(enable){
             bind.shimmerLoading.shimmerLoading.startShimmer()
@@ -179,14 +189,14 @@ class HomeFragment : Fragment() {
                 isLoading=true
                 currentPage+=1
                 movieAdapter?.addLoadingItem()
-                if(!fetchByGenre)viewModel.fetchMovies(null,currentPage)
-                else viewModel.fetchMovies(genreId,currentPage)
+                when(fetchBy){
+                    BY_GENRE->{viewModel.fetchMovies(genreId,currentPage)}
+                    BY_CATEGORY->{viewModel.fetchMoviesSortedBy(CATEGORY,currentPage)}
+                    else->{viewModel.fetchMovies(null,currentPage)}
+                }
             }
-
             override fun getTotalPageCount() = totalPages
-
             override fun isLastPage() = isLastPage
-
             override fun isLoading() = isLoading
         })
     }
