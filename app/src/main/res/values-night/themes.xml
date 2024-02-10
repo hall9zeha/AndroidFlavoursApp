@@ -58,8 +58,11 @@
         <item name="boxCornerRadiusBottomEnd">@dimen/common_padding_max</item>
         <item name="boxCornerRadiusTopEnd">@dimen/common_padding_max</item>
         <item name="boxCornerRadiusTopStart">@dimen/common_padding_max</item>
-        <item name="boxStrokeWidth">0dp</item>
-        <item name="boxStrokeColor">@color/white</item>
+        <item name="boxStrokeWidth">0.5dp</item>
+        <item name="boxStrokeWidthFocused">0.5dp</item>
+        <item name="boxStrokeColor">@color/md_theme_dark_primary</item>
+        <item name="endIconMode">custom</item>
+        <item name="hintEnabled">false</item>
     </style>
 
     <style name="RatingBar" parent="Theme.AppCompat">

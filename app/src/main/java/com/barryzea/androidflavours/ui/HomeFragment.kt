@@ -153,8 +153,8 @@ class HomeFragment : Fragment() {
             adapter=genresAdapter
             addItemDecoration(
                 DotsIndicatorDecoration(
-                    colorActive = ContextCompat.getColor(context,R.color.purple),
-                    colorInactive = ContextCompat.getColor(context, R.color.purple_200)
+                    colorActive = ContextCompat.getColor(context,R.color.yellow),
+                    colorInactive = ContextCompat.getColor(context, R.color.md_theme_dark_primaryContainer)
                 )
             )
         }
