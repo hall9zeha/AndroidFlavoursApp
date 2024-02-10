@@ -114,8 +114,11 @@ class HomeFragment : Fragment() {
                 BY_CATEGORY->{viewModel.fetchMoviesSortedBy(CATEGORY,currentPage)}
                 else->{viewModel.fetchMovies(null,currentPage)}
             }
-            viewModel.fetchGenres()
+
+        }else{
+            viewModel.fetchMovies(null,currentPage)
         }
+        viewModel.fetchGenres()
         viewModel.movies.observe(viewLifecycleOwner, Observer(::updateUi))
         viewModel.infoMsg.observe(viewLifecycleOwner){
             bind.root.showSnackbar(it)

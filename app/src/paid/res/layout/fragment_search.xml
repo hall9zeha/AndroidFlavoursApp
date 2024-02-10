@@ -31,7 +31,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:boxStrokeColor="#FF9800"
+        app:boxStrokeWidth="0.5dp"
+        app:boxStrokeColor="@color/md_theme_dark_primary"
         app:hintEnabled="false"
         app:endIconMode="custom"
 
@@ -82,9 +83,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:scrollbars="none"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBarSearch"
         app:layout_constraintBottom_toBottomOf="parent"
+
         />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
