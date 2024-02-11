@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
+import com.barryzea.androidflavours.R
 
 import com.barryzea.androidflavours.common.showSnackbar
 import com.barryzea.androidflavours.common.utils.PaginationRecyclerView
@@ -71,10 +72,16 @@ class SearchFragment : Fragment() {
         if(savedInstanceState !=null){
             currentPage=1
             movieAdapter.clear()
-
+        }else{
+            //Cargamos con un listado general de películas la primera vez
+            viewModel.fetchMovies(null,1)
+        }
+        viewModel.movies.observe(viewLifecycleOwner){result->
+            updateUi(result)
         }
         viewModel.searchValue.observe(viewLifecycleOwner){
             viewModel.searchMovie(it,page=null)
+            searchValue=it
         }
         viewModel.moviesFound.observe(viewLifecycleOwner){
            it?.let{result->
@@ -86,7 +93,7 @@ class SearchFragment : Fragment() {
                     //Si usamos cualquier vista dentro del coordinator layuot el snackbar no se lanzará
                     //por eso traemos la siguiente vista
                     val view = activity?.window?.decorView?.findViewById<View>(android.R.id.content)
-                    view?.showSnackbar("No hay  resultados para ${bind.edtSearch.text}")
+                    view?.showSnackbar(getString(R.string.no_results, bind.edtSearch.text))
                     bind.amountFoundChip.apply {
                         visibility=View.GONE
                         text=""
@@ -166,7 +173,8 @@ class SearchFragment : Fragment() {
                 isLoading=true
                 currentPage+=1
                 movieAdapter?.addLoadingItem()
-                viewModel.searchMovie(bind.edtSearch.text.toString(),currentPage)
+                if(searchValue.isEmpty()) viewModel.fetchMovies(null,currentPage)
+                else viewModel.searchMovie(bind.edtSearch.text.toString(),currentPage)
 
             }
             override fun getTotalPageCount() = totalPages

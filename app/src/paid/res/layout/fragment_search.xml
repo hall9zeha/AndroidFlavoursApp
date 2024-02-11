@@ -31,6 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/common_padding_micro"
         android:layout_marginStart="@dimen/common_padding_micro"
         android:layout_marginEnd="@dimen/common_padding_micro"
         app:endIconDrawable="@drawable/ic_search"
@@ -43,14 +44,15 @@
             android:hint="Ingresa tu búsqueda"
             android:singleLine="true"
             android:imeOptions="actionSearch"
-            android:layout_margin="@dimen/common_padding_micro"
+            
             />
     </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.chip.Chip
             android:id="@+id/amountFoundChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/common_padding_micro"
+            android:layout_marginStart="@dimen/common_padding_micro"
+            android:layout_marginBottom="@dimen/common_padding_micro"
             tools:text="1222"
             android:visibility="gone"
             tools:visibility="visible"

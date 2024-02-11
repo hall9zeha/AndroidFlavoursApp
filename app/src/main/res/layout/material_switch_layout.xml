@@ -2,9 +2,12 @@
 <com.google.android.material.materialswitch.MaterialSwitch xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/switchWidget"
     android:clickable="false"
     android:focusable="false"
-    >
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:checked="true"
+    app:trackTint="@color/md_theme_dark_onPrimaryContainer">
 
 </com.google.android.material.materialswitch.MaterialSwitch>
