@@ -27,4 +27,5 @@
     <string name="about_this">About this app</string>
     <string name="no_results">No hay resultados para %1$s</string>
     <string name="characters_title">Characters</string>
+    <string name="trailer_title">Trailer</string>
 </resources>
