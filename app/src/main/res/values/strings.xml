@@ -26,4 +26,5 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="about_this">About this app</string>
     <string name="no_results">No hay resultados para %1$s</string>
+    <string name="characters_title">Characters</string>
 </resources>
