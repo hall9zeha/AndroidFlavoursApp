@@ -1,7 +1,9 @@
 package com.barryzea.androidflavours.ui.activities
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.MediaController
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.navArgs
@@ -47,7 +49,8 @@ class DetailActivity : AppCompatActivity() {
         tvRelease.text = m?.releaseDate
         tvPopularity.text=getString(R.string.popularity) + m?.popularity.toString()
         ratingDetail.rating=m?.voteAverage!!.toFloat()
-        detailViewModel.fetchMovieCredits(m!!.id)
+        //detailViewModel.fetchMovieCredits(m!!.id)
+        detailViewModel.fetchCreditsAndTrailer(m!!.id)
     }
     private fun setUpAdapter(){
         characterAdapter= CharacterAdapter()
@@ -67,5 +70,7 @@ class DetailActivity : AppCompatActivity() {
             Log.e("DETALLE", it )
             bind.root.showSnackbar(it)
         }
+
     }
+
 }

@@ -3,6 +3,7 @@ package com.barryzea.androidflavours.data.repository
 import com.barryzea.androidflavours.data.entities.Cast
 import com.barryzea.androidflavours.data.entities.Genres
 import com.barryzea.androidflavours.data.entities.TmdbResult
+import com.barryzea.androidflavours.data.entities.Trailers
 import com.barryzea.androidflavours.domain.entities.DomainMovie
 import retrofit2.Response
 
@@ -17,5 +18,5 @@ interface Repository {
     suspend fun fetchGenres():Response<Genres>
     suspend fun fetchCredits(idMovie:Int):Response<Cast>
 
-
+    suspend fun fetchTrailers(idMovie:Int):Response<Trailers>
 }

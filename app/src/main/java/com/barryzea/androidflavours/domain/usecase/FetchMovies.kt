@@ -4,6 +4,7 @@ import androidx.lifecycle.liveData
 import com.barryzea.androidflavours.data.entities.CharacterMovie
 import com.barryzea.androidflavours.data.entities.Genres
 import com.barryzea.androidflavours.data.entities.TmdbResponse
+import com.barryzea.androidflavours.data.entities.TrailerMovie
 import com.barryzea.androidflavours.data.repository.Repository
 import com.barryzea.androidflavours.domain.entities.DomainMovie
 import com.barryzea.androidflavours.domain.entities.toDomain
@@ -62,5 +63,26 @@ class FetchMovies(private val repository: Repository):UseCases {
         }catch(e:Exception){
             TmdbResponse.Error(e.message.toString())
         }
+
     }
+
+    override suspend fun fetchTrailers(idMovie: Int): TmdbResponse<List<TrailerMovie>> {
+        return try{
+            val response = repository.fetchTrailers(idMovie)
+            if(response.isSuccessful){TmdbResponse.Success(response.body()!!.trailers)}
+            else{TmdbResponse.Error(response.message())}
+        }catch(e:Exception){
+            TmdbResponse.Error(e.message.toString())
+        }
+    }
+
+  /*  private inline fun <reified  T : Any> handleResponse(fetchCall:()-> Response<T>):TmdbResponse<T>{
+        return try{
+            val response = fetchCall()
+            if(response.isSuccessful)TmdbResponse.Success(response.body()!!)
+            else TmdbResponse.Error(response.message())
+        }catch(e:Exception){
+            TmdbResponse.Error(e.message.toString())
+        }
+    }*/
 }

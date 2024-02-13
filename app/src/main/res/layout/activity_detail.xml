@@ -189,26 +189,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvCharactersTitle"/>
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvTrailersTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/trailer_title"
-                    android:textAppearance="?attr/textAppearanceTitleLarge"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rvCharacters"
-                    android:layout_marginStart="@dimen/common_padding_default"
-                    />
-                <VideoView
-                    android:id="@+id/videoView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvTrailersTitle"
-                    android:layout_marginStart="@dimen/common_padding_default"
-                    android:layout_marginEnd="@dimen/common_padding_default"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

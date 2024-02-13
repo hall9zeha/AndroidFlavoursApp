@@ -44,3 +44,7 @@ data class Cast(
     @SerializedName("id")val id:Int=0,
     @SerializedName("cast")val cast:List<CharacterMovie> = listOf()
 )
+data class Trailers(
+    @SerializedName("id")val id:Int=0,
+    @SerializedName("results")val trailers:List<TrailerMovie> = listOf()
+)

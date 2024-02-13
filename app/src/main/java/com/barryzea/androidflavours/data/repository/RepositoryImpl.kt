@@ -4,6 +4,7 @@ import com.barryzea.androidflavours.data.datasource.remote.RetrofitService
 import com.barryzea.androidflavours.data.entities.Cast
 import com.barryzea.androidflavours.data.entities.Genres
 import com.barryzea.androidflavours.data.entities.TmdbResult
+import com.barryzea.androidflavours.data.entities.Trailers
 import com.barryzea.androidflavours.domain.entities.DomainMovie
 import retrofit2.Response
 import javax.inject.Inject
@@ -36,5 +37,9 @@ class RepositoryImpl @Inject constructor(retrofit: RetrofitService, private val 
 
     override suspend fun fetchCredits(idMovie: Int): Response<Cast> {
         return apiService.fetchCredits(idMovie,apiKey)
+    }
+
+    override suspend fun fetchTrailers(idMovie: Int): Response<Trailers> {
+        return apiService.fetchTrailers(idMovie,apiKey)
     }
 }

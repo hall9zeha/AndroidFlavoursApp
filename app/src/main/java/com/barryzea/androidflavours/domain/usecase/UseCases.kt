@@ -3,6 +3,7 @@ package com.barryzea.androidflavours.domain.usecase
 import com.barryzea.androidflavours.data.entities.CharacterMovie
 import com.barryzea.androidflavours.data.entities.Genres
 import com.barryzea.androidflavours.data.entities.TmdbResponse
+import com.barryzea.androidflavours.data.entities.TrailerMovie
 import com.barryzea.androidflavours.domain.entities.DomainMovie
 
 /**
@@ -15,5 +16,6 @@ interface UseCases {
     suspend fun fetchMoviesSortedBy(sortValue:String, page:Int):TmdbResponse<DomainMovie>
     suspend fun fetchGenres(): TmdbResponse<Genres>
     suspend fun fetchCredits(idMovie:Int):TmdbResponse<List<CharacterMovie>>
+    suspend fun fetchTrailers(idMovie:Int):TmdbResponse<List<TrailerMovie>>
 
 }
