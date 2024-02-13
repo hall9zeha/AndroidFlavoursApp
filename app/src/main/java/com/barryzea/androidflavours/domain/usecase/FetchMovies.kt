@@ -1,10 +1,14 @@
 package com.barryzea.androidflavours.domain.usecase
 
+import androidx.lifecycle.liveData
+import com.barryzea.androidflavours.data.entities.CharacterMovie
 import com.barryzea.androidflavours.data.entities.Genres
 import com.barryzea.androidflavours.data.entities.TmdbResponse
 import com.barryzea.androidflavours.data.repository.Repository
 import com.barryzea.androidflavours.domain.entities.DomainMovie
 import com.barryzea.androidflavours.domain.entities.toDomain
+import kotlinx.coroutines.Job
+import retrofit2.Response
 
 /**
  * Project AndroidFlavours
@@ -50,4 +54,13 @@ class FetchMovies(private val repository: Repository):UseCases {
         }
     }
 
+    override suspend fun fetchCredits(idMovie: Int): TmdbResponse<List<CharacterMovie>> {
+        return try{
+            val response = repository.fetchCredits(idMovie)
+            if(response.isSuccessful){TmdbResponse.Success(response.body()!!.cast)}
+            else{TmdbResponse.Error(response.message())}
+        }catch(e:Exception){
+            TmdbResponse.Error(e.message.toString())
+        }
+    }
 }

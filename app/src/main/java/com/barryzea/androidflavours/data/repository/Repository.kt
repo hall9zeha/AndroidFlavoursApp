@@ -1,5 +1,6 @@
 package com.barryzea.androidflavours.data.repository
 
+import com.barryzea.androidflavours.data.entities.Cast
 import com.barryzea.androidflavours.data.entities.Genres
 import com.barryzea.androidflavours.data.entities.TmdbResult
 import com.barryzea.androidflavours.domain.entities.DomainMovie
@@ -14,5 +15,7 @@ interface Repository {
     suspend fun searchMovie(searchValue:String,page:Int?):Response<DomainMovie>
     suspend fun fetchMoviesSortedBy(sortValue:String, page:Int):Response<TmdbResult>
     suspend fun fetchGenres():Response<Genres>
+    suspend fun fetchCredits(idMovie:Int):Response<Cast>
+
 
 }

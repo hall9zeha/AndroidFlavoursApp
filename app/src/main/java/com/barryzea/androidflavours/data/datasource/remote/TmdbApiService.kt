@@ -49,7 +49,7 @@ interface TmdbApiService {
 
     @GET("movie/{idMovie}")
     suspend fun fetchCredits(
-        @Path("idMovie")idMovie:String,
+        @Path("idMovie")idMovie:Int,
         @Query("api_key")apiKey: String
     ):Response<Cast>
 }
