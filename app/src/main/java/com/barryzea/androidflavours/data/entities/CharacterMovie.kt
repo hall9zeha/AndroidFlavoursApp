@@ -16,7 +16,7 @@ data class CharacterMovie(
     @SerializedName("original_name") val originalName:String="",
     @SerializedName("popularity") val popularity:Float=0F,
     @SerializedName("profile_path") val profilePath:String="",
-    @SerializedName("cast_id") val cast_id:Int=0,
+    @SerializedName("cast_id") val castId:Int=0,
     @SerializedName("character") val character:String="",
     @SerializedName("credit_id") val creditId:String="",
 

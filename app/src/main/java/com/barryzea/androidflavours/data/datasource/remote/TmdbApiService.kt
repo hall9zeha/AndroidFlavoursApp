@@ -1,5 +1,6 @@
 package com.barryzea.androidflavours.data.datasource.remote
 
+import com.barryzea.androidflavours.data.entities.Cast
 import com.barryzea.androidflavours.data.entities.Genres
 import com.barryzea.androidflavours.data.entities.TmdbResult
 import com.barryzea.androidflavours.domain.entities.DomainMovie
@@ -45,4 +46,10 @@ interface TmdbApiService {
         @Query("language")language:String,
         @Query("page")page:Int
     ):Response<TmdbResult>
+
+    @GET("movie/{idMovie}")
+    suspend fun fetchCredits(
+        @Path("idMovie")idMovie:String,
+        @Query("api_key")apiKey: String
+    ):Response<Cast>
 }
