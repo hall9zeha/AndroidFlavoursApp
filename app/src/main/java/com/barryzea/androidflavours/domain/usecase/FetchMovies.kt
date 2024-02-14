@@ -63,7 +63,6 @@ class FetchMovies(private val repository: Repository):UseCases {
         }catch(e:Exception){
             TmdbResponse.Error(e.message.toString())
         }
-
     }
 
     override suspend fun fetchTrailers(idMovie: Int): TmdbResponse<List<TrailerMovie>> {
@@ -75,8 +74,8 @@ class FetchMovies(private val repository: Repository):UseCases {
             TmdbResponse.Error(e.message.toString())
         }
     }
-
-  /*  private inline fun <reified  T : Any> handleResponse(fetchCall:()-> Response<T>):TmdbResponse<T>{
+/*
+    private inline fun <reified  T : Any> handleResponse(fetchCall:()-> Response<T>):TmdbResponse<T>{
         return try{
             val response = fetchCall()
             if(response.isSuccessful)TmdbResponse.Success(response.body()!!)
