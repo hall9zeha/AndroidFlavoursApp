@@ -29,4 +29,7 @@
     <string name="characters_title">Characters</string>
     <string name="trailer_title">Trailer</string>
     <string name="account">Account</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="login_btn">Login</string>
 </resources>

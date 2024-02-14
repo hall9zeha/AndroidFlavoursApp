@@ -8,6 +8,6 @@
     android:focusable="false"
     xmlns:tools="http://schemas.android.com/tools"
     tools:checked="true"
-    app:trackTint="@color/md_theme_dark_onPrimaryContainer">
+    app:trackTint="@color/md_theme_onPrimaryContainer">
 
 </com.google.android.material.materialswitch.MaterialSwitch>
