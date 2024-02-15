@@ -1,7 +1,10 @@
 package com.barryzea.androidflavours.di
 
+import com.barryzea.androidflavours.data.repository.LoginRepository
 import com.barryzea.androidflavours.data.repository.Repository
 import com.barryzea.androidflavours.domain.usecase.FetchMovies
+import com.barryzea.androidflavours.domain.usecase.LoginUseCases
+import com.barryzea.androidflavours.domain.usecase.LoginUseCasesImpl
 import com.barryzea.androidflavours.domain.usecase.UseCases
 import dagger.Binds
 import dagger.Module
@@ -23,5 +26,9 @@ class DataModule {
     @ViewModelScoped
     @Provides
     fun useCaseProvides(repository:Repository):UseCases = FetchMovies(repository)
+
+    @ViewModelScoped
+    @Provides
+    fun loginUseCaseProvides(loginRepository:LoginRepository):LoginUseCases = LoginUseCasesImpl(loginRepository)
 }
 

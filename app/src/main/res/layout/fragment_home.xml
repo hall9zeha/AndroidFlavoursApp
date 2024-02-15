@@ -9,7 +9,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.HomeFragment">
+    tools:context=".ui.fragments.HomeFragment">
 
     <include layout="@layout/loading_shimmer_layout"
         android:id="@+id/shimmerLoading"

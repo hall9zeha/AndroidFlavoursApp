@@ -1,14 +1,11 @@
-package com.barryzea.androidflavours.ui
+package com.barryzea.androidflavours.ui.fragments
 
 import android.os.Bundle
-import android.provider.SyncStateContract.Constants
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -17,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.barryzea.androidflavours.R
 import com.barryzea.androidflavours.common.BY_CATEGORY
 import com.barryzea.androidflavours.common.BY_GENRE
-import com.barryzea.androidflavours.common.LATEST
 import com.barryzea.androidflavours.common.NONE
 import com.barryzea.androidflavours.common.POPULAR
 import com.barryzea.androidflavours.common.TOP_RATED
@@ -33,7 +29,6 @@ import com.barryzea.androidflavours.ui.activities.MainActivity
 import com.barryzea.androidflavours.ui.adapters.GenresAdapter
 import com.barryzea.androidflavours.ui.adapters.MovieAdapter
 import com.barryzea.androidflavours.ui.viewmodel.MainViewModel
-import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val ARG_PARAM1 = "param1"
@@ -41,7 +36,7 @@ private const val ARG_PARAM2 = "param2"
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    private var _bind:FragmentHomeBinding?=null
+    private var _bind: FragmentHomeBinding?=null
     private val bind get() = _bind!!
 
     private var param1: String? = null
@@ -49,7 +44,7 @@ class HomeFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModels()
     private  var movieAdapter: MovieAdapter?=null
-    private var genresAdapter:GenresAdapter?= null
+    private var genresAdapter: GenresAdapter?= null
     private lateinit var mLayoutManager: GridLayoutManager
     private var currentPage=1
     private var isLoading=false
@@ -73,7 +68,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         activity?.let{
-            _bind = FragmentHomeBinding.inflate(inflater,container,false)
+            _bind = FragmentHomeBinding.inflate(inflater, container, false)
             _bind?.let{
                 return it.root
             }
@@ -110,8 +105,8 @@ class HomeFragment : Fragment() {
         if(savedInstanceState==null) {
             currentPage = 1
             when(fetchBy){
-                BY_GENRE->{viewModel.fetchMovies(genreId,currentPage)}
-                BY_CATEGORY->{viewModel.fetchMoviesSortedBy(CATEGORY,currentPage)}
+                BY_GENRE ->{viewModel.fetchMovies(genreId,currentPage)}
+                BY_CATEGORY ->{viewModel.fetchMoviesSortedBy(CATEGORY,currentPage)}
                 else->{viewModel.fetchMovies(null,currentPage)}
             }
 
@@ -142,7 +137,7 @@ class HomeFragment : Fragment() {
     private fun setUpAdapter(){
         movieAdapter = MovieAdapter(::onItemClick)
         genresAdapter = GenresAdapter(::onGenreItemClick)
-        mLayoutManager=GridLayoutManager(context,3)
+        mLayoutManager= GridLayoutManager(context, 3)
         bind.rvMovies.apply {
             layoutManager = mLayoutManager
             setHasFixedSize(true)
@@ -153,8 +148,11 @@ class HomeFragment : Fragment() {
             adapter=genresAdapter
             addItemDecoration(
                 DotsIndicatorDecoration(
-                    colorActive = ContextCompat.getColor(context,R.color.yellow),
-                    colorInactive = ContextCompat.getColor(context, R.color.md_theme_primaryContainer)
+                    colorActive = ContextCompat.getColor(context, R.color.yellow),
+                    colorInactive = ContextCompat.getColor(
+                        context,
+                        R.color.md_theme_primaryContainer
+                    )
                 )
             )
         }
@@ -186,15 +184,15 @@ class HomeFragment : Fragment() {
     private fun setUpPagination(){
         //Obtenemos la referencia a nuestro bottomNavigationView que está en MainActivity para enviarla a nuestro paginador
         //del recyclerView y pueda mostrarlo u ocultarlo mientras nos desplazamos.
-        val bottomNav = (activity as? MainActivity )?.bind?.bottomNav
+        val bottomNav = (activity as? MainActivity)?.bind?.bottomNav
         bind.rvMovies.addOnScrollListener(object: PaginationRecyclerView(bottomNav,mLayoutManager){
             override fun loadMoreItems() {
                 isLoading=true
                 currentPage+=1
                 movieAdapter?.addLoadingItem()
                 when(fetchBy){
-                    BY_GENRE->{viewModel.fetchMovies(genreId,currentPage)}
-                    BY_CATEGORY->{viewModel.fetchMoviesSortedBy(CATEGORY,currentPage)}
+                    BY_GENRE ->{viewModel.fetchMovies(genreId,currentPage)}
+                    BY_CATEGORY ->{viewModel.fetchMoviesSortedBy(CATEGORY,currentPage)}
                     else->{viewModel.fetchMovies(null,currentPage)}
                 }
             }
