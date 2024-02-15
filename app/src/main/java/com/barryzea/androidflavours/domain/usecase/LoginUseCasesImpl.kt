@@ -1,11 +1,11 @@
 package com.barryzea.androidflavours.domain.usecase
 
-import com.barryzea.androidflavours.data.entities.RequestToken
-import com.barryzea.androidflavours.data.entities.Session
 import com.barryzea.androidflavours.data.entities.TmdbResponse
 import com.barryzea.androidflavours.data.repository.LoginRepository
 import com.barryzea.androidflavours.domain.entities.CreateSessionRequest
+import com.barryzea.androidflavours.domain.entities.DomainAuth
 import com.barryzea.androidflavours.domain.entities.ValidateLoginRequest
+import com.barryzea.androidflavours.domain.entities.toDomain
 
 /**
  * Project AndroidFlavours
@@ -13,15 +13,33 @@ import com.barryzea.androidflavours.domain.entities.ValidateLoginRequest
  **/
 
 class LoginUseCasesImpl(private val loginRepository: LoginRepository):LoginUseCases {
-    override suspend fun getRequestToken(): TmdbResponse<RequestToken> {
-        TODO("Not yet implemented")
+    override suspend fun getRequestToken(): TmdbResponse<DomainAuth> {
+        return try {
+            val response = loginRepository.getRequestToken()
+            if(response.isSuccessful) TmdbResponse.Success(response.body()?.toDomain()!!)
+            else TmdbResponse.Error(response.message())
+        }catch(e:Exception){
+            TmdbResponse.Error(e.message.toString())
+        }
     }
 
-    override suspend fun validateWithLogin(request: ValidateLoginRequest): TmdbResponse<RequestToken> {
-        TODO("Not yet implemented")
+    override suspend fun validateWithLogin(request: ValidateLoginRequest): TmdbResponse<DomainAuth> {
+        return try {
+            val response = loginRepository.validateWithLogin(request)
+            if(response.isSuccessful) TmdbResponse.Success(response.body()?.toDomain()!!)
+            else TmdbResponse.Error(response.message())
+        }catch(e:Exception){
+            TmdbResponse.Error(e.message.toString())
+        }
     }
 
-    override suspend fun createSession(request: CreateSessionRequest): TmdbResponse<Session> {
-        TODO("Not yet implemented")
+    override suspend fun createSession(request: CreateSessionRequest): TmdbResponse<DomainAuth> {
+        return try {
+            val response = loginRepository.createSession(request)
+            if(response.isSuccessful) TmdbResponse.Success(response.body()?.toDomain()!!)
+            else TmdbResponse.Error(response.message())
+        }catch(e:Exception){
+            TmdbResponse.Error(e.message.toString())
+        }
     }
 }
