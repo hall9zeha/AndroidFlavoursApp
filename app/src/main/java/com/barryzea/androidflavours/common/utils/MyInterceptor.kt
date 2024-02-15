@@ -17,10 +17,14 @@ class MyInterceptor:Interceptor {
         val request:Request = chain.request()
         val response = chain.proceed(request)
         return when(response.code){
-            400->{setResponse(response,chain,400,response.message)}
-            401->{setResponse(response,chain,401,response.message)}
-            403->{setResponse(response,chain,403,response.message)}
-            404->{setResponse(response,chain,404,response.message)}
+            400->{setResponse(response,chain,400,"Validation failed.")}
+            401->{setResponse(response,chain,401,"Authentication failed: Usuario o password incorrectos")}
+            403->{setResponse(response,chain,403,"Duplicate entry: The data you tried to submit already exists.")}
+            404->{setResponse(response,chain,404,"Invalid id: The pre-requisite id is invalid or not found.")}
+            405->{setResponse(response,chain,405,"Invalid format: This service doesn't exist in that format.")}
+            406->{setResponse(response,chain,406,"Invalid accept header.")}
+            429->{setResponse(response,chain,429,"Your request count (#) is over the allowed limit of (40).")}
+            503->{setResponse(response,chain,404,"Service offline: This service is temporarily offline, try again later.")}
             200->{setResponse(response,chain,200,"Respuesta de la API completada correctamente")}
             else->{
                 //Volvemos a llamar a la api  cinco veces más si hay algún error desconocido

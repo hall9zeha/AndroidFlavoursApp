@@ -28,12 +28,11 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases):Vi
     private var _newToken:MutableLiveData<String> = MutableLiveData()
     val newToken:LiveData<String> = _newToken
 
-    private var _sessionId:MutableLiveData<String> = MutableLiveData()
-    val sessionId:LiveData<String> = _sessionId
-
     private var _authResponse:MutableLiveData<DomainAuth> = MutableLiveData()
     val authResponse:LiveData<DomainAuth> = _authResponse
 
+    private var _sessionId:MutableLiveData<String> = MutableLiveData()
+    val sessionId:LiveData<String> = _sessionId
 
     fun requestNewToken(){
         viewModelScope.launch {
@@ -46,7 +45,10 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases):Vi
     fun validateWithLogin(requestLogin:ValidateLoginRequest){
         viewModelScope.launch {
             when(val response = useCases.validateWithLogin(requestLogin)){
-                is TmdbResponse.Success-> if(response.tmdbResult.success) _authResponse.value=response.tmdbResult!!
+                is TmdbResponse.Success->{
+                    if(response.tmdbResult.success) _authResponse.value=response.tmdbResult!!
+                    else _msgInfo.value="Usuario o password incorrectos"
+                }
                 is TmdbResponse.Error-> _msgInfo.value = response.msg
             }
 

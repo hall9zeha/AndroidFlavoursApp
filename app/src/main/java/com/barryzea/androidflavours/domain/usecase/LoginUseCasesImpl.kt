@@ -1,5 +1,6 @@
 package com.barryzea.androidflavours.domain.usecase
 
+import android.util.Log
 import com.barryzea.androidflavours.data.entities.TmdbResponse
 import com.barryzea.androidflavours.data.repository.LoginRepository
 import com.barryzea.androidflavours.domain.entities.CreateSessionRequest
@@ -18,6 +19,7 @@ class LoginUseCasesImpl(private val loginRepository: LoginRepository):LoginUseCa
             val response = loginRepository.getRequestToken()
             if(response.isSuccessful) TmdbResponse.Success(response.body()?.toDomain()!!)
             else TmdbResponse.Error(response.message())
+
         }catch(e:Exception){
             TmdbResponse.Error(e.message.toString())
         }
@@ -26,6 +28,7 @@ class LoginUseCasesImpl(private val loginRepository: LoginRepository):LoginUseCa
     override suspend fun validateWithLogin(request: ValidateLoginRequest): TmdbResponse<DomainAuth> {
         return try {
             val response = loginRepository.validateWithLogin(request)
+            Log.e("LOGIN", response.toString() )
             if(response.isSuccessful) TmdbResponse.Success(response.body()?.toDomain()!!)
             else TmdbResponse.Error(response.message())
         }catch(e:Exception){
