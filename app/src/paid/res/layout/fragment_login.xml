@@ -8,7 +8,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilUserName"
-        android:layout_width="240dp"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
 
         app:layout_constraintTop_toTopOf="parent"
@@ -25,13 +25,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/username_hint"
-            android:imeOptions="actionNext"
+
             android:singleLine="true"/>
 
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilPassword"
-        android:layout_width="240dp"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
 
         app:layout_constraintStart_toStartOf="parent"
