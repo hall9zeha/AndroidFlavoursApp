@@ -4,6 +4,7 @@ import android.app.Application
 import com.barryzea.androidflavours.BuildConfig
 import com.barryzea.androidflavours.data.datasource.remote.RetrofitService
 import com.barryzea.androidflavours.data.datasource.remote.RetrofitServiceImpl
+import com.barryzea.androidflavours.data.datasource.remote.TmdbLoginService
 import com.barryzea.androidflavours.data.repository.Repository
 import com.barryzea.androidflavours.data.repository.RepositoryImpl
 import dagger.Binds
@@ -43,7 +44,6 @@ class AppModule {
 abstract class RetrofitModule{
     @Binds
     abstract fun retrofitProvides(retrofit:RetrofitServiceImpl): RetrofitService
-
 }
 @Module
 @InstallIn(SingletonComponent::class)
