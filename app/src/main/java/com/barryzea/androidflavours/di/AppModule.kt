@@ -1,6 +1,7 @@
 package com.barryzea.androidflavours.di
 
 import android.app.Application
+import android.content.Context
 import com.barryzea.androidflavours.BuildConfig
 import com.barryzea.androidflavours.data.datasource.remote.RetrofitService
 import com.barryzea.androidflavours.data.datasource.remote.RetrofitServiceImpl
@@ -27,6 +28,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+    @Singleton
+    @Provides
+    fun contextProvides(app:Application):Context = app.applicationContext
+
     @Singleton
     @Provides
     @Named("apiKey")
