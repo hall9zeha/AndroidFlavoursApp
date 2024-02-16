@@ -100,6 +100,7 @@ val glide_version = "4.16.0"
 val okhttp_bom = "4.11.0"
 val shimer_layout_version = "0.5.0"
 val nav_version = "2.7.6"
+val lottieVersion = "6.3.0"
 
 dependencies {
 
@@ -147,5 +148,8 @@ dependencies {
     //Navigation
     implementation ("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation ("androidx.navigation:navigation-ui-ktx:$nav_version")
+
+    //Lottie anim
+    implementation ("com.airbnb.android:lottie:$lottieVersion")
 
 }

@@ -41,4 +41,6 @@
     <color name="md_theme_scrim">#000000</color>
     <color name="stroke_unfocused_edt">@color/yellow</color>
     <color name="search_box_background_color">@color/md_theme_onPrimary</color>
+    <color name="login_button_background">@color/md_theme_inverseOnSurface</color>
+    <color name="login_button_pressed">@color/md_theme_inverseOnSurface</color>
 </resources>

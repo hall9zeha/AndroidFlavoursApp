@@ -3,4 +3,10 @@
     <declare-styleable name="AspectRatioImageView">
         <attr name="ratio" format="float" />
     </declare-styleable>
+    <declare-styleable name="ProgressButton">
+        <attr name="text" format="string" />
+        <attr name="loading" format="boolean" />
+        <attr name="enabled" format="boolean" />
+        <attr name="lottie_resId" format="reference" />
+    </declare-styleable>
 </resources>

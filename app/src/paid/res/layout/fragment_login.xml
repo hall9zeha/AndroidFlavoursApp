@@ -51,7 +51,7 @@
             android:singleLine="true"/>
 
     </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.button.MaterialButton
+   <!-- <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
         android:layout_width="0dp"
         android:layout_height="64dp"
@@ -61,7 +61,18 @@
         app:layout_constraintTop_toBottomOf="@id/tilPassword"
         android:layout_marginTop="@dimen/common_padding_max"
         style="@style/loginButtonStyle"
-        />
+        />-->
+    <com.barryzea.androidflavours.ui.components.ProgressButton
+        android:id="@+id/btnLogin"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="@id/tilPassword"
+        app:layout_constraintEnd_toEndOf="@id/tilPassword"
+        app:layout_constraintTop_toBottomOf="@id/tilPassword"
+        android:layout_marginTop="24dp"
+        app:enabled="true"
+        app:text="@string/login_btn"
+        style="@style/Widget.ProgressButton.Black"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

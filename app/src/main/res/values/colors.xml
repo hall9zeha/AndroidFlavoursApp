@@ -43,6 +43,7 @@
     <color name="stroke_unfocused_edt">@color/md_theme_onSecondaryContainer</color>
     <color name="stroke_btn_login_color">@color/md_theme_onSecondaryContainer</color>
     <color name="search_box_background_color">@color/white</color>
-
+    <color name="login_button_background">@color/white</color>
+    <color name="login_button_pressed">@color/white</color>
 
 </resources>

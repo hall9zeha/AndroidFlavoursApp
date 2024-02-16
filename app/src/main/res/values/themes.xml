@@ -90,4 +90,28 @@
         <item name="shapeCornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+    <!--Estilos para button loader-->
+    <style name="ThemeOverlay.Widget.ProgressButton.Black" parent="">
+        <item name="android:textAppearanceButton">@style/TextAppearance.ProgressButton.Black</item>
+        <item name="android:colorControlHighlight">@color/yellow</item>
+    </style>
+
+    <style name="TextAppearance.Body.White" parent="@style/TextAppearance.MaterialComponents.Body1">
+       <!-- <item name="android:fontFamily"></item>-->
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!--Text styiling for black button, with selector-->
+    <style name="TextAppearance.ProgressButton.Black" parent="@style/TextAppearance.Body.White">
+        <item name="android:textColor">@color/black_button_text_color_selector</item>
+    </style>
+
+    <style name="Widget.ProgressButton.Black" parent="">
+        <item name="android:theme">@style/ThemeOverlay.Widget.ProgressButton.Black</item>
+        <item name="android:background">@drawable/progress_button_black</item>
+    </style>
 </resources>

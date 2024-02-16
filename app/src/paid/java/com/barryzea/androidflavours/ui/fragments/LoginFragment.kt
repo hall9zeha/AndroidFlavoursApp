@@ -80,7 +80,8 @@ class LoginFragment : Fragment() {
             false
         }
         btnLogin.setOnClickListener {
-            it.isEnabled=false
+            btnLogin.isEnabled = true
+            btnLogin.setLoading(true)
             validateNameAndPassword() }
 
         tilPassword.setEndIconOnClickListener {
@@ -119,15 +120,16 @@ class LoginFragment : Fragment() {
         }
         viewModel.sessionId.observe(viewLifecycleOwner){
             it?.let{sessionId->
-                bind.btnLogin.isEnabled=true
+               bind.btnLogin.isEnabled=true
                 Toast.makeText(context, "Sesión creada", Toast.LENGTH_SHORT).show()
                 Log.e("3-SESSION_ID",sessionId)
-
+                bind.btnLogin.setLoading(false)
             }
         }
         viewModel.msgInfo.observe(viewLifecycleOwner){
             bind.root.showSnackbar(it)
             bind.btnLogin.isEnabled=true
+            bind.btnLogin.setLoading(false)
         }
     }
     private fun validateNameAndPassword()=with(bind){
@@ -141,7 +143,7 @@ class LoginFragment : Fragment() {
         }
         else{
             viewModel.requestNewToken()
-            Toast.makeText(context, "Espere por favor", Toast.LENGTH_SHORT).show()
+
         }
     }
     override fun onDestroyView() {
