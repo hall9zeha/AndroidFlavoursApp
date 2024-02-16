@@ -101,6 +101,8 @@ val okhttp_bom = "4.11.0"
 val shimer_layout_version = "0.5.0"
 val nav_version = "2.7.6"
 val lottieVersion = "6.3.0"
+val datastorePrefsVersion ="1.0.0"
+val splashScreenVersion="1.0.1"
 
 dependencies {
 
@@ -151,5 +153,11 @@ dependencies {
 
     //Lottie anim
     implementation ("com.airbnb.android:lottie:$lottieVersion")
+
+    //DataStore preferences
+    implementation("androidx.datastore:datastore-preferences:$datastorePrefsVersion")
+
+    //Splash screen librería
+    implementation("androidx.core:core-splashscreen:$splashScreenVersion")
 
 }

@@ -75,6 +75,7 @@ class LoginFragment : Fragment() {
         edtPassword.setOnEditorActionListener { v, actionId, event ->
             if(actionId == EditorInfo.IME_ACTION_GO){
                 validateNameAndPassword()
+                btnLogin.setLoading(true)
                 return@setOnEditorActionListener false
             }
             false
