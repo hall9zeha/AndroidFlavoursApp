@@ -2,7 +2,6 @@ package com.barryzea.androidflavours.ui.fragments
 
 import android.os.Bundle
 import android.text.InputType
-import android.text.TextUtils
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,7 +18,6 @@ import com.barryzea.androidflavours.domain.entities.CreateSessionRequest
 import com.barryzea.androidflavours.domain.entities.ValidateLoginRequest
 import com.barryzea.androidflavours.ui.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.log
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -33,6 +31,7 @@ class LoginFragment : Fragment() {
     private var _bind:FragmentLoginBinding?=null
     private val viewModel:LoginViewModel by viewModels()
     private val bind:FragmentLoginBinding get() = _bind!!
+    private var isLogin:Boolean=false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,16 +73,25 @@ class LoginFragment : Fragment() {
     private fun setUpListeners()= with(bind){
         edtPassword.setOnEditorActionListener { v, actionId, event ->
             if(actionId == EditorInfo.IME_ACTION_GO){
-                validateNameAndPassword()
-                btnLogin.setLoading(true)
-                return@setOnEditorActionListener false
+                if(!isLogin) {
+                    validateNameAndPassword()
+                    btnLogin.setLoading(true)
+                    return@setOnEditorActionListener false
+                }else{
+                    Toast.makeText(context, "Ya hay una sesión abierta", Toast.LENGTH_SHORT).show()
+                }
             }
             false
         }
         btnLogin.setOnClickListener {
-            btnLogin.isEnabled = true
-            btnLogin.setLoading(true)
-            validateNameAndPassword() }
+            if(!isLogin) {
+                btnLogin.isEnabled = true
+                btnLogin.setLoading(true)
+                validateNameAndPassword()
+            }else{
+                Toast.makeText(context, "Ya hay una sesión abierta", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         tilPassword.setEndIconOnClickListener {
 
@@ -101,7 +109,10 @@ class LoginFragment : Fragment() {
         }
     }
     private fun setUpObservers(){
-
+        viewModel.checkIsSessionIsCreated()
+        viewModel.sessionCreatedId.observe(viewLifecycleOwner){sessionId->
+            if(sessionId.isNotEmpty())isLogin=true
+        }
         viewModel.newToken.observe(viewLifecycleOwner){
             it?.let{token->
                 Log.e("1-NEW_TOKEN",token )
@@ -125,6 +136,8 @@ class LoginFragment : Fragment() {
                 Toast.makeText(context, "Sesión creada", Toast.LENGTH_SHORT).show()
                 Log.e("3-SESSION_ID",sessionId)
                 bind.btnLogin.setLoading(false)
+                viewModel.saveSessionId(sessionId)
+                viewModel.checkIsSessionIsCreated()
             }
         }
         viewModel.msgInfo.observe(viewLifecycleOwner){

@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.barryzea.androidflavours.common.utils.DataStorePreferences
 import com.barryzea.androidflavours.common.utils.SingleMutableLiveData
+import com.barryzea.androidflavours.data.entities.PrefsEntity
 import com.barryzea.androidflavours.data.entities.TmdbResponse
 import com.barryzea.androidflavours.domain.entities.CreateSessionRequest
 import com.barryzea.androidflavours.domain.entities.DomainAuth
@@ -13,6 +15,7 @@ import com.barryzea.androidflavours.domain.usecase.LoginUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Project AndroidFlavours
@@ -20,19 +23,22 @@ import javax.inject.Inject
  **/
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val useCases: LoginUseCases):ViewModel() {
+class LoginViewModel @Inject constructor(private val useCases: LoginUseCases, val datastore:DataStorePreferences):ViewModel() {
 
     private var _msgInfo:MutableLiveData<String> = MutableLiveData()
     val msgInfo:LiveData<String> = _msgInfo
 
-    private var _newToken:MutableLiveData<String> = MutableLiveData()
+    private var _newToken:SingleMutableLiveData<String> = SingleMutableLiveData()
     val newToken:LiveData<String> = _newToken
 
-    private var _authResponse:MutableLiveData<DomainAuth> = MutableLiveData()
+    private var _authResponse:SingleMutableLiveData<DomainAuth> = SingleMutableLiveData()
     val authResponse:LiveData<DomainAuth> = _authResponse
 
-    private var _sessionId:MutableLiveData<String> = MutableLiveData()
+    private var _sessionId:SingleMutableLiveData<String> = SingleMutableLiveData()
     val sessionId:LiveData<String> = _sessionId
+
+    private var _sessionCreatedId:MutableLiveData<String> = MutableLiveData()
+    val sessionCreatedId:LiveData<String> = _sessionCreatedId
 
     fun requestNewToken(){
         viewModelScope.launch {
@@ -62,7 +68,17 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases):Vi
             }
         }
     }
-
-
+    fun saveSessionId(sessionId:String){
+        viewModelScope.launch {
+            datastore.saveToDatastore(PrefsEntity(sessionId=sessionId))
+        }
+    }
+    fun checkIsSessionIsCreated(){
+        viewModelScope.launch {
+            datastore.getFromDatastore().collect{
+                _sessionCreatedId.value = it.sessionId!!
+            }
+        }
+    }
 
 }
