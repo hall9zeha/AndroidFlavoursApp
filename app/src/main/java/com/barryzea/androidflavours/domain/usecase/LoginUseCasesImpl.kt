@@ -7,6 +7,7 @@ import com.barryzea.androidflavours.domain.entities.CreateSessionRequest
 import com.barryzea.androidflavours.domain.entities.DomainAuth
 import com.barryzea.androidflavours.domain.entities.ValidateLoginRequest
 import com.barryzea.androidflavours.domain.entities.toDomain
+import retrofit2.Response
 
 /**
  * Project AndroidFlavours
@@ -45,4 +46,16 @@ class LoginUseCasesImpl(private val loginRepository: LoginRepository):LoginUseCa
             TmdbResponse.Error(e.message.toString())
         }
     }
+
+    override suspend fun fetchUserDetails(sessionId: String): TmdbResponse<DomainAuth> {
+        return try {
+            val response = loginRepository.fetchUserDetails(sessionId)
+            if(response.isSuccessful) TmdbResponse.Success(response.body()?.toDomain()!!)
+            else TmdbResponse.Error(response.message())
+        }catch(e:Exception){
+            TmdbResponse.Error(e.message.toString())
+        }
+    }
+
+
 }

@@ -13,20 +13,20 @@ import com.google.android.material.snackbar.Snackbar
  * Created by Barry Zea H. on 01/02/2024.
  **/
 
-fun ImageView.loadUrl(url:String)=
+fun ImageView.loadUrl(url:String, placeholder:Int=R.drawable.placeholder_movie)=
     Glide.with(this)
         .load(url)
-        .placeholder(R.drawable.placeholder_movie)
+        .placeholder(placeholder)
         .diskCacheStrategy(DiskCacheStrategy.ALL)
-        .error(R.drawable.placeholder_movie)
+        .error(placeholder)
         .centerCrop()
         .into(this)
-fun ImageView.loadRes(resource:Int)=
+fun ImageView.loadRes(resource:Int,placeholder:Int=R.drawable.placeholder_movie)=
     Glide.with(this)
         .load(resource)
-        .placeholder(R.drawable.placeholder_movie)
+        .placeholder(placeholder)
         .diskCacheStrategy(DiskCacheStrategy.ALL)
-        .error(R.drawable.placeholder_movie)
+        .error(placeholder)
         .centerCrop()
         .into(this)
 fun View.showSnackbar(msg:String, duration:Int=Snackbar.LENGTH_SHORT)=

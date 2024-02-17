@@ -40,6 +40,9 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases, va
     private var _sessionCreatedId:MutableLiveData<String> = MutableLiveData()
     val sessionCreatedId:LiveData<String> = _sessionCreatedId
 
+    private var _userDetail:MutableLiveData<DomainAuth> = MutableLiveData()
+    val userDetail:LiveData<DomainAuth> = _userDetail
+
     fun requestNewToken(){
         viewModelScope.launch {
             when (val response = useCases.getRequestToken()) {
@@ -77,6 +80,14 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases, va
         viewModelScope.launch {
             datastore.getFromDatastore().collect{
                 _sessionCreatedId.value = it.sessionId!!
+            }
+        }
+    }
+    fun fetchUserDetail(sessionId: String){
+        viewModelScope.launch {
+            when(val response = useCases.fetchUserDetails(sessionId)){
+                is TmdbResponse.Success->_userDetail.value=response.tmdbResult
+                is TmdbResponse.Error->_msgInfo.value=response.msg
             }
         }
     }

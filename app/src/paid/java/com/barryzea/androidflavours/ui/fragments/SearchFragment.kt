@@ -116,6 +116,9 @@ class SearchFragment : Fragment() {
         }
     }
     private fun setUpListeners()=with(bind){
+
+        (activity as? MainActivity)?.bind?.ctlHeader?.visibility=View.GONE
+
         tilSearch.setEndIconOnClickListener {
             if(edtSearch.text.toString().isNotEmpty()){
                 movieAdapter.clear()

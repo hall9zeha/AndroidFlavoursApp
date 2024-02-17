@@ -2,6 +2,7 @@ package com.barryzea.androidflavours.data.datasource.remote
 
 import com.barryzea.androidflavours.data.entities.RequestToken
 import com.barryzea.androidflavours.data.entities.Session
+import com.barryzea.androidflavours.data.entities.User
 import com.barryzea.androidflavours.domain.entities.CreateSessionRequest
 import com.barryzea.androidflavours.domain.entities.ValidateLoginRequest
 import retrofit2.Response
@@ -20,7 +21,11 @@ interface TmdbLoginService {
     suspend fun getRequestToken(
         @Query("api_key") apiKey:String
     ): Response<RequestToken>
-
+    @GET("account")
+    suspend fun fetchUserDetail(
+        @Query("api_key") apiKey: String,
+        @Query("session_id")sessionId:String
+    ):Response<User>
     @POST("authentication/token/validate_with_login")
     suspend fun validateWithLogin(
         @Query("api_key")apiKey:String,

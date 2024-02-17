@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -43,6 +44,7 @@ class HomeFragment : Fragment() {
     private var param2: String? = null
 
     private val viewModel: MainViewModel by viewModels()
+
     private  var movieAdapter: MovieAdapter?=null
     private var genresAdapter: GenresAdapter?= null
     private lateinit var mLayoutManager: GridLayoutManager
@@ -102,6 +104,12 @@ class HomeFragment : Fragment() {
         viewModel.fetchMoviesSortedBy(category,1)
     }
     private fun setUpObservers(savedInstanceState: Bundle?) {
+        viewModel.getPreferences()
+        viewModel.preferences.observe(viewLifecycleOwner){preferences->
+            if(preferences.sessionId!!.isNotEmpty()){
+                (activity as? MainActivity)?.bind?.ctlHeader?.visibility = View.VISIBLE
+            }
+        }
         if(savedInstanceState==null) {
             currentPage = 1
             when(fetchBy){

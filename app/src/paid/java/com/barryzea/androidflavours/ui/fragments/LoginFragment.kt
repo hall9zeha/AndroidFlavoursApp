@@ -16,6 +16,7 @@ import com.barryzea.androidflavours.common.showSnackbar
 import com.barryzea.androidflavours.databinding.FragmentLoginBinding
 import com.barryzea.androidflavours.domain.entities.CreateSessionRequest
 import com.barryzea.androidflavours.domain.entities.ValidateLoginRequest
+import com.barryzea.androidflavours.ui.activities.MainActivity
 import com.barryzea.androidflavours.ui.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -112,6 +113,7 @@ class LoginFragment : Fragment() {
         viewModel.checkIsSessionIsCreated()
         viewModel.sessionCreatedId.observe(viewLifecycleOwner){sessionId->
             if(sessionId.isNotEmpty())isLogin=true
+            (activity as? MainActivity)?.bind?.ctlHeader?.visibility=View.VISIBLE
         }
         viewModel.newToken.observe(viewLifecycleOwner){
             it?.let{token->

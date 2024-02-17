@@ -42,4 +42,5 @@ class RepositoryImpl @Inject constructor(retrofit: RetrofitService, private val 
     override suspend fun fetchTrailers(idMovie: Int): Response<Trailers> {
         return apiService.fetchTrailers(idMovie,apiKey)
     }
+
 }

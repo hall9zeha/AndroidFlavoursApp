@@ -19,4 +19,5 @@ interface Repository {
     suspend fun fetchCredits(idMovie:Int):Response<Cast>
 
     suspend fun fetchTrailers(idMovie:Int):Response<Trailers>
+
 }

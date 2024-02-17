@@ -1,10 +1,13 @@
 package com.barryzea.androidflavours.ui.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.barryzea.androidflavours.common.utils.DataStorePreferences
 import com.barryzea.androidflavours.common.utils.SingleMutableLiveData
 import com.barryzea.androidflavours.data.entities.Genres
+import com.barryzea.androidflavours.data.entities.PrefsEntity
 import com.barryzea.androidflavours.data.entities.TmdbResponse
 import com.barryzea.androidflavours.domain.entities.DomainMovie
 import com.barryzea.androidflavours.domain.usecase.UseCases
@@ -18,27 +21,40 @@ import javax.inject.Inject
  **/
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val useCases: UseCases) :ViewModel() {
+class MainViewModel @Inject constructor(private val useCases: UseCases, private val prefs:DataStorePreferences) :ViewModel() {
 
-    var movies:SingleMutableLiveData<DomainMovie> = SingleMutableLiveData()
-        private set
-    var moviesFound:SingleMutableLiveData<DomainMovie> = SingleMutableLiveData()
-        private set
-    var infoMsg:MutableLiveData<String> = MutableLiveData()
-        private set
-    var genres:MutableLiveData<Genres> = MutableLiveData()
-        private set
-    var searchValue:MutableLiveData<String> = MutableLiveData()
-        private set
+    private var _movies:SingleMutableLiveData<DomainMovie> = SingleMutableLiveData()
+    val  movies:SingleMutableLiveData<DomainMovie> = _movies
 
+    private var _moviesFound:SingleMutableLiveData<DomainMovie> = SingleMutableLiveData()
+    val moviesFound:SingleMutableLiveData<DomainMovie> = _moviesFound
+
+    private var _infoMsg:MutableLiveData<String> = MutableLiveData()
+    val infoMsg:MutableLiveData<String> = _infoMsg
+
+    private var _genres:MutableLiveData<Genres> = MutableLiveData()
+    val genres:MutableLiveData<Genres> = _genres
+
+    private var _searchValue:MutableLiveData<String> = MutableLiveData()
+    val searchValue:MutableLiveData<String> = _searchValue
+
+    private var _preferences:MutableLiveData<PrefsEntity> = MutableLiveData()
+    val preferences:LiveData<PrefsEntity> = _preferences
+    fun getPreferences(){
+        viewModelScope.launch {
+            prefs.getFromDatastore().collect{
+                _preferences.value=it
+            }
+        }
+    }
     fun fetchMovies(genreId:Int?,page:Int){
         viewModelScope.launch {
             when(val response = useCases.fetchMovies(genreId,page)){
                 is TmdbResponse.Success ->{
-                    movies.value= response.tmdbResult
+                    _movies.value= response.tmdbResult
                 }
                 is TmdbResponse.Error->{
-                    infoMsg.value = response.msg
+                    _infoMsg.value = response.msg
                 }
             }
         }
@@ -47,10 +63,10 @@ class MainViewModel @Inject constructor(private val useCases: UseCases) :ViewMod
         viewModelScope.launch {
             when(val response = useCases.fetchMoviesSortedBy(sortedValue,page)){
                 is TmdbResponse.Success ->{
-                    movies.value=response.tmdbResult
+                    _movies.value=response.tmdbResult
                 }
                 is TmdbResponse.Error->{
-                    infoMsg.value = response.msg
+                    _infoMsg.value = response.msg
                 }
             }
         }
@@ -59,10 +75,10 @@ class MainViewModel @Inject constructor(private val useCases: UseCases) :ViewMod
         viewModelScope.launch{
             when(val response = useCases.searchMovie(searchValue,page)){
                 is TmdbResponse.Success->{
-                    moviesFound.value= response.tmdbResult
+                    _moviesFound.value= response.tmdbResult
                 }
                 is TmdbResponse.Error->{
-                    infoMsg.value = response.msg
+                    _infoMsg.value = response.msg
                 }
             }
         }
@@ -71,10 +87,10 @@ class MainViewModel @Inject constructor(private val useCases: UseCases) :ViewMod
         viewModelScope.launch {
             when(val response = useCases.fetchGenres()){
                 is TmdbResponse.Success->{
-                    genres.value = response.tmdbResult
+                    _genres.value = response.tmdbResult
                 }
                 is TmdbResponse.Error->{
-                    infoMsg.value = response.msg
+                    _infoMsg.value = response.msg
 
                 }
             }
@@ -82,7 +98,7 @@ class MainViewModel @Inject constructor(private val useCases: UseCases) :ViewMod
     }
     fun setSearchValue(stringValue:String){
         viewModelScope.launch {
-            searchValue.value=stringValue
+            _searchValue.value=stringValue
         }
     }
 

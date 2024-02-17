@@ -19,6 +19,7 @@ import com.barryzea.androidflavours.common.utils.PaginationRecyclerView
 import com.barryzea.androidflavours.data.entities.TmdbResult
 import com.barryzea.androidflavours.databinding.ActivityMainBinding
 import com.barryzea.androidflavours.ui.adapters.MovieAdapter
+import com.barryzea.androidflavours.ui.viewmodel.LoginViewModel
 import com.barryzea.androidflavours.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     internal lateinit var bind:ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
+    private val loginViewModel:LoginViewModel by viewModels()
     private lateinit var navController:NavController
 
 
@@ -34,13 +36,27 @@ class MainActivity : AppCompatActivity() {
         bind= ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
         setUpBottomNav()
+        setUpObservers()
     }
     private fun setUpBottomNav(){
         val navGraphIds = listOf(R.navigation.nav_graph)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-       navController = navHostFragment.navController
+        navController = navHostFragment.navController
         val controller = bind.bottomNav.setupWithNavController(navController!!)
+    }
+    private fun setUpObservers(){
+        viewModel.getPreferences()
+        viewModel.preferences.observe(this){preferences->
+            if(preferences.sessionId!!.isNotEmpty()){
+                loginViewModel.fetchUserDetail(preferences.sessionId)
+                bind.ctlHeader.visibility=View.VISIBLE
+
+            }
+        }
+        loginViewModel.userDetail.observe(this){
+            bind.tvUsername.text=it.username
+        }
     }
 
 }

@@ -1,10 +1,12 @@
 package com.barryzea.androidflavours.ui.fragments
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.barryzea.androidflavours.R
+import com.barryzea.androidflavours.ui.activities.MainActivity
 
 class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -12,6 +14,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setUpListeners()
     }
     private fun setUpListeners(){
+        (activity as? MainActivity)?.bind?.ctlHeader?.visibility= View.GONE
         val themePrefs = findPreference<SwitchPreferenceCompat>("darkTheme")
         themePrefs?.setOnPreferenceChangeListener { preference, newValue ->
             if(newValue as Boolean){

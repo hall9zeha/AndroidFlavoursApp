@@ -2,6 +2,7 @@ package com.barryzea.androidflavours.domain.entities
 
 import com.barryzea.androidflavours.data.entities.RequestToken
 import com.barryzea.androidflavours.data.entities.Session
+import com.barryzea.androidflavours.data.entities.User
 
 /**
  * Project AndroidFlavours
@@ -9,7 +10,11 @@ import com.barryzea.androidflavours.data.entities.Session
  **/
 data class DomainAuth(
     val success:Boolean = false,
-    val token:String?=""
+    val token:String?="",
+    val avatar:String?="",
+    val id:Int?=0,
+    val name:String?="",
+    val username:String?=""
 )
 fun RequestToken.toDomain() = DomainAuth(
     success = success,
@@ -18,4 +23,11 @@ fun RequestToken.toDomain() = DomainAuth(
 fun Session.toDomain() = DomainAuth(
     success = success,
     token = sessionId
+)
+fun User.toDomain()=DomainAuth(
+    success = id > 0,
+    avatar = avatar.avatarTmdb.avatarPath,
+    id=id,
+    name=name,
+    username = username
 )
