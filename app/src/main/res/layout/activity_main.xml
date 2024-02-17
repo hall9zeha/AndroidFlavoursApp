@@ -23,6 +23,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             >
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvAppTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="TMDB"
+                android:text="TMDB"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ivSession"
+                app:layout_constraintBottom_toBottomOf="@id/ivSession"
+                android:layout_marginStart="@dimen/common_padding_min"
+                />
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +70,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ctlHeader"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="@dimen/common_padding_min"
+        />
     <!--
     Ocultar el elemento BottomNavigationView funciona mientras el fragmento sobre el cual
     nos desplazamos no tenga como padre un elemento de tipo CoordinatorLayout, entonces

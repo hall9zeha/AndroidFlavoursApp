@@ -60,12 +60,13 @@ class MainActivity : AppCompatActivity() {
         viewModel.preferences.observe(this){preferences->
             if(preferences.sessionId!!.isNotEmpty()){
                 loginViewModel.fetchUserDetail(preferences.sessionId)
-                bind.ctlHeader.visibility=View.VISIBLE
+
 
             }
         }
         loginViewModel.userDetail.observe(this){
             bind.tvUsername.text=it.username
+            bind.ctlHeader.visibility=View.VISIBLE
         }
     }
     private fun setupPopupMenu(){
