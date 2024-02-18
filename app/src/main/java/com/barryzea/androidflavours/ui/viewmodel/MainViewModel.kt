@@ -12,6 +12,7 @@ import com.barryzea.androidflavours.data.entities.TmdbResponse
 import com.barryzea.androidflavours.domain.entities.DomainMovie
 import com.barryzea.androidflavours.domain.usecase.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -40,6 +41,7 @@ class MainViewModel @Inject constructor(private val useCases: UseCases, private 
 
     private var _preferences:MutableLiveData<PrefsEntity> = MutableLiveData()
     val preferences:LiveData<PrefsEntity> = _preferences
+
     fun getPreferences(){
         viewModelScope.launch {
             prefs.getFromDatastore().collect{
@@ -47,7 +49,10 @@ class MainViewModel @Inject constructor(private val useCases: UseCases, private 
             }
         }
     }
-    fun clearPreferences(){ viewModelScope.launch {prefs.clearDatastore() } }
+    fun clearPreferences(){ viewModelScope.launch {
+        prefs.clearDatastore()
+        getPreferences()
+    } }
     fun fetchMovies(genreId:Int?,page:Int){
         viewModelScope.launch {
             when(val response = useCases.fetchMovies(genreId,page)){

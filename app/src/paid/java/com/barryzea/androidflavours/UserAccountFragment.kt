@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.barryzea.androidflavours.databinding.FragmentUserAccountBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,7 +19,7 @@ class UserAccountFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private  var _bind:FragmentUserAccountBinding?=null
-    private val bind:FragmentUserAccountBinding = _bind!!
+    private val bind:FragmentUserAccountBinding get() = _bind!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +44,7 @@ class UserAccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
     }
 
     override fun onDestroyView() {

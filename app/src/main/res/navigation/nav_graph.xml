@@ -64,4 +64,13 @@
         android:name="com.barryzea.androidflavours.ui.fragments.LoginFragment"
         android:label="Login"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/userAccountFragment"
+        android:name="com.barryzea.androidflavours.UserAccountFragment"
+        android:label="User account"
+        tools:layout="@layout/fragment_user_account" >
+        <action
+            android:id="@+id/action_userAccountFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>
