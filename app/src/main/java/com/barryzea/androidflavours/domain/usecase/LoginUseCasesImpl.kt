@@ -25,7 +25,6 @@ class LoginUseCasesImpl(private val loginRepository: LoginRepository):LoginUseCa
             TmdbResponse.Error(e.message.toString())
         }
     }
-
     override suspend fun validateWithLogin(request: ValidateLoginRequest): TmdbResponse<DomainAuth> {
         return try {
             val response = loginRepository.validateWithLogin(request)
@@ -46,7 +45,6 @@ class LoginUseCasesImpl(private val loginRepository: LoginRepository):LoginUseCa
             TmdbResponse.Error(e.message.toString())
         }
     }
-
     override suspend fun fetchUserDetails(sessionId: String): TmdbResponse<DomainAuth> {
         return try {
             val response = loginRepository.fetchUserDetails(sessionId)
@@ -56,6 +54,13 @@ class LoginUseCasesImpl(private val loginRepository: LoginRepository):LoginUseCa
             TmdbResponse.Error(e.message.toString())
         }
     }
-
-
+    override suspend fun logout(sessionId: String): TmdbResponse<DomainAuth> {
+        return try {
+            val response = loginRepository.logout(sessionId)
+            if(response.isSuccessful) TmdbResponse.Success(response.body()?.toDomain()!!)
+            else TmdbResponse.Error(response.message())
+        }catch(e:Exception){
+            TmdbResponse.Error(e.message.toString())
+        }
+    }
 }

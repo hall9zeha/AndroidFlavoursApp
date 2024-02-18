@@ -1,5 +1,4 @@
 package com.barryzea.androidflavours.data.entities
-
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -15,7 +14,6 @@ data class Session(
     @SerializedName("success")val success: Boolean = false,
     @SerializedName("session_id")val sessionId:String?=""
 )
-
 data class User(
     @SerializedName("avatar")val avatar:Avatar=Avatar(),
     @SerializedName("id")val id:Int=0,
@@ -30,3 +28,4 @@ data class Avatar(
     @SerializedName("tmdb")val avatarTmdb:Tmdb= Tmdb()
 )
 data class Tmdb(@SerializedName("avatar_path")val avatarPath:String?="")
+data class Logout(@SerializedName("success")val success:Boolean=false)

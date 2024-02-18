@@ -152,10 +152,12 @@ class LoginFragment : Fragment() {
         if(bind.edtUserName.text.toString().isEmpty()){
             edtUserName.error = "Nombre requerido"
             edtUserName.requestFocus()
+            btnLogin.setLoading(false)
         }
         else if(bind.edtPassword.text.toString().isEmpty()){
             edtPassword.error = "Password requerido"
             edtPassword.requestFocus()
+            btnLogin.setLoading(false)
         }
         else{
             viewModel.requestNewToken()

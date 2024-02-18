@@ -1,5 +1,6 @@
 package com.barryzea.androidflavours.data.repository
 
+import com.barryzea.androidflavours.data.entities.Logout
 import com.barryzea.androidflavours.data.entities.RequestToken
 import com.barryzea.androidflavours.data.entities.Session
 import com.barryzea.androidflavours.data.entities.User
@@ -17,4 +18,5 @@ interface LoginRepository {
     suspend fun validateWithLogin(request:ValidateLoginRequest):Response<RequestToken>
     suspend fun createSession(request:CreateSessionRequest):Response<Session>
     suspend fun fetchUserDetails(sessionId:String):Response<User>
+    suspend fun logout(sessionId: String):Response<Logout>
 }

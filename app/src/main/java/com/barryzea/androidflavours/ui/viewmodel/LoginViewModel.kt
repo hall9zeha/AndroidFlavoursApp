@@ -43,6 +43,9 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases, va
     private var _userDetail:MutableLiveData<DomainAuth> = MutableLiveData()
     val userDetail:LiveData<DomainAuth> = _userDetail
 
+    private var _logoutSuccess:SingleMutableLiveData<Boolean> = SingleMutableLiveData()
+    val logoutSuccess:LiveData<Boolean> = _logoutSuccess
+
     fun requestNewToken(){
         viewModelScope.launch {
             when (val response = useCases.getRequestToken()) {
@@ -91,5 +94,12 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases, va
             }
         }
     }
-
+    fun logout(sessionId: String){
+        viewModelScope.launch {
+            when(val response=useCases.logout(sessionId)){
+                is TmdbResponse.Success-> _logoutSuccess.value = response.tmdbResult.success
+                is TmdbResponse.Error->_msgInfo.value=response.msg
+            }
+        }
+    }
 }

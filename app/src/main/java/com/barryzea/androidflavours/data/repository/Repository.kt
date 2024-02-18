@@ -17,7 +17,6 @@ interface Repository {
     suspend fun fetchMoviesSortedBy(sortValue:String, page:Int):Response<TmdbResult>
     suspend fun fetchGenres():Response<Genres>
     suspend fun fetchCredits(idMovie:Int):Response<Cast>
-
     suspend fun fetchTrailers(idMovie:Int):Response<Trailers>
 
 }

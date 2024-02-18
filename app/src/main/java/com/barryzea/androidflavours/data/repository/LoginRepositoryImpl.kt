@@ -1,6 +1,7 @@
 package com.barryzea.androidflavours.data.repository
 
 import com.barryzea.androidflavours.data.datasource.remote.RetrofitService
+import com.barryzea.androidflavours.data.entities.Logout
 import com.barryzea.androidflavours.data.entities.RequestToken
 import com.barryzea.androidflavours.data.entities.User
 import com.barryzea.androidflavours.domain.entities.CreateSessionRequest
@@ -19,4 +20,5 @@ class LoginRepositoryImpl @Inject constructor(retrofit:RetrofitService, private 
     override suspend fun validateWithLogin(request: ValidateLoginRequest) = loginService.validateWithLogin(apiKey,request)
     override suspend fun createSession(request: CreateSessionRequest) = loginService.createSession(apiKey,request)
     override suspend fun fetchUserDetails(sessionId: String) = loginService.fetchUserDetail(apiKey,sessionId)
+    override suspend fun logout(sessionId: String) = loginService.logout(apiKey,sessionId)
 }

@@ -47,6 +47,7 @@ class MainViewModel @Inject constructor(private val useCases: UseCases, private 
             }
         }
     }
+    fun clearPreferences(){ viewModelScope.launch {prefs.clearDatastore() } }
     fun fetchMovies(genreId:Int?,page:Int){
         viewModelScope.launch {
             when(val response = useCases.fetchMovies(genreId,page)){

@@ -18,5 +18,6 @@ interface LoginUseCases {
     suspend fun validateWithLogin(request: ValidateLoginRequest): TmdbResponse<DomainAuth>
     suspend fun createSession(request: CreateSessionRequest): TmdbResponse<DomainAuth>
     suspend fun fetchUserDetails(sessionId:String):TmdbResponse<DomainAuth>
+    suspend fun logout(sessionId:String):TmdbResponse<DomainAuth>
 
 }

@@ -1,5 +1,6 @@
 package com.barryzea.androidflavours.domain.entities
 
+import com.barryzea.androidflavours.data.entities.Logout
 import com.barryzea.androidflavours.data.entities.RequestToken
 import com.barryzea.androidflavours.data.entities.Session
 import com.barryzea.androidflavours.data.entities.User
@@ -30,4 +31,7 @@ fun User.toDomain()=DomainAuth(
     id=id,
     name=name,
     username = username
+)
+fun Logout.toDomain()=DomainAuth(
+    success = success
 )
