@@ -17,6 +17,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.barryzea.androidflavours.R
+import com.barryzea.androidflavours.common.showSnackbar
 import com.barryzea.androidflavours.common.utils.PaginationRecyclerView
 import com.barryzea.androidflavours.data.entities.TmdbResult
 import com.barryzea.androidflavours.databinding.ActivityMainBinding
@@ -61,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                 loginViewModel.fetchUserDetail(preferences.sessionId)
                 sessionId=preferences.sessionId
                 isLogin=true
-                Log.e("TAG",preferences.sessionId )
+
             }else{
                 bind.tvUsername.text=""
                 isLogin=false
@@ -76,6 +77,8 @@ class MainActivity : AppCompatActivity() {
                 viewModel.getPreferences()
             }
         }
+        viewModel.infoMsg.observe(this){  bind.root.showSnackbar(it)}
+        loginViewModel.msgInfo.observe(this){bind.root.showSnackbar(it)}
     }
     private fun setupPopupMenu(){
         popupMenu = PopupMenu(this,bind.ivSession)
@@ -85,11 +88,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.logoutItem -> {
                     sessionId?.let{
                         loginViewModel.logout(it)
-                        Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show()
                     }
                     true
                 }
-
                 else -> false
             }
         }
