@@ -10,6 +10,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.barryzea.androidflavours.R
 import com.barryzea.androidflavours.common.showSnackbar
 import com.barryzea.androidflavours.databinding.FragmentLoginBinding
@@ -121,6 +122,7 @@ class LoginFragment : Fragment() {
                 bind.btnLogin.setLoading(false)
                 viewModel.saveSessionId(sessionId)
                 viewModel.checkIfSessionIsCreated()
+                goToAccountContent()
             }
         }
         viewModel.msgInfo.observe(viewLifecycleOwner){
@@ -128,6 +130,9 @@ class LoginFragment : Fragment() {
             bind.btnLogin.isEnabled=true
             bind.btnLogin.setLoading(false)
         }
+    }
+    private fun goToAccountContent(){
+        findNavController().navigate(R.id.userAccountFragment)
     }
     private fun validateNameAndPassword()=with(bind){
         if(bind.edtUserName.text.toString().isEmpty()){

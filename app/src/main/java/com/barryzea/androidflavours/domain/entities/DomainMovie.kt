@@ -16,7 +16,7 @@ data class DomainMovie(
 )
 fun TmdbResult.toDomain()=
     DomainMovie(
-        page=pages,
+        page=page,
         totalPages = total_pages,
         totalResult = total_result,
         movies=movies
