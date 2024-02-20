@@ -1,5 +1,6 @@
 package com.barryzea.androidflavours.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,6 +15,7 @@ import com.barryzea.androidflavours.domain.entities.ValidateLoginRequest
 import com.barryzea.androidflavours.domain.usecase.LoginUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,19 +30,13 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases, va
     private var _msgInfo:MutableLiveData<String> = MutableLiveData()
     val msgInfo:LiveData<String> = _msgInfo
 
-    private var _newToken:SingleMutableLiveData<String> = SingleMutableLiveData()
-    val newToken:LiveData<String> = _newToken
-
-    private var _authResponse:SingleMutableLiveData<DomainAuth> = SingleMutableLiveData()
-    val authResponse:LiveData<DomainAuth> = _authResponse
-
     private var _createdSessionId:SingleMutableLiveData<String> = SingleMutableLiveData()
     val createdSessionId:LiveData<String> = _createdSessionId
 
-    private var _sessionIdPrefs:MutableLiveData<String> = MutableLiveData()
+    private var _sessionIdPrefs:SingleMutableLiveData<String> = SingleMutableLiveData()
     val sessionIdPrefs:LiveData<String> = _sessionIdPrefs
 
-    private var _userDetail:MutableLiveData<DomainAuth> = MutableLiveData()
+    private var _userDetail:SingleMutableLiveData<DomainAuth> = SingleMutableLiveData()
     val userDetail:LiveData<DomainAuth> = _userDetail
 
     private var _logoutSuccess:SingleMutableLiveData<Boolean> = SingleMutableLiveData()
@@ -51,8 +47,9 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases, va
     private val sessionTokenChannel:Channel<String> = Channel()
 
     // 1- Realizamos una nueva petición de token
-    fun requestNewToken(){
+    private fun requestNewToken(){
         viewModelScope.launch {
+            Log.e("REQUEST-TOKEN", "EJECUTADO" )
             when (val response = useCases.getRequestToken()) {
                 is TmdbResponse.Success-> if(response.tmdbResult.success){
                     //Si se recibió el token lo enviamos a través de nuestro canal a las corrutinas que lo observan
@@ -65,35 +62,40 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases, va
     // 2- Una vez recibido el token lo enviamos junto a nuestros datos de usuario a validar a la API
     fun validateWithLogin(requestLogin:ValidateLoginRequest){
         viewModelScope.launch {
+            Log.e("VALIDATE", "EJECUTADO" )
             //Ejecutamos la función del paso 1
             requestNewToken()
             //Aquí es donde recibimos el token del paso 1
             val tokenCreated= sessionTokenChannel.receive()
 
-            //Agregamos el token a los datos del usuario para enviarla ala API y crear la sesión
-            val requestUser=ValidateLoginRequest(
-                username = requestLogin.username,
-                password = requestLogin.password,
-                requestToken = tokenCreated
-            )
-            when(val response = useCases.validateWithLogin(requestUser)){
-                is TmdbResponse.Success->{
-                    if(response.tmdbResult.success){
-                       createSession(CreateSessionRequest(response.tmdbResult.token))
+                //Agregamos el token a los datos del usuario para enviarla ala API y crear la sesión
+                val requestUser = ValidateLoginRequest(
+                    username = requestLogin.username,
+                    password = requestLogin.password,
+                    requestToken = tokenCreated
+                )
+                when (val response = useCases.validateWithLogin(requestUser)) {
+                    is TmdbResponse.Success -> {
+                        if (response.tmdbResult.success) {
+                            createSession(CreateSessionRequest(response.tmdbResult.token))
+                        } else _msgInfo.value = "Usuario o password incorrectos"
                     }
-                    else _msgInfo.value="Usuario o password incorrectos"
+
+                    is TmdbResponse.Error -> _msgInfo.value = response.msg
                 }
-                is TmdbResponse.Error-> _msgInfo.value = response.msg
-            }
+
         }
     }
     // 3- Mandamos una petición para crear la sesión
     private fun createSession(requestToken:CreateSessionRequest){
         viewModelScope.launch {
+            Log.e("CREATE-SESSION", "EJECUTADO" )
             //Una vez creada la sesión de obtenido el token de sessión, manejamos dicho token como mejor nos convenga
             //En este caso se guardará en preferencias
             when(val response = useCases.createSession(requestToken)){
-                is TmdbResponse.Success-> if(response.tmdbResult.success) _createdSessionId.value=response.tmdbResult.token!!
+                is TmdbResponse.Success-> if(response.tmdbResult.success){
+                    _createdSessionId.value=response.tmdbResult.token!!
+                }
                 is TmdbResponse.Error-> _msgInfo.value = response.msg
             }
         }
@@ -111,6 +113,9 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases, va
             }
         }
     }
+    fun clearPreferences(){
+        viewModelScope.launch { datastore.clearDatastore() }
+    }
     fun fetchUserDetail(sessionId: String){
         viewModelScope.launch {
             when(val response = useCases.fetchUserDetails(sessionId)){
@@ -127,8 +132,7 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases, va
             }
         }
     }
-
-    override fun onCleared() {
+   override fun onCleared() {
         super.onCleared()
         sessionTokenChannel.close()
     }

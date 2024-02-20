@@ -28,7 +28,6 @@ class LoginUseCasesImpl(private val loginRepository: LoginRepository):LoginUseCa
     override suspend fun validateWithLogin(request: ValidateLoginRequest): TmdbResponse<DomainAuth> {
         return try {
             val response = loginRepository.validateWithLogin(request)
-            Log.e("LOGIN", response.toString() )
             if(response.isSuccessful) TmdbResponse.Success(response.body()?.toDomain()!!)
             else TmdbResponse.Error(response.message())
         }catch(e:Exception){

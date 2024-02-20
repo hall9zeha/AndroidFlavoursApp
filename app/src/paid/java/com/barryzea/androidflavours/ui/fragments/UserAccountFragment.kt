@@ -1,11 +1,10 @@
 package com.barryzea.androidflavours.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.barryzea.androidflavours.common.showSnackbar
@@ -32,6 +31,7 @@ class UserAccountFragment : Fragment() {
     private var sessionId:String?=null
     private var mAdapter: AccountMoviesAdapter?=null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -57,7 +57,9 @@ class UserAccountFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpAdapter()
         setUpObservers()
+
     }
+
     private fun setUpAdapter()=with(bind){
         mAdapter = AccountMoviesAdapter{}
         rvFavorites.apply {
@@ -66,13 +68,13 @@ class UserAccountFragment : Fragment() {
             adapter=mAdapter
         }
     }
+
     private fun setUpObservers(){
         loginViewModel.checkIfSessionIsCreated()
         loginViewModel.sessionIdPrefs.observe(viewLifecycleOwner){sessionIdSaved->
             if(sessionIdSaved.isNotEmpty()){
                 isLogin = true
                 sessionId=sessionIdSaved
-                Log.e("TAG",sessionId.toString() )
                 loginViewModel.fetchUserDetail(sessionIdSaved)
             }
         }
@@ -87,6 +89,7 @@ class UserAccountFragment : Fragment() {
         accountViewModel.msgInfo.observe(viewLifecycleOwner){
             bind.root.showSnackbar(it)
         }
+
 
     }
     override fun onDestroyView() {
