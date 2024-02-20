@@ -7,4 +7,5 @@ package com.barryzea.androidflavours.data.datasource.remote
 interface RetrofitService {
     fun retrofitService(): TmdbApiService
     fun loginService():TmdbLoginService
+    fun accountService():TmdbAccountService
 }

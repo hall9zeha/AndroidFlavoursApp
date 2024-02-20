@@ -6,6 +6,8 @@ import com.barryzea.androidflavours.BuildConfig
 import com.barryzea.androidflavours.data.datasource.remote.RetrofitService
 import com.barryzea.androidflavours.data.datasource.remote.RetrofitServiceImpl
 import com.barryzea.androidflavours.data.datasource.remote.TmdbLoginService
+import com.barryzea.androidflavours.data.repository.AccountRepository
+import com.barryzea.androidflavours.data.repository.AccountRepositoryImpl
 import com.barryzea.androidflavours.data.repository.LoginRepository
 import com.barryzea.androidflavours.data.repository.LoginRepositoryImpl
 import com.barryzea.androidflavours.data.repository.Repository
@@ -67,4 +69,11 @@ class RepositoryModule{
         retrofitService: RetrofitService,
         @Named("apiKey")apiKey:String
     ):LoginRepository=LoginRepositoryImpl(retrofitService,apiKey)
+    @Singleton()
+    @Provides
+    fun accountRepositoryProvides(
+        retrofitService: RetrofitService,
+        @Named("apiKey")apiKey:String,
+        @Named("language")language:String
+    ): AccountRepository =AccountRepositoryImpl(retrofitService,apiKey,language)
 }

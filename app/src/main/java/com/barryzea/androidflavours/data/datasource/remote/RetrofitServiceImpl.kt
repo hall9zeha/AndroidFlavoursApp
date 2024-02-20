@@ -26,4 +26,5 @@ class RetrofitServiceImpl @Inject constructor():RetrofitService {
     }
     override fun retrofitService(): TmdbApiService = retrofitInstance().create(TmdbApiService::class.java)
     override fun loginService(): TmdbLoginService = retrofitInstance().create(TmdbLoginService::class.java)
+    override fun accountService(): TmdbAccountService = retrofitInstance().create(TmdbAccountService::class.java)
 }
