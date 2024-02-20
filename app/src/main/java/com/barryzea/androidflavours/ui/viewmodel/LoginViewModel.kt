@@ -127,4 +127,9 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases, va
             }
         }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        sessionTokenChannel.close()
+    }
 }

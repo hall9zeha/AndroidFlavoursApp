@@ -1,11 +1,18 @@
 package com.barryzea.androidflavours.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.barryzea.androidflavours.common.showSnackbar
 import com.barryzea.androidflavours.databinding.FragmentUserAccountBinding
+import com.barryzea.androidflavours.ui.adapters.AccountMoviesAdapter
+import com.barryzea.androidflavours.ui.viewmodel.AccountViewModel
+import com.barryzea.androidflavours.ui.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -19,6 +26,11 @@ class UserAccountFragment : Fragment() {
     private var param2: String? = null
     private  var _bind:FragmentUserAccountBinding?=null
     private val bind:FragmentUserAccountBinding get() = _bind!!
+    private val loginViewModel: LoginViewModel by viewModels()
+    private val accountViewModel:AccountViewModel by viewModels()
+    private var isLogin:Boolean=false
+    private var sessionId:String?=null
+    private var mAdapter: AccountMoviesAdapter?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,9 +55,40 @@ class UserAccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUpAdapter()
+        setUpObservers()
+    }
+    private fun setUpAdapter()=with(bind){
+        mAdapter = AccountMoviesAdapter{}
+        rvFavorites.apply {
+            setHasFixedSize(true)
+            layoutManager=LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+            adapter=mAdapter
+        }
+    }
+    private fun setUpObservers(){
+        loginViewModel.checkIfSessionIsCreated()
+        loginViewModel.sessionIdPrefs.observe(viewLifecycleOwner){sessionIdSaved->
+            if(sessionIdSaved.isNotEmpty()){
+                isLogin = true
+                sessionId=sessionIdSaved
+                Log.e("TAG",sessionId.toString() )
+                loginViewModel.fetchUserDetail(sessionIdSaved)
+            }
+        }
+        loginViewModel.userDetail.observe(viewLifecycleOwner){user->
+            accountViewModel.fetchMyFavoriteMovies(user.id.toString(),sessionId.toString(),1)
+        }
+        accountViewModel.favoriteList.observe(viewLifecycleOwner){favorites->
+            favorites?.let{
+                mAdapter?.addAll(it.movies)
+            }
+        }
+        accountViewModel.msgInfo.observe(viewLifecycleOwner){
+            bind.root.showSnackbar(it)
+        }
 
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _bind=null

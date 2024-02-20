@@ -1,7 +1,10 @@
 package com.barryzea.androidflavours.di
 
+import com.barryzea.androidflavours.data.repository.AccountRepository
 import com.barryzea.androidflavours.data.repository.LoginRepository
 import com.barryzea.androidflavours.data.repository.Repository
+import com.barryzea.androidflavours.domain.usecase.AccountUseCases
+import com.barryzea.androidflavours.domain.usecase.AccountUseCasesImpl
 import com.barryzea.androidflavours.domain.usecase.FetchMovies
 import com.barryzea.androidflavours.domain.usecase.LoginUseCases
 import com.barryzea.androidflavours.domain.usecase.LoginUseCasesImpl
@@ -30,5 +33,9 @@ class DataModule {
     @ViewModelScoped
     @Provides
     fun loginUseCaseProvides(loginRepository:LoginRepository):LoginUseCases = LoginUseCasesImpl(loginRepository)
+
+    @ViewModelScoped
+    @Provides
+    fun accountUseCaseProvides(accountRepository: AccountRepository):AccountUseCases = AccountUseCasesImpl(accountRepository)
 }
 

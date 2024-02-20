@@ -12,5 +12,5 @@ class AccountRepositoryImpl @Inject constructor(retrofit:RetrofitService,
                                                 private val apiKey:String,
                                                 private val lang:String):AccountRepository {
     private val accountService = retrofit.accountService()
-    override suspend fun fetchMyFavoriteMovies(accountId: String, page: Int) =accountService.fetchMyFavoriteMovies(accountId,apiKey,lang,page)
+    override suspend fun fetchMyFavoriteMovies(accountId: String,sessionId:String, page: Int) =accountService.fetchMyFavoriteMovies(accountId,apiKey,sessionId,lang,page)
 }

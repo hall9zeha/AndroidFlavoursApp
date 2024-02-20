@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.barryzea.androidflavours.R
 import com.barryzea.androidflavours.common.loadUrl
 import com.barryzea.androidflavours.data.entities.TmdbMovie
-import com.barryzea.androidflavours.databinding.ItemMovieBinding
+import com.barryzea.androidflavours.databinding.ItemMovieThumbnailBinding
 
 /**
  * Project AndroidFlavours
@@ -18,7 +18,7 @@ class AccountMoviesAdapter(private val onItemClick:(TmdbMovie)->Unit):RecyclerVi
     private var moviesList:MutableList<TmdbMovie> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_movie,parent,false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_movie_thumbnail,parent,false)
         return ViewHolder(itemView)
     }
     fun addAll(movies:List<TmdbMovie>){
@@ -35,10 +35,9 @@ class AccountMoviesAdapter(private val onItemClick:(TmdbMovie)->Unit):RecyclerVi
 
     override fun getItemCount() = moviesList.size
     inner class ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
-        val bind=ItemMovieBinding.bind(itemView)
+        val bind= ItemMovieThumbnailBinding.bind(itemView)
         fun onBind(movie:TmdbMovie)=with(bind){
             ivMovie.loadUrl("https://image.tmdb.org/t/p/w185/${movie.posterPath}")
-            tvTittle.text=movie.title
             ratingBar.rating=(movie.voteAverage.toFloat() /2)
             root.setOnClickListener { onItemClick(movie) }
         }

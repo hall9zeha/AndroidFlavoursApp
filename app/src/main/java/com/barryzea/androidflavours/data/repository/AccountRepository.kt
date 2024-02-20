@@ -8,5 +8,5 @@ import retrofit2.Response
  * Created by Barry Zea H. on 20/02/2024.
  **/
 interface AccountRepository {
-    suspend fun fetchMyFavoriteMovies(accountId:String,page:Int):Response<TmdbResult>
+    suspend fun fetchMyFavoriteMovies(accountId:String,sessionId:String,page:Int):Response<TmdbResult>
 }
