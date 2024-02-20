@@ -66,7 +66,7 @@
         tools:layout="@layout/fragment_login" />
     <fragment
         android:id="@+id/userAccountFragment"
-        android:name="com.barryzea.androidflavours.UserAccountFragment"
+        android:name="com.barryzea.androidflavours.ui.fragments.UserAccountFragment"
         android:label="User account"
         tools:layout="@layout/fragment_user_account" >
         <action

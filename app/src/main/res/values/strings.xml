@@ -33,4 +33,6 @@
     <string name="password_hint">Password</string>
     <string name="login_btn">Login</string>
     <string name="logout">Logout</string>
+    <string name="username_required_msg">Username required</string>
+    <string name="password_required_msg">Password required</string>
 </resources>

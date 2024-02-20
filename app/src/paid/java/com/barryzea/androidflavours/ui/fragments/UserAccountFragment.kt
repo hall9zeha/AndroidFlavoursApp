@@ -1,11 +1,10 @@
-package com.barryzea.androidflavours
+package com.barryzea.androidflavours.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.barryzea.androidflavours.databinding.FragmentUserAccountBinding
 import dagger.hilt.android.AndroidEntryPoint
 

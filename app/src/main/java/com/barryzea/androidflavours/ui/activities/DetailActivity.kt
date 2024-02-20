@@ -28,8 +28,8 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bind = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(bind.root)
-        setUpDetail()
         setUpAdapter()
+        setUpDetail()
         setUpObservers()
 
     }
@@ -67,7 +67,6 @@ class DetailActivity : AppCompatActivity() {
             }
         }
         detailViewModel.infoMsg.observe(this){
-            Log.e("DETALLE", it )
             bind.root.showSnackbar(it)
         }
 

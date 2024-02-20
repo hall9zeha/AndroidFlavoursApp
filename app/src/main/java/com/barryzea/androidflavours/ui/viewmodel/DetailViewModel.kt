@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.barryzea.androidflavours.common.utils.SingleMutableLiveData
 import com.barryzea.androidflavours.data.entities.CharacterMovie
 import com.barryzea.androidflavours.data.entities.TmdbResponse
 import com.barryzea.androidflavours.data.entities.TrailerMovie
@@ -22,7 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(private val useCases: UseCases) :ViewModel() {
 
-    private var _credits:MutableLiveData<List<CharacterMovie>> = MutableLiveData()
+    private var _credits:SingleMutableLiveData<List<CharacterMovie>> = SingleMutableLiveData()
     val credits:LiveData<List<CharacterMovie>> = _credits
     private var _infoMsg:MutableLiveData<String> = MutableLiveData()
     val infoMsg:LiveData<String> = _infoMsg
@@ -51,9 +52,12 @@ class DetailViewModel @Inject constructor(private val useCases: UseCases) :ViewM
             val (credits, trailers) = awaitAll(creditsDef, trailersDef)
 
             when {
-                credits is TmdbResponse.Success && trailers is TmdbResponse.Success -> {
+                credits is TmdbResponse.Success ->{
                     //A causa de que nuestra clase TmdbResponse es de tipo genérico debemos castear al tipo  de dato esperado, según corresponda
                     _credits.value = credits.tmdbResult as List<CharacterMovie>
+                }
+                trailers is TmdbResponse.Success -> {
+
                     //Para reproducir los trailers de youtube se debe de obtener una key al registrar la app en nuestra cuenta
                     //de desarrollador e implementado la librería de youtube, ya que VideoView  no reproduce videos de youtube
                     //como si lo hacía antiguamente.

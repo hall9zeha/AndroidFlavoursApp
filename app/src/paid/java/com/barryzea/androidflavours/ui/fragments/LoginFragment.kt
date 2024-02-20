@@ -2,7 +2,6 @@ package com.barryzea.androidflavours.ui.fragments
 
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,6 @@ import androidx.fragment.app.viewModels
 import com.barryzea.androidflavours.R
 import com.barryzea.androidflavours.common.showSnackbar
 import com.barryzea.androidflavours.databinding.FragmentLoginBinding
-import com.barryzea.androidflavours.domain.entities.CreateSessionRequest
 import com.barryzea.androidflavours.domain.entities.ValidateLoginRequest
 import com.barryzea.androidflavours.ui.activities.MainActivity
 import com.barryzea.androidflavours.ui.viewmodel.LoginViewModel
@@ -30,8 +28,8 @@ class LoginFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var _bind:FragmentLoginBinding?=null
-    private val viewModel:LoginViewModel by viewModels()
     private val bind:FragmentLoginBinding get() = _bind!!
+    private val viewModel:LoginViewModel by viewModels()
     private var isLogin:Boolean=false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,36 +108,19 @@ class LoginFragment : Fragment() {
         }
     }
     private fun setUpObservers(){
-        viewModel.checkIsSessionIsCreated()
-        viewModel.sessionCreatedId.observe(viewLifecycleOwner){sessionId->
+        viewModel.checkIfSessionIsCreated()
+        viewModel.sessionIdPrefs.observe(viewLifecycleOwner){ sessionId->
             if(sessionId.isNotEmpty())isLogin=true
             (activity as? MainActivity)?.bind?.ctlHeader?.visibility=View.VISIBLE
         }
-        viewModel.newToken.observe(viewLifecycleOwner){
-            it?.let{token->
-                Log.e("1-NEW_TOKEN",token )
-                viewModel.validateWithLogin(
-                    ValidateLoginRequest(bind.edtUserName.text.toString().trim(),
-                        bind.edtPassword.text.toString().trim(),
-                        token
-                        )
-                )
-            }
-        }
-        viewModel.authResponse.observe(viewLifecycleOwner){
-            it?.let {responseAuth->
-                Log.e("2-ALLOW_TOKEN",responseAuth.token.toString() )
-                viewModel.createSession(CreateSessionRequest(responseAuth.token))
-            }
-        }
-        viewModel.sessionId.observe(viewLifecycleOwner){
+
+        viewModel.createdSessionId.observe(viewLifecycleOwner){
             it?.let{sessionId->
                bind.btnLogin.isEnabled=true
                 Toast.makeText(context, "Sesión creada", Toast.LENGTH_SHORT).show()
-                Log.e("3-SESSION_ID",sessionId)
                 bind.btnLogin.setLoading(false)
                 viewModel.saveSessionId(sessionId)
-                viewModel.checkIsSessionIsCreated()
+                viewModel.checkIfSessionIsCreated()
             }
         }
         viewModel.msgInfo.observe(viewLifecycleOwner){
@@ -150,18 +131,21 @@ class LoginFragment : Fragment() {
     }
     private fun validateNameAndPassword()=with(bind){
         if(bind.edtUserName.text.toString().isEmpty()){
-            edtUserName.error = "Nombre requerido"
+            edtUserName.error = getString(R.string.username_required_msg)
             edtUserName.requestFocus()
             btnLogin.setLoading(false)
         }
         else if(bind.edtPassword.text.toString().isEmpty()){
-            edtPassword.error = "Password requerido"
+            edtPassword.error = getString(R.string.password_required_msg)
             edtPassword.requestFocus()
             btnLogin.setLoading(false)
         }
         else{
-            viewModel.requestNewToken()
-
+            viewModel.validateWithLogin(
+                ValidateLoginRequest(bind.edtUserName.text.toString().trim(),
+                    bind.edtPassword.text.toString().trim()
+                )
+            )
         }
     }
     override fun onDestroyView() {
