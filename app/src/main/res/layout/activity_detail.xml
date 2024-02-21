@@ -12,7 +12,6 @@
     android:layout_height="match_parent"
 
     tools:context=".ui.activities.DetailActivity">
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
@@ -55,10 +54,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
             >
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ctlPoster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvMovieDetailDesc"
+                >
+
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="100dp"
@@ -66,6 +78,7 @@
                     android:id="@+id/ivPoster"
                     tools:src="@mipmap/ic_launcher"
                     android:scaleType="centerCrop"
+                    android:fitsSystemWindows="true"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="@dimen/common_padding_default"
@@ -140,25 +153,19 @@
                     android:layout_marginStart="@dimen/common_padding_min"
                     android:layout_marginEnd="@dimen/common_padding_micro"
                     />
-                <LinearLayout
-                    android:id="@+id/lnDetail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:transitionGroup="true"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivPoster"
-                    >
-
-                <com.google.android.material.textview.MaterialTextView
+            </androidx.constraintlayout.widget.ConstraintLayout>
+             <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvMovieDetailDesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/common_padding_default"
                     android:padding="@dimen/common_padding_default"
                     android:justificationMode="inter_word"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ctlPoster"
+                    app:layout_constraintBottom_toTopOf="@id/tvCharactersTitle"
+                    />
                <!-- <com.barryzea.androidflavours.ui.components.MovieDetailInfo
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -166,33 +173,38 @@
                     android:padding="@dimen/common_padding_default"
                     android:lineSpacingMultiplier="1.5"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>-->
-            </LinearLayout>
+
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvCharactersTitle"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?attr/textAppearanceTitleLarge"
                     android:text="@string/characters_title"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/lnDetail"
+                    app:layout_constraintTop_toBottomOf="@id/tvMovieDetailDesc"
                     android:layout_marginStart="@dimen/common_padding_default"
                     />
-                <androidx.recyclerview.widget.RecyclerView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="136dp"
-                    android:id="@+id/rvCharacters"
-                    tools:orientation="horizontal"
-                    tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/character_item"
-                    android:layout_margin="@dimen/common_padding_min"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvCharactersTitle"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rvCharacters"
+                        tools:orientation="horizontal"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/character_item"
+                        android:layout_margin="@dimen/common_padding_min"
+                        />
+                </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

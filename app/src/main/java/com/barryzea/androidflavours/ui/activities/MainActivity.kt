@@ -29,8 +29,6 @@ class MainActivity : AppCompatActivity(){
     private var popupMenu:PopupMenu?=null
     private var isLogin = false
     private var sessionId:String?=null
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind= ActivityMainBinding.inflate(layoutInflater)
@@ -40,7 +38,6 @@ class MainActivity : AppCompatActivity(){
         setupPopupMenu()
         setUpListeners()
         onBackPressedDispatcher()
-
     }
     private fun setUpBottomNav(){
         val navGraphIds = listOf(R.navigation.nav_graph)
@@ -56,7 +53,6 @@ class MainActivity : AppCompatActivity(){
             //con la función onBackPressedDispatcher()
             if(destination.id==R.id.loginFragment && isLogin){
                 navController.navigate(R.id.userAccountFragment)
-
             }
         }
     }
@@ -64,7 +60,6 @@ class MainActivity : AppCompatActivity(){
         ivSession.setOnClickListener {
             if(isLogin) popupMenu?.show()
         }
-
     }
     private fun setUpObservers(){
         viewModel.getPreferences()
@@ -90,11 +85,11 @@ class MainActivity : AppCompatActivity(){
                 isLogin=false
                 val currentDest = navController.currentDestination
                 if(currentDest?.id == R.id.userAccountFragment){
-                    val navAction=UserAccountFragmentDirections.actionGoToLogin()
+                    val goToLoginAction=UserAccountFragmentDirections.actionGoToLogin()
                     val navOptions = NavOptions.Builder()
                         .setPopUpTo(R.id.loginFragment, true) // Elimina el fragmento anterior del back stack
                         .build()
-                   navController.navigate(navAction,navOptions)
+                   navController.navigate(goToLoginAction,navOptions)
                 }
             }
         }
@@ -119,7 +114,6 @@ class MainActivity : AppCompatActivity(){
                 else -> false
             }
         }
-
     }
    private fun onBackPressedDispatcher(){
        onBackPressedDispatcher.addCallback(this, object:OnBackPressedCallback(true){

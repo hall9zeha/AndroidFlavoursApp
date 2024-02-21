@@ -89,6 +89,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUpListeners() {
+        (activity as? MainActivity)?.bind?.ctlHeader?.visibility = View.VISIBLE
         bind.chipPopular.setOnClickListener { fetchMoviesByCategory(POPULAR) }
         bind.chipTopRated.setOnClickListener {fetchMoviesByCategory(TOP_RATED) }
         bind.chipDiscover.setOnClickListener {

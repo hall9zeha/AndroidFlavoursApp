@@ -3,6 +3,7 @@ package com.barryzea.androidflavours.ui.activities
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.MediaController
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -63,6 +64,7 @@ class DetailActivity : AppCompatActivity() {
     private fun setUpObservers(){
         detailViewModel.credits.observe(this){characters->
             characters?.let{
+                bind.rvCharacters.visibility=View.VISIBLE
                 characterAdapter?.add(characters)
             }
         }
