@@ -22,7 +22,7 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var bind:ActivityDetailBinding
     //Recuperamos los argumentos enviados desde HomeFragment
-    val args:DetailActivityArgs by navArgs()
+    private val args:DetailActivityArgs by navArgs()
     private val detailViewModel:DetailViewModel by viewModels()
     private var characterAdapter:CharacterAdapter?=null
     override fun onCreate(savedInstanceState: Bundle?) {

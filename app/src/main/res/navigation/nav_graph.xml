@@ -88,6 +88,14 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right">
         </action>
+        <action
+            android:id="@+id/go_to_account_movies_list"
+            app:destination="@id/accountMovieList"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+        </action>
     </fragment>
     <activity
         android:id="@+id/accountMovieList"

@@ -35,4 +35,6 @@
     <string name="logout">Logout</string>
     <string name="username_required_msg">Username required</string>
     <string name="password_required_msg">Password required</string>
+    <string name="favorite_movies_subtitle">Favorite movies</string>
+    <string name="watchlist_movies_subtitle">Watchlist movies</string>
 </resources>

@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.barryzea.androidflavours.common.FAVORITES_LIST
+import com.barryzea.androidflavours.common.WATCH_LIST
 import com.barryzea.androidflavours.common.showSnackbar
 import com.barryzea.androidflavours.databinding.ActivityAccountMovieListBinding
 import com.barryzea.androidflavours.databinding.FragmentUserAccountBinding
@@ -58,10 +60,19 @@ class UserAccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpAdapter()
+        setUpListeners()
         setUpObservers()
-
+       }
+    private fun setUpListeners()=with(bind){
+        tvFavoriteMovies.setOnClickListener{
+            val actionShowMyFavorites = UserAccountFragmentDirections.goToAccountMoviesList(FAVORITES_LIST)
+            Navigation.findNavController(bind.root).navigate(actionShowMyFavorites)
+        }
+        tvWatchListMovies.setOnClickListener {
+            val actionShowMyWatchList = UserAccountFragmentDirections.goToAccountMoviesList(WATCH_LIST)
+            Navigation.findNavController(bind.root).navigate(actionShowMyWatchList)
+        }
     }
-
     private fun setUpAdapter()=with(bind){
         mAdapter = AccountMoviesAdapter{
             val action = UserAccountFragmentDirections.actionHomeToDetail(it)
