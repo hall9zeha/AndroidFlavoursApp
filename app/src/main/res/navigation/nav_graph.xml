@@ -81,4 +81,15 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
+    <activity
+        android:id="@+id/accountMovieList"
+        android:name="com.barryzea.androidflavours.ui.activities.AccountMovieList"
+        android:label="Account movie detail"
+        tools:layout="@layout/activity_account_movie_list">
+        <argument
+            android:name="typeOfList"
+            app:argType="integer"
+            android:defaultValue="0"
+            />
+    </activity>
 </navigation>
