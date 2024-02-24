@@ -94,11 +94,12 @@ class UserAccountFragment : Fragment() {
                 loginViewModel.fetchUserDetail(sessionIdSaved)
             }
         }
-        loginViewModel.userDetail.observe(viewLifecycleOwner){user->
+       loginViewModel.userDetail.observe(viewLifecycleOwner){user->
             accountViewModel.fetchMyFavoriteMovies(user.id.toString(),sessionId.toString(),1)
         }
         accountViewModel.favoriteList.observe(viewLifecycleOwner){favorites->
             favorites?.let{
+                bind.shimmerLoader.shimmerHorizontalLoader.visibility=View.GONE
                 mAdapter?.addAll(it.movies)
             }
         }
