@@ -13,3 +13,7 @@ const val UPCOMING = "upcoming"
 const val BY_GENRE = 10
 const val BY_CATEGORY = 11
 const val NONE =0
+
+// Para identificar el tipo de lista a mostrar, referido a las listas de películas del usuario
+const val FAVORITES_LIST = 1
+const val WATCH_LIST = 2

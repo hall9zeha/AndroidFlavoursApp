@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.barryzea.androidflavours.common.showSnackbar
+import com.barryzea.androidflavours.databinding.ActivityAccountMovieListBinding
 import com.barryzea.androidflavours.databinding.FragmentUserAccountBinding
 import com.barryzea.androidflavours.ui.adapters.AccountMoviesAdapter
 import com.barryzea.androidflavours.ui.viewmodel.AccountViewModel
@@ -61,7 +63,10 @@ class UserAccountFragment : Fragment() {
     }
 
     private fun setUpAdapter()=with(bind){
-        mAdapter = AccountMoviesAdapter{}
+        mAdapter = AccountMoviesAdapter{
+            val action = UserAccountFragmentDirections.actionHomeToDetail(it)
+            Navigation.findNavController(bind.root).navigate(action)
+        }
         rvFavorites.apply {
             setHasFixedSize(true)
             layoutManager=LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
