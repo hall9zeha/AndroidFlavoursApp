@@ -163,48 +163,37 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ivPoster"
-                    android:padding="@dimen/common_padding_default"
+                    android:padding="@dimen/common_padding_micro"
                     >
                     <ImageButton
                         android:id="@+id/btnBookmark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_bookmark"
+                        android:focusable="true"
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/btnWatchList"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginTop="@dimen/common_padding_micro"
+                        android:layout_marginStart="@dimen/common_padding_default"
+                        style="@style/Widget.Material3.Button.IconButton"
                         />
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvBookmark"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add favorite"
-                        app:layout_constraintStart_toStartOf="@id/btnBookmark"
-                        app:layout_constraintEnd_toEndOf="@id/btnBookmark"
-                        app:layout_constraintTop_toBottomOf="@id/btnBookmark"
 
-                        />
                     <ImageButton
                         android:id="@+id/btnWatchList"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_watch_list"
+                        android:focusable="true"
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
                         app:layout_constraintStart_toEndOf="@id/btnBookmark"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/btnBookmark"
+                        android:layout_marginStart="@dimen/common_padding_min"
+                        style="@style/Widget.Material3.Button.IconButton"
                         />
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvWatchList"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Add watchlist"
-                        app:layout_constraintStart_toStartOf="@id/btnWatchList"
-                        app:layout_constraintEnd_toEndOf="@id/btnWatchList"
-                        app:layout_constraintTop_toBottomOf="@id/btnWatchList"
 
-                        />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
              <com.google.android.material.textview.MaterialTextView
