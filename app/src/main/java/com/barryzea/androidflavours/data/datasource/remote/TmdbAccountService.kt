@@ -19,4 +19,12 @@ interface TmdbAccountService {
         @Query("language")language:String,
         @Query("page")page:Int
     ): Response<TmdbResult>
+    @GET("account/{account_id}/watchlist/movies")
+    suspend fun fetchMyWatchlistMovies(
+        @Path("account_id")accountId:String,
+        @Query("api_key") apiKey:String,
+        @Query("session_id")sessionId:String,
+        @Query("language")language:String,
+        @Query("page")page:Int
+    ): Response<TmdbResult>
 }

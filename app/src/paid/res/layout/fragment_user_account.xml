@@ -63,6 +63,7 @@
                 tools:listitem="@layout/item_movie_thumbnail"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/common_padding_min"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -97,15 +97,23 @@
             app:popExitAnim="@anim/slide_out_right">
         </action>
     </fragment>
-    <activity
+    <fragment
         android:id="@+id/accountMovieList"
-        android:name="com.barryzea.androidflavours.ui.activities.AccountMovieList"
+        android:name="com.barryzea.androidflavours.ui.fragments.AccountMovieListFragment"
         android:label="Account movie detail"
-        tools:layout="@layout/activity_account_movie_list">
+        tools:layout="@layout/fragment_account_movie_list">
         <argument
             android:name="typeOfList"
             app:argType="integer"
             android:defaultValue="0"
             />
-    </activity>
+        <action
+            android:id="@+id/action_go_to_detail"
+            app:destination="@id/detailActivity"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+        </action>
+    </fragment>
 </navigation>

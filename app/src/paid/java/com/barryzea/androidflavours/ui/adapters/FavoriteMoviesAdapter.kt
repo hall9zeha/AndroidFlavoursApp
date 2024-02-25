@@ -14,7 +14,7 @@ import com.barryzea.androidflavours.databinding.ItemMovieThumbnailBinding
  * Created by Barry Zea H. on 20/02/2024.
  **/
 
-class AccountMoviesAdapter(private val onItemClick:(TmdbMovie)->Unit):RecyclerView.Adapter<AccountMoviesAdapter.ViewHolder>() {
+class FavoriteMoviesAdapter(private val onItemClick:(TmdbMovie)->Unit):RecyclerView.Adapter<FavoriteMoviesAdapter.ViewHolder>() {
     private var moviesList:MutableList<TmdbMovie> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

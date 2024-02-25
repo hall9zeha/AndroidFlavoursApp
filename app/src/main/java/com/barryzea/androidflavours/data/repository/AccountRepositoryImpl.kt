@@ -1,6 +1,8 @@
 package com.barryzea.androidflavours.data.repository
 
 import com.barryzea.androidflavours.data.datasource.remote.RetrofitService
+import com.barryzea.androidflavours.data.entities.TmdbResult
+import retrofit2.Response
 import javax.inject.Inject
 
 /**
@@ -12,5 +14,13 @@ class AccountRepositoryImpl @Inject constructor(retrofit:RetrofitService,
                                                 private val apiKey:String,
                                                 private val lang:String):AccountRepository {
     private val accountService = retrofit.accountService()
-    override suspend fun fetchMyFavoriteMovies(accountId: String,sessionId:String, page: Int) =accountService.fetchMyFavoriteMovies(accountId,apiKey,sessionId,lang,page)
+    override suspend fun fetchMyFavoriteMovies(
+        accountId: String,
+        sessionId:String,
+        page: Int) =accountService.fetchMyFavoriteMovies(accountId,apiKey,sessionId,lang,page)
+    override suspend fun fetchMyWatchlistMovies(
+        accountId: String,
+        sessionId: String,
+        page: Int
+    )= accountService.fetchMyWatchlistMovies(accountId,apiKey,sessionId,lang,page)
 }

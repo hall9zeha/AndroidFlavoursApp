@@ -8,4 +8,5 @@ import com.barryzea.androidflavours.domain.entities.DomainMovie
  **/
 interface AccountUseCases {
     suspend fun fetchMyFavoriteMovies(accountId:String,sessionId:String, page:Int):TmdbResponse<DomainMovie>
+    suspend fun fetchMyWatchlistMovies(accountId:String,sessionId:String, page:Int):TmdbResponse<DomainMovie>
 }

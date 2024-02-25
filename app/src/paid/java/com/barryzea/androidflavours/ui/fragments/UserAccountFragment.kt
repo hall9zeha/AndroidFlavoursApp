@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.barryzea.androidflavours.common.FAVORITES_LIST
 import com.barryzea.androidflavours.common.WATCH_LIST
 import com.barryzea.androidflavours.common.showSnackbar
-import com.barryzea.androidflavours.databinding.ActivityAccountMovieListBinding
 import com.barryzea.androidflavours.databinding.FragmentUserAccountBinding
-import com.barryzea.androidflavours.ui.adapters.AccountMoviesAdapter
+import com.barryzea.androidflavours.ui.activities.MainActivity
+import com.barryzea.androidflavours.ui.adapters.FavoriteMoviesAdapter
 import com.barryzea.androidflavours.ui.viewmodel.AccountViewModel
 import com.barryzea.androidflavours.ui.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,7 +33,8 @@ class UserAccountFragment : Fragment() {
     private val accountViewModel:AccountViewModel by viewModels()
     private var isLogin:Boolean=false
     private var sessionId:String?=null
-    private var mAdapter: AccountMoviesAdapter?=null
+    private var mFavoritesAdapter: FavoriteMoviesAdapter?=null
+    private var mWatchListAdapter:FavoriteMoviesAdapter?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +65,7 @@ class UserAccountFragment : Fragment() {
         setUpObservers()
        }
     private fun setUpListeners()=with(bind){
+        (activity as? MainActivity)?.bind?.ctlHeader?.visibility = View.VISIBLE
         tvFavoriteMovies.setOnClickListener{
             val actionShowMyFavorites = UserAccountFragmentDirections.goToAccountMoviesList(FAVORITES_LIST)
             Navigation.findNavController(bind.root).navigate(actionShowMyFavorites)
@@ -74,14 +76,23 @@ class UserAccountFragment : Fragment() {
         }
     }
     private fun setUpAdapter()=with(bind){
-        mAdapter = AccountMoviesAdapter{
+        mFavoritesAdapter = FavoriteMoviesAdapter{
+            val action = UserAccountFragmentDirections.actionHomeToDetail(it)
+            Navigation.findNavController(bind.root).navigate(action)
+        }
+        mWatchListAdapter = FavoriteMoviesAdapter{
             val action = UserAccountFragmentDirections.actionHomeToDetail(it)
             Navigation.findNavController(bind.root).navigate(action)
         }
         rvFavorites.apply {
             setHasFixedSize(true)
             layoutManager=LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-            adapter=mAdapter
+            adapter=mFavoritesAdapter
+        }
+        rvWatchList.apply {
+            setHasFixedSize(true)
+            layoutManager=LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+            adapter=mWatchListAdapter
         }
     }
 
@@ -96,11 +107,18 @@ class UserAccountFragment : Fragment() {
         }
        loginViewModel.userDetail.observe(viewLifecycleOwner){user->
             accountViewModel.fetchMyFavoriteMovies(user.id.toString(),sessionId.toString(),1)
+            accountViewModel.fetchMyWatchlistMovies(user.id.toString(),sessionId.toString(),1)
         }
         accountViewModel.favoriteList.observe(viewLifecycleOwner){favorites->
             favorites?.let{
                 bind.shimmerLoader.shimmerHorizontalLoader.visibility=View.GONE
-                mAdapter?.addAll(it.movies)
+                mFavoritesAdapter?.addAll(it.movies)
+            }
+        }
+        accountViewModel.watchlist.observe(viewLifecycleOwner){watchlist->
+            watchlist?.let{
+                bind.shimmerLoader.shimmerHorizontalLoader.visibility=View.GONE
+                mWatchListAdapter?.addAll(it.movies)
             }
         }
         accountViewModel.msgInfo.observe(viewLifecycleOwner){

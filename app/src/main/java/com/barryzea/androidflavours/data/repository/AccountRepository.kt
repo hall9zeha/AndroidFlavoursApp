@@ -9,4 +9,5 @@ import retrofit2.Response
  **/
 interface AccountRepository {
     suspend fun fetchMyFavoriteMovies(accountId:String,sessionId:String,page:Int):Response<TmdbResult>
+    suspend fun fetchMyWatchlistMovies(accountId:String,sessionId:String,page:Int):Response<TmdbResult>
 }

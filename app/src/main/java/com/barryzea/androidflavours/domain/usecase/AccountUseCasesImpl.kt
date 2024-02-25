@@ -25,4 +25,19 @@ class AccountUseCasesImpl(private val accountRepository: AccountRepository):Acco
             TmdbResponse.Error(e.message.toString())
         }
     }
+
+    override suspend fun fetchMyWatchlistMovies(
+        accountId: String,
+        sessionId: String,
+        page: Int
+    ): TmdbResponse<DomainMovie> {
+        return try {
+            val response = accountRepository.fetchMyWatchlistMovies(accountId,sessionId,page)
+            if(response.isSuccessful) TmdbResponse.Success(response.body()?.toDomain()!!)
+            else TmdbResponse.Error(response.message())
+
+        }catch(e:Exception){
+            TmdbResponse.Error(e.message.toString())
+        }
+    }
 }
