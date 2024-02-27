@@ -139,7 +139,8 @@ class AccountMovieListFragment : Fragment() {
         }
     }
     private fun setUpPagination(){
-       bind.rvDetail.addOnScrollListener(object: PaginationRecyclerView(null,mLayoutManager){
+        val bottomNav = (activity as? MainActivity)?.bind?.bottomNav
+       bind.rvDetail.addOnScrollListener(object: PaginationRecyclerView(bottomNav,mLayoutManager){
             override fun loadMoreItems() {
                 isLoading=true
                 currentPage+=1
@@ -179,4 +180,9 @@ class AccountMovieListFragment : Fragment() {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (activity as? MainActivity)?.bind?.bottomNav?.visibility=View.VISIBLE
+        _bind=null
+    }
 }
