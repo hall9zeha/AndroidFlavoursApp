@@ -14,7 +14,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setUpListeners()
     }
     private fun setUpListeners(){
-        (activity as? MainActivity)?.bind?.ctlHeader?.visibility= View.GONE
+
         val themePrefs = findPreference<SwitchPreferenceCompat>("darkTheme")
         themePrefs?.setOnPreferenceChangeListener { preference, newValue ->
             if(newValue as Boolean){
@@ -23,6 +23,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
             true
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.let {
+            (activity as? MainActivity)?.bind?.ctlHeader?.visibility = View.GONE
         }
     }
 }

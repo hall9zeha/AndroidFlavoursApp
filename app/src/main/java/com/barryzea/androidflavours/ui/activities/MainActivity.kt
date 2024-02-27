@@ -23,7 +23,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(){
-    internal lateinit var bind:ActivityMainBinding
+    private  var _bind:ActivityMainBinding?=null
+    internal  val bind:ActivityMainBinding get() = _bind!!
     private val viewModel: MainViewModel by viewModels()
     private val loginViewModel:LoginViewModel by viewModels()
     private lateinit var navController:NavController
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity(){
     private var sessionId:String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bind= ActivityMainBinding.inflate(layoutInflater)
+        _bind= ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
         setUpBottomNav()
         setUpObservers()
