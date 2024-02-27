@@ -13,4 +13,5 @@ interface AccountUseCases {
     suspend fun fetchMyFavoriteMovies(accountId:String,sessionId:String, page:Int):TmdbResponse<DomainMovie>
     suspend fun fetchMyWatchlistMovies(accountId:String,sessionId:String, page:Int):TmdbResponse<DomainMovie>
     suspend fun addToFavorite(accountId: Int,sessionId: String,idMovie:Int):TmdbResponse<DomainAuth>
+    suspend fun addToWatchlist(accountId: Int,sessionId: String,idMovie:Int):TmdbResponse<DomainAuth>
 }

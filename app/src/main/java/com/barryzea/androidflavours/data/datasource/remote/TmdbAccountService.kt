@@ -34,8 +34,19 @@ interface TmdbAccountService {
         @Path("account_id") accountId: Int,
         @Query("api_key") apiKey: String,
         @Query("session_id") sessionId: String,
+        //Al tener nuestra aplicación de ejemplo de solo películas lo agregamos por defecto así
         @Query("media_type") mediaType: String = "movie",
         @Query("media_id") mediaId: Int,
         @Query("favorite") favorite: Boolean = true
     ): Response<PostResponse>
+    @POST("account/{account_id}/watchlist")
+    suspend fun addToWatchlist(
+        @Path("account_id") accountId: Int,
+        @Query("api_key") apiKey: String,
+        @Query("session_id") sessionId: String,
+        @Query("media_type") mediaType: String = "movie",
+        @Query("media_id") mediaId: Int,
+        @Query("watchlist") favorite: Boolean = true
+    ): Response<PostResponse>
+
 }

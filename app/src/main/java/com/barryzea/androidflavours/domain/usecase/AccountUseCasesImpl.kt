@@ -52,7 +52,20 @@ class AccountUseCasesImpl(private val accountRepository: AccountRepository, priv
     ): TmdbResponse<DomainAuth> {
         return try{
             val response = accountRepository.addToFavorite(apiKey, accountId,sessionId,idMovie)
-            Log.e("response", response.toString() )
+            if(response.isSuccessful)TmdbResponse.Success(response.body()!!.toDomain())
+            else TmdbResponse.Error(response.message())
+        }catch(e:Exception){
+            TmdbResponse.Error(e.message.toString())
+        }
+    }
+
+    override suspend fun addToWatchlist(
+        accountId: Int,
+        sessionId: String,
+        idMovie: Int
+    ): TmdbResponse<DomainAuth> {
+        return try{
+            val response = accountRepository.addToWatchlist(apiKey, accountId,sessionId,idMovie)
             if(response.isSuccessful)TmdbResponse.Success(response.body()!!.toDomain())
             else TmdbResponse.Error(response.message())
         }catch(e:Exception){

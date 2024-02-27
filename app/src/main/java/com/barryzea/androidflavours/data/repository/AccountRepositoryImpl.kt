@@ -1,6 +1,7 @@
 package com.barryzea.androidflavours.data.repository
 
 import com.barryzea.androidflavours.data.datasource.remote.RetrofitService
+import com.barryzea.androidflavours.data.entities.PostResponse
 import com.barryzea.androidflavours.data.entities.TmdbResult
 import retrofit2.Response
 import javax.inject.Inject
@@ -30,4 +31,11 @@ class AccountRepositoryImpl @Inject constructor(retrofit:RetrofitService,
         sessionId: String,
         idMovie: Int
     ) = accountService.addToFavorites(apiKey=apiKey, accountId = accountId, sessionId = sessionId, mediaId = idMovie)
+
+    override suspend fun addToWatchlist(
+        apiKey: String,
+        accountId: Int,
+        sessionId: String,
+        idMovie: Int
+    ) = accountService.addToWatchlist(apiKey = apiKey, accountId = accountId, sessionId = sessionId, mediaId = idMovie)
 }

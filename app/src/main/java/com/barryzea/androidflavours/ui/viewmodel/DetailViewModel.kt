@@ -45,6 +45,8 @@ class DetailViewModel @Inject constructor(private val preferences: DataStorePref
 
     private var _favoriteAdded:MutableLiveData<DomainAuth> = MutableLiveData()
     val favoriteAdded:LiveData<DomainAuth> = _favoriteAdded
+    private var _watchlistAdded:MutableLiveData<DomainAuth> = MutableLiveData()
+    val watchlistAdded:LiveData<DomainAuth> = _watchlistAdded
 
     private var _isLogin:MutableLiveData<Boolean> = MutableLiveData()
     val isLogin:LiveData<Boolean> = _isLogin
@@ -115,6 +117,17 @@ class DetailViewModel @Inject constructor(private val preferences: DataStorePref
                 val response = accountUseCase.addToFavorite(_userDetail.value?.id!!, sessionId,idMovie)
                 when(response){
                     is TmdbResponse.Success->_favoriteAdded.value=response.tmdbResult
+                    is TmdbResponse.Error->_infoMsg.value=response.msg
+                }
+            }
+        }
+    }
+    fun addToWatchlist(idMovie:Int){
+        viewModelScope.launch {
+            mSessionId?.let{sessionId->
+                val response = accountUseCase.addToWatchlist(_userDetail.value?.id!!, sessionId,idMovie)
+                when(response){
+                    is TmdbResponse.Success->_watchlistAdded.value=response.tmdbResult
                     is TmdbResponse.Error->_infoMsg.value=response.msg
                 }
             }

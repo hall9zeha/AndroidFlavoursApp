@@ -59,9 +59,14 @@ class DetailActivity : AppCompatActivity() {
     }
     private fun setUpListeners() = with(bind){
         movInfo.btnBookmark.setOnClickListener {
-            args.movie?.let{
-                detailViewModel.addToFavorite(it.id)
+            args.movie?.id?.let{
+                detailViewModel.addToFavorite(it)
 
+            }
+        }
+        movInfo.btnWatchList.setOnClickListener {
+            args.movie?.id?.let{
+                detailViewModel.addToWatchlist(it)
             }
         }
     }
@@ -93,7 +98,10 @@ class DetailActivity : AppCompatActivity() {
             bind.root.showSnackbar(it)
         }
         detailViewModel.favoriteAdded.observe(this){
-            Toast.makeText(this, "Added successfully", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Added to favorite", Toast.LENGTH_SHORT).show()
+        }
+        detailViewModel.watchlistAdded.observe(this){
+            Toast.makeText(this, "Added to watchlist", Toast.LENGTH_SHORT).show()
         }
 
     }
