@@ -36,26 +36,27 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setUpDetail()= with(bind) {
+
          val m = args.movie
         //args.movie?.let {m ->
         ivMovieDetail.loadUrl("https://image.tmdb.org/t/p/w780${m?.backdropPath}")
-        ivPoster.loadUrl("https://image.tmdb.org/t/p/w780${m?.posterPath}")
+        movInfo.ivPoster.loadUrl("https://image.tmdb.org/t/p/w780${m?.posterPath}")
         tvMovieDetailDesc.text=m?.overview
         toolbarDetail.title=m?.title
         //tvDetail.setMovieInfo(m!!)
         //}
         //nueva implementación
-        tvLang.text=getString(R.string.original_language)  + m?.originalLanguage
-        tvTitle.text=m?.originalTitle
-        tvRelease.text = m?.releaseDate
-        tvPopularity.text=getString(R.string.popularity) + m?.popularity.toString()
-        ratingDetail.rating=m?.voteAverage!!.toFloat()
+        movInfo.tvLang.text=getString(R.string.original_language)  + m?.originalLanguage
+        movInfo.tvTitle.text=m?.originalTitle
+        movInfo.tvRelease.text = m?.releaseDate
+        movInfo.tvPopularity.text=getString(R.string.popularity) + m?.popularity.toString()
+        movInfo.ratingDetail.rating=m?.voteAverage!!.toFloat()
         //detailViewModel.fetchMovieCredits(m!!.id)
         detailViewModel.fetchCreditsAndTrailer(m!!.id)
     }
     private fun setUpAdapter(){
         characterAdapter= CharacterAdapter()
-        bind.rvCharacters.apply {
+        bind.body.rvCharacters.apply {
             layoutManager = LinearLayoutManager(this@DetailActivity, LinearLayoutManager.HORIZONTAL,false)
             setHasFixedSize(true)
             adapter = characterAdapter
@@ -64,8 +65,13 @@ class DetailActivity : AppCompatActivity() {
     private fun setUpObservers(){
         detailViewModel.credits.observe(this){characters->
             characters?.let{
-                bind.rvCharacters.visibility=View.VISIBLE
+                bind.body.rvCharacters.visibility=View.VISIBLE
                 characterAdapter?.add(characters)
+
+                //Al hacerce visible la vista que muestra el reparto de actores, empuja a las demás vistas hacia arriba
+                //ya que es un scrollview el que las contiene, por lo tanto reseteamos su posición inmediatamente, esto es
+                //prácticamente imperceptible
+                bind.scrollViewMain.scrollTo(0,0)
             }
         }
         detailViewModel.infoMsg.observe(this){
