@@ -1,6 +1,6 @@
 package com.barryzea.androidflavours.data.datasource.remote
 
-import com.barryzea.androidflavours.data.entities.Logout
+import com.barryzea.androidflavours.data.entities.PostResponse
 import com.barryzea.androidflavours.data.entities.RequestToken
 import com.barryzea.androidflavours.data.entities.Session
 import com.barryzea.androidflavours.data.entities.User
@@ -44,5 +44,5 @@ interface TmdbLoginService {
     suspend fun logout(
         @Query("api_key")apiKey:String,
         @Query("session_id")sessionId:String
-    ):Response<Logout>
+    ):Response<PostResponse>
 }

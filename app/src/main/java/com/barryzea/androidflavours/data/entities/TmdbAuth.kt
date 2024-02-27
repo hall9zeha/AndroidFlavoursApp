@@ -28,4 +28,4 @@ data class Avatar(
     @SerializedName("tmdb")val avatarTmdb:Tmdb= Tmdb()
 )
 data class Tmdb(@SerializedName("avatar_path")val avatarPath:String?="")
-data class Logout(@SerializedName("success")val success:Boolean=false)
+data class PostResponse(@SerializedName("success")val success:Boolean=false)

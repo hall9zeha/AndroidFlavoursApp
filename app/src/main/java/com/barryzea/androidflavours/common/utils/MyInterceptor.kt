@@ -26,6 +26,7 @@ class MyInterceptor:Interceptor {
             429->{setResponse(response,chain,429,"Your request count (#) is over the allowed limit of (40).")}
             503->{setResponse(response,chain,404,"Service offline: This service is temporarily offline, try again later.")}
             200->{setResponse(response,chain,200,"Respuesta de la API completada correctamente")}
+            201->{setResponse(response,chain,201,"Posted successfully")}
             else->{
                 //Volvemos a llamar a la api  cinco veces más si hay algún error desconocido
                 if(!response.isSuccessful && tryCount<5){

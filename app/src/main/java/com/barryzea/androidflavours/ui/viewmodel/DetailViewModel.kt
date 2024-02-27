@@ -4,10 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.barryzea.androidflavours.common.utils.DataStorePreferences
 import com.barryzea.androidflavours.common.utils.SingleMutableLiveData
 import com.barryzea.androidflavours.data.entities.CharacterMovie
 import com.barryzea.androidflavours.data.entities.TmdbResponse
 import com.barryzea.androidflavours.data.entities.TrailerMovie
+import com.barryzea.androidflavours.domain.entities.DomainAuth
+import com.barryzea.androidflavours.domain.usecase.AccountUseCases
+import com.barryzea.androidflavours.domain.usecase.LoginUseCases
 import com.barryzea.androidflavours.domain.usecase.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
@@ -21,7 +25,11 @@ import javax.inject.Inject
  **/
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(private val useCases: UseCases) :ViewModel() {
+class DetailViewModel @Inject constructor(private val preferences: DataStorePreferences,
+                                          private val loginUseCases: LoginUseCases,
+                                          private val useCases: UseCases,
+                                          private val accountUseCase:AccountUseCases) :ViewModel() {
+    private var mSessionId:String?=null
 
     private var _credits:SingleMutableLiveData<List<CharacterMovie>> = SingleMutableLiveData()
     val credits:LiveData<List<CharacterMovie>> = _credits
@@ -31,6 +39,34 @@ class DetailViewModel @Inject constructor(private val useCases: UseCases) :ViewM
     //Estas propiedades no se usan en ninguna vista aún
     private var _trailers:MutableLiveData<List<TrailerMovie>> = MutableLiveData()
     val trailers:LiveData<List<TrailerMovie>> = _trailers
+
+    private var _userDetail:MutableLiveData<DomainAuth> = MutableLiveData()
+    val userDetail:LiveData<DomainAuth> = _userDetail
+
+    private var _favoriteAdded:MutableLiveData<DomainAuth> = MutableLiveData()
+    val favoriteAdded:LiveData<DomainAuth> = _favoriteAdded
+
+    private var _isLogin:MutableLiveData<Boolean> = MutableLiveData()
+    val isLogin:LiveData<Boolean> = _isLogin
+    init{
+        viewModelScope.launch {
+            preferences.getFromDatastore().collect{pref->
+                if(pref.sessionId.toString().isNotEmpty()){
+                    _isLogin.value=true
+                    mSessionId=pref.sessionId
+                    fetUserDetail(pref.sessionId!!)
+                }
+            }
+        }
+    }
+    private fun fetUserDetail(sessionId:String){
+        viewModelScope.launch {
+            when(val response = loginUseCases.fetchUserDetails(sessionId)){
+                is TmdbResponse.Success->_userDetail.value=response.tmdbResult
+                is TmdbResponse.Error->_infoMsg.value=response.msg
+            }
+        }
+    }
 
     //Podemos usar esta forma si queremos realizar peticiones  secuencialmente a nuestra API
    /* fun fetchMovieCredits(idMovie:Int){
@@ -73,5 +109,15 @@ class DetailViewModel @Inject constructor(private val useCases: UseCases) :ViewM
                 }
             }
         }}
-
+    fun addToFavorite(idMovie:Int){
+        viewModelScope.launch {
+            mSessionId?.let{sessionId->
+                val response = accountUseCase.addToFavorite(_userDetail.value?.id!!, sessionId,idMovie)
+                when(response){
+                    is TmdbResponse.Success->_favoriteAdded.value=response.tmdbResult
+                    is TmdbResponse.Error->_infoMsg.value=response.msg
+                }
+            }
+        }
+    }
 }

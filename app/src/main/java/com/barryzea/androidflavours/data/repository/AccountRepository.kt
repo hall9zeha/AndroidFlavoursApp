@@ -1,5 +1,6 @@
 package com.barryzea.androidflavours.data.repository
 
+import com.barryzea.androidflavours.data.entities.PostResponse
 import com.barryzea.androidflavours.data.entities.TmdbResult
 import retrofit2.Response
 
@@ -10,4 +11,5 @@ import retrofit2.Response
 interface AccountRepository {
     suspend fun fetchMyFavoriteMovies(accountId:String,sessionId:String,page:Int):Response<TmdbResult>
     suspend fun fetchMyWatchlistMovies(accountId:String,sessionId:String,page:Int):Response<TmdbResult>
+    suspend fun addToFavorite(apiKey:String,accountId: Int,sessionId: String, idMovie:Int):Response<PostResponse>
 }

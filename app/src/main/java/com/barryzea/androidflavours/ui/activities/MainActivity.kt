@@ -2,6 +2,7 @@ package com.barryzea.androidflavours.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.PopupMenu
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
@@ -69,7 +70,7 @@ class MainActivity : AppCompatActivity(){
                 loginViewModel.fetchUserDetail(preferences.sessionId)
                 sessionId=preferences.sessionId
                 isLogin=true
-
+                Log.e("TAG", sessionId.toString() )
             }else{
                 bind.tvUsername.text=""
                 isLogin=false

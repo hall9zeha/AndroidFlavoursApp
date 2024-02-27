@@ -2,7 +2,6 @@ package com.barryzea.androidflavours.data.datasource.remote
 
 import com.barryzea.androidflavours.data.entities.Cast
 import com.barryzea.androidflavours.data.entities.Genres
-import com.barryzea.androidflavours.data.entities.Logout
 import com.barryzea.androidflavours.data.entities.TmdbResult
 import com.barryzea.androidflavours.data.entities.Trailers
 import com.barryzea.androidflavours.domain.entities.DomainMovie

@@ -16,6 +16,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -36,6 +37,6 @@ class DataModule {
 
     @ViewModelScoped
     @Provides
-    fun accountUseCaseProvides(accountRepository: AccountRepository):AccountUseCases = AccountUseCasesImpl(accountRepository)
+    fun accountUseCaseProvides(accountRepository: AccountRepository, @Named("apiKey")apiKey:String):AccountUseCases = AccountUseCasesImpl(accountRepository,apiKey)
 }
 

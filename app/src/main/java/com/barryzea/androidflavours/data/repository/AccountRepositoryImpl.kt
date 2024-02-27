@@ -23,4 +23,11 @@ class AccountRepositoryImpl @Inject constructor(retrofit:RetrofitService,
         sessionId: String,
         page: Int
     )= accountService.fetchMyWatchlistMovies(accountId,apiKey,sessionId,lang,page)
+
+    override suspend fun addToFavorite(
+        apiKey: String,
+        accountId: Int,
+        sessionId: String,
+        idMovie: Int
+    ) = accountService.addToFavorites(apiKey=apiKey, accountId = accountId, sessionId = sessionId, mediaId = idMovie)
 }

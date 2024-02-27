@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.MediaController
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.navArgs
@@ -31,6 +32,7 @@ class DetailActivity : AppCompatActivity() {
         setContentView(bind.root)
         setUpAdapter()
         setUpDetail()
+        setUpListeners()
         setUpObservers()
 
     }
@@ -53,6 +55,15 @@ class DetailActivity : AppCompatActivity() {
         movInfo.ratingDetail.rating=m?.voteAverage!!.toFloat()
         //detailViewModel.fetchMovieCredits(m!!.id)
         detailViewModel.fetchCreditsAndTrailer(m!!.id)
+
+    }
+    private fun setUpListeners() = with(bind){
+        movInfo.btnBookmark.setOnClickListener {
+            args.movie?.let{
+                detailViewModel.addToFavorite(it.id)
+
+            }
+        }
     }
     private fun setUpAdapter(){
         characterAdapter= CharacterAdapter()
@@ -63,6 +74,10 @@ class DetailActivity : AppCompatActivity() {
         }
     }
     private fun setUpObservers(){
+        detailViewModel.isLogin.observe(this){
+            if(it)bind.movInfo.lnAuthenticatedActions.visibility=View.VISIBLE
+
+        }
         detailViewModel.credits.observe(this){characters->
             characters?.let{
                 bind.body.rvCharacters.visibility=View.VISIBLE
@@ -76,6 +91,9 @@ class DetailActivity : AppCompatActivity() {
         }
         detailViewModel.infoMsg.observe(this){
             bind.root.showSnackbar(it)
+        }
+        detailViewModel.favoriteAdded.observe(this){
+            Toast.makeText(this, "Added successfully", Toast.LENGTH_SHORT).show()
         }
 
     }
