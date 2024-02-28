@@ -1,9 +1,7 @@
 package com.barryzea.androidflavours.data.datasource.remote
 
-import android.provider.SyncStateContract.Constants
 import com.barryzea.androidflavours.common.BASE_URL
 import com.barryzea.androidflavours.common.utils.MyInterceptor
-import com.barryzea.androidflavours.data.entities.TmdbResponse
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

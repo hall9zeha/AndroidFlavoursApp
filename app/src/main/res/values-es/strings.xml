@@ -19,7 +19,7 @@
     <string name="reply_title">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="theme_title">Cambiar modo noche</string>
+    <string name="theme_title">Activar modo noche</string>
     <string name="attachment_title">Download incoming attachments</string>
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
@@ -50,4 +50,5 @@
     <string name="added_to_favorite">Agregado a favoritos</string>
     <string name="added_to_watchlist">Agregado a lista para ver</string>
     <string name="session_created">Sesión creada</string>
+    <string name="miscellany">Miscelánea</string>
 </resources>
