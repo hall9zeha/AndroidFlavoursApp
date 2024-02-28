@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.PopupMenu
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.NavOptions
@@ -20,6 +21,10 @@ import com.barryzea.androidflavours.ui.fragments.UserAccountFragmentDirections
 import com.barryzea.androidflavours.ui.viewmodel.LoginViewModel
 import com.barryzea.androidflavours.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(){
@@ -33,6 +38,13 @@ class MainActivity : AppCompatActivity(){
     private var sessionId:String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen().apply {
+            CoroutineScope(Dispatchers.IO).launch {
+                delay(2000)
+                setKeepOnScreenCondition{false}
+            }
+        }
+
         _bind= ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
         setUpBottomNav()
