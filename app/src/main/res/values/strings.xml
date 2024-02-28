@@ -37,4 +37,17 @@
     <string name="password_required_msg">Password required</string>
     <string name="favorite_movies_subtitle">Favorite movies</string>
     <string name="watchlist_movies_subtitle">Watchlist movies</string>
+    <string name="msg_code_400">Validation failed.</string>
+    <string name="msg_code_401">Authentication failed: incorrect username or password</string>
+    <string name="msg_code_403">Duplicate entry: The data you tried to submit already exists.</string>
+    <string name="msg_code_404">Invalid id: The pre-requisite id is invalid or not found.</string>
+    <string name="msg_code_405">Invalid format: This service doesn\'t exist in that format.</string>
+    <string name="msg_code_406">Invalid accept header.</string>
+    <string name="msg_code_429">Your request count (#) is over the allowed limit of (40).</string>
+    <string name="msg_code_503">Service offline: This service is temporarily offline, try again later.</string>
+    <string name="msg_code_200">Api response completed successfully</string>
+    <string name="msg_code_201">Posted successfully</string>
+    <string name="added_to_favorite">Added to favorite</string>
+    <string name="added_to_watchlist">Added to watchlist</string>
+    <string name="session_created">Session created</string>
 </resources>

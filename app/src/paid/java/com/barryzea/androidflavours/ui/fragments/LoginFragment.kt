@@ -116,14 +116,14 @@ class LoginFragment : Fragment(){
         viewModel.createdSessionId.observe(viewLifecycleOwner){sessionId->
             if(sessionId.isNotEmpty()){
                bind.btnLogin.isEnabled=true
-               Toast.makeText(context, "Sesión creada", Toast.LENGTH_SHORT).show()
+               Toast.makeText(context, getString(R.string.session_created), Toast.LENGTH_SHORT).show()
                 bind.btnLogin.setLoading(false)
                 viewModel.saveSessionId(sessionId)
 
                 bind.edtUserName.setText("")
                 bind.edtPassword.setText("")
                 goToAccountContent()
-                Log.e("CREATED_SESSION", sessionId )
+
             }
         }
 

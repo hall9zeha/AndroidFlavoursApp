@@ -36,7 +36,6 @@ class UserAccountFragment : Fragment() {
     private var mFavoritesAdapter: FavoriteMoviesAdapter?=null
     private var mWatchListAdapter:FavoriteMoviesAdapter?=null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {

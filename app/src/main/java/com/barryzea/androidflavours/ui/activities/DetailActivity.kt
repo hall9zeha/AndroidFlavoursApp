@@ -98,10 +98,10 @@ class DetailActivity : AppCompatActivity() {
             bind.root.showSnackbar(it)
         }
         detailViewModel.favoriteAdded.observe(this){
-            Toast.makeText(this, "Added to favorite", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.added_to_favorite), Toast.LENGTH_SHORT).show()
         }
         detailViewModel.watchlistAdded.observe(this){
-            Toast.makeText(this, "Added to watchlist", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.added_to_watchlist), Toast.LENGTH_SHORT).show()
         }
 
     }

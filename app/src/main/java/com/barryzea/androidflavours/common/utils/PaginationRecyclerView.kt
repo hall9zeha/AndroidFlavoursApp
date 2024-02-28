@@ -1,13 +1,10 @@
 package com.barryzea.androidflavours.common.utils
 
 import android.transition.Fade
-import android.transition.TransitionManager
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.barryzea.androidflavours.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -23,7 +20,7 @@ abstract class PaginationRecyclerView(private val bottomNav:BottomNavigationView
         var slideDownAnim:Animation?=null
         var slideUpAnim:Animation?=null
         bottomNav?.let {
-            slideDownAnim = AnimationUtils.loadAnimation(it.context,R.anim.slide_down_anim)
+            slideDownAnim = AnimationUtils.loadAnimation(it.context,R.anim.slide_down)
             slideUpAnim = AnimationUtils.loadAnimation(it.context,R.anim.slide_up)
         }
 

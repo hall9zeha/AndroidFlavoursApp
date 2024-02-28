@@ -14,8 +14,8 @@ import javax.inject.Inject
  * Created by Barry Zea H. on 31/01/2024.
  **/
 //Api client
-class RetrofitServiceImpl @Inject constructor():RetrofitService {
-    private val client = OkHttpClient.Builder().addInterceptor(MyInterceptor()).build()
+class RetrofitServiceImpl @Inject constructor(myInterceptor: MyInterceptor):RetrofitService {
+    private val client = OkHttpClient.Builder().addInterceptor(myInterceptor).build()
 
     private fun retrofitInstance():Retrofit{
         return Retrofit.Builder().apply {

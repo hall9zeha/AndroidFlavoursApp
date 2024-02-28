@@ -3,6 +3,7 @@ package com.barryzea.androidflavours.di
 import android.app.Application
 import android.content.Context
 import com.barryzea.androidflavours.BuildConfig
+import com.barryzea.androidflavours.common.utils.MyInterceptor
 import com.barryzea.androidflavours.data.datasource.remote.RetrofitService
 import com.barryzea.androidflavours.data.datasource.remote.RetrofitServiceImpl
 import com.barryzea.androidflavours.data.datasource.remote.TmdbLoginService
@@ -17,6 +18,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import java.lang.StringBuilder
 import java.util.Locale
 import javax.inject.Named
@@ -33,6 +35,10 @@ class AppModule {
     @Singleton
     @Provides
     fun contextProvides(app:Application):Context = app.applicationContext
+
+    @Singleton
+    @Provides
+    fun interceptorProvides(context: Context):Interceptor = MyInterceptor(context)
 
     @Singleton
     @Provides

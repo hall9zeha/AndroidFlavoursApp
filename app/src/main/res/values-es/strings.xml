@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">AndroidFlavours</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Inicio</string>
+    <string name="settings">Configuración</string>
+    <string name="search">Buscar</string>
+    <string name="original_language">Lenguaje original: </string>
+    <string name="original_title">Título original:</string>
+    <string name="release_date">Fecha de lanzamiento:</string>
+    <string name="popularity">Popularidad: </string>
+    <string name="vote_average">Voto promedio:</string>
+    <!-- Preference Titles -->
+    <string name="Theme_header">Tema</string>
+
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="theme_title">Cambiar modo noche</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="about_this">Acerca de esta app</string>
+    <string name="no_results">No hay resultados para %1$s</string>
+    <string name="characters_title">Reparto</string>
+    <string name="trailer_title">Trailer</string>
+    <string name="account">Cuenta</string>
+    <string name="username_hint">Nombre de usuario</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="login_btn">Iniciar</string>
+    <string name="logout">Salir</string>
+    <string name="username_required_msg">Nombre requerido</string>
+    <string name="password_required_msg">Contraseña requerida</string>
+    <string name="favorite_movies_subtitle">Mis favoritos</string>
+    <string name="watchlist_movies_subtitle">Para mirar</string>
+    <string name="msg_code_400">Error en validación</string>
+    <string name="msg_code_401">Error de autenticación: usuario o contraseña incorrectos</string>
+    <string name="msg_code_403">Entrada duplicada: los datos que intentó enviar ya existen.</string>
+    <string name="msg_code_404">Identificación no válida: la identificación del requisito previo no es válida o no se encuentra.</string>
+    <string name="msg_code_405">Formato no válido: este servicio no existe en ese formato.</string>
+    <string name="msg_code_406">Encabezado de aceptación no válido.</string>
+    <string name="msg_code_429">Su recuento de solicitudes (#) supera el límite permitido de (40).</string>
+    <string name="msg_code_503">Servicio fuera de línea: este servicio está temporalmente fuera de línea, inténtelo nuevamente más tarde.</string>
+    <string name="msg_code_200">La respuesta de la API se completó con éxito</string>
+    <string name="msg_code_201">Publicado exitosamente</string>
+    <string name="added_to_favorite">Agregado a favoritos</string>
+    <string name="added_to_watchlist">Agregado a lista para ver</string>
+    <string name="session_created">Sesión creada</string>
+</resources>
