@@ -39,8 +39,6 @@ class LoginFragment : Fragment(){
     private val viewModel:LoginViewModel by viewModels()
     private var isLogin:Boolean=false
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -48,7 +46,6 @@ class LoginFragment : Fragment(){
             param2 = it.getString(ARG_PARAM2)
         }
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -123,16 +120,13 @@ class LoginFragment : Fragment(){
                 bind.edtUserName.setText("")
                 bind.edtPassword.setText("")
                 goToAccountContent()
-
             }
         }
-
         viewModel.msgInfo.observe(viewLifecycleOwner){
             bind.root.showSnackbar(it)
             bind.btnLogin.isEnabled=true
             bind.btnLogin.setLoading(false)
         }
-
     }
     private fun goToAccountContent(){
         findNavController().navigate(R.id.userAccountFragment)
@@ -156,7 +150,6 @@ class LoginFragment : Fragment(){
             )
         }
     }
-
 
     companion object {
         @JvmStatic
