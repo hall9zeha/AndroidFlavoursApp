@@ -22,11 +22,10 @@ Importante: no olvide poner su clave de API en el archivo ```local.properties```
 Para seleccionar una variante y trabajar sobre ella puede hacerlo desde la vista de proyecto que nos muestra todos los paquetes.
 La vista de Android solo mostrará la variante seleccionada por defecto, así que para mostrar los paquetes y recursos de una variante en específico selecciónela de la pestaña buil variants en Android Studio.
 
-<p align="center" width="40%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/select_variant.jpg"  alt="drawing" width="40%" height="40%"/></p>
+<p align="left" width="40%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/select_variant.jpg"  alt="drawing" width="40%" height="40%"/></p>
 
 ## Estado del proyecto
 ![Badge Terminado](https://img.shields.io/badge/STATUS-%20TERMINADO-green)
-## Download demo 📂 [click here](https://github.com/hall9zeha/Modularized-Android-App/raw/main/docs/demo/notepad-release.apk)
 
 ## Se utilizó :wrench:
 
