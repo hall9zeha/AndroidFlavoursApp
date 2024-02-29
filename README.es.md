@@ -1,5 +1,5 @@
 # AndroidFlavoursApp
-<img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/src/free/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/>|<img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/paid/src/main/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/>
+<img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/app/src/free/res/mipmap-xxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/>|<img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/app/src/paid/res/mipmap-xxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/>
 
 Aplicación de Android escrita en Kotlin que usa la [API TMDB movies](https://developer.themoviedb.org/reference/intro/getting-started) para mostrar una lista de películas. Implementa diferentes variantes (flavours) para adaptarse a diversas necesidades y preferencias de los usuarios. 
 
