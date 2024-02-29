@@ -1,11 +1,16 @@
 # AndroidFlavoursApp
+<img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/src/free/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/>|<img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/paid/src/main/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/>
+
 Aplicación de Android escrita en Kotlin que usa la [API TMDB movies](https://developer.themoviedb.org/reference/intro/getting-started) para mostrar una lista de películas. Implementa diferentes variantes (flavours) para adaptarse a diversas necesidades y preferencias de los usuarios. 
+
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/README.md)
+
 ## Objetivo
 Aprender el uso y funcionamiento de variantes en una aplicación Android que comparten código en común y administrar las diferencias entre las variantes de la aplicación.
 ## Paquetes :card_file_box:
 * Main
 * Free (flavour)
-* Paid (flavour)
+* Paid (flavour) el nombre solo es descriptivo, no hay que pagar nada para usarlo :D
 ## Pre-requisitos :gear:
 * Java jdk 17
 * Android sdk 34
