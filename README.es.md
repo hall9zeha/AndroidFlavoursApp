@@ -1,7 +1,7 @@
 # AndroidFlavoursApp
 <img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/app/src/free/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/>|<img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/app/src/paid/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/>
 
-Aplicación de Android escrita en Kotlin que usa la [API TMDB movies](https://developer.themoviedb.org/reference/intro/getting-started) para mostrar una lista de películas. Implementa diferentes variantes (flavours) para adaptarse a diversas necesidades y preferencias de los usuarios. 
+Aplicación de Android escrita en Kotlin que usa la [API TMDB movies](https://developer.themoviedb.org/reference/intro/getting-started) para mostrar una lista de películas. Implementa diferentes variantes (flavors) para adaptarse a diversas necesidades y preferencias de los usuarios. 
 
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/README.md)
 
@@ -9,8 +9,8 @@ Aplicación de Android escrita en Kotlin que usa la [API TMDB movies](https://de
 Aprender el uso y funcionamiento de variantes en una aplicación Android que comparten código en común y administrar las diferencias entre las variantes de la aplicación.
 ## Paquetes :card_file_box:
 * Main
-* Free (flavour)
-* Paid (flavour) el nombre solo es descriptivo, no hay que pagar nada para usarlo :D
+* Free (flavor)
+* Paid (flavor) el nombre solo es descriptivo, no hay que pagar nada para usarlo :D
 ## Pre-requisitos :gear:
 * Java jdk 17
 * Android sdk 34
@@ -48,13 +48,13 @@ La vista de Android solo mostrará la variante seleccionada por defecto, así qu
 * [ViewModel](https://developer.android.com/jetpack/androidx/releases/lifecycle)
 
 ## Funciones :memo:
-* Free(flavour)
+* Free(flavor)
     - Muestra películas (recientes, populares, mejor valorados, etc.)
     - Posibilidad de filtrar por géneros
     - Detalle de película
     - Buscar película
     - Configuración
-* Paid(flavour)
+* Paid(flavor)
     - Todo el contenido de la variante Free
     - Iniciar sesión en tmdb movies
     - Lista de favoritos de la cuenta de usuario

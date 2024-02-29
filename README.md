@@ -1,15 +1,16 @@
 # AndroidFlavoursApp
 <img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/app/src/free/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/>|<img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/app/src/paid/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/>
 
-Android application written in Kotlin that utilizes the [API TMDB movies](https://developer.themoviedb.org/reference/intro/getting-started) to display a list of movies. It implements different variants (flavours) to cater to various user needs and preferences.
+Android application written in Kotlin that utilizes the [API TMDB movies](https://developer.themoviedb.org/reference/intro/getting-started) to display a list of movies. It implements different variants (flavors) to cater to various user needs and preferences.
+
 [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/README.md) [![es](https://img.shields.io/badge/lang-es-yellow.svg)](https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/README.es.md)
 
 ## Objective
 Learn how to use and manage variants in an Android application that share common code, and handle the differences between the application's variants.
 ## Packages :card_file_box:
 * Main
-* Free (flavour)
-* Paid (flavour) - The name is descriptive only; you don't have to pay anything to use it! :D
+* Free (flavor)
+* Paid (flavor) - The name is descriptive only; you don't have to pay anything to use it! :D
 ## Pre-requisitos :gear:
 * Java jdk 17
 * Android sdk 34
@@ -46,13 +47,13 @@ To select a variant and work on it, you can do so from the project view, which d
 * [ViewModel](https://developer.android.com/jetpack/androidx/releases/lifecycle)
 
 ## Features :memo:
-* Free(flavour)
+* Free(flavor)
     - Displays movies (recent, popular, top-rated, etc.)
     - Ability to filter by genres
     - Movie detail view
     - Movie search
 Settings
-* Paid(flavour)
+* Paid(flavor)
     - All content from the Free variant
     - Login to TMDb Movies
     - User account favorites list
