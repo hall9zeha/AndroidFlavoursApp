@@ -79,11 +79,9 @@ class MainActivity : AppCompatActivity(){
         viewModel.getPreferences()
         viewModel.preferences.observe(this){preferences->
             if(preferences.sessionId!!.isNotEmpty()){
-
                 loginViewModel.fetchUserDetail(preferences.sessionId)
                 sessionId=preferences.sessionId
                 isLogin=true
-                Log.e("TAG", sessionId.toString() )
             }else{
                 bind.tvUsername.text=""
                 isLogin=false

@@ -28,7 +28,6 @@ import kotlinx.coroutines.launch
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-
 @AndroidEntryPoint
 class LoginFragment : Fragment(){
 
@@ -65,8 +64,6 @@ class LoginFragment : Fragment(){
         setUpObservers()
 
     }
-
-
     private fun setUpListeners()= with(bind){
         edtPassword.setOnEditorActionListener { v, actionId, event ->
             if(actionId == EditorInfo.IME_ACTION_GO){
@@ -163,6 +160,7 @@ class LoginFragment : Fragment(){
     }
     override fun onDestroyView() {
         super.onDestroyView()
+        isLogin=false
         _bind=null
     }
 

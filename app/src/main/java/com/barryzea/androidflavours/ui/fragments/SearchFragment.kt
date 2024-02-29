@@ -1,18 +1,15 @@
 package com.barryzea.androidflavours.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.barryzea.androidflavours.R
-
 import com.barryzea.androidflavours.common.showSnackbar
 import com.barryzea.androidflavours.common.utils.PaginationRecyclerView
 import com.barryzea.androidflavours.data.entities.TmdbMovie
@@ -95,7 +92,7 @@ class SearchFragment : Fragment() {
                     val view = activity?.window?.decorView?.findViewById<View>(android.R.id.content)
                     view?.showSnackbar(getString(R.string.no_results, bind.edtSearch.text))
                     bind.amountFoundChip.apply {
-                        visibility=View.GONE
+                        visibility= View.GONE
                         text=""
                     }
                 }
@@ -117,7 +114,7 @@ class SearchFragment : Fragment() {
     }
     private fun setUpListeners()=with(bind){
 
-        (activity as? MainActivity)?.bind?.ctlHeader?.visibility=View.GONE
+        (activity as? MainActivity)?.bind?.ctlHeader?.visibility= View.GONE
 
         tilSearch.setEndIconOnClickListener {
             if(edtSearch.text.toString().isNotEmpty()){
@@ -155,7 +152,7 @@ class SearchFragment : Fragment() {
     private fun updateUi(domainMovie: DomainMovie?) {
         domainMovie?.let {
             bind.amountFoundChip.apply {
-                visibility=View.VISIBLE
+                visibility= View.VISIBLE
                 text=domainMovie.totalResult.toString()
             }
             setUpShimmerLayout(false)
