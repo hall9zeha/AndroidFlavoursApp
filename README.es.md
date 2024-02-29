@@ -19,6 +19,10 @@ Importante: no olvide poner su clave de API en el archivo ```local.properties```
 ```xml
     MY_API_KEY = "Reemplazar-este-texto-por-tu-clave"
 ```
+Para seleccionar una variante y trabajar sobre ella puede hacerlo desde la vista de proyecto que nos muestra todos los paquetes.
+La vista de Android solo mostrará la variante seleccionada por defecto, así que para mostrar los paquetes y recursos de una variante en específico selecciónela de la pestaña buil variants en Android Studio.
+
+<p align="center" width="40%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/select_variant.jpg"  alt="drawing" width="40%" height="40%"/></p>
 
 ## Estado del proyecto
 ![Badge Terminado](https://img.shields.io/badge/STATUS-%20TERMINADO-green)
@@ -40,6 +44,7 @@ Importante: no olvide poner su clave de API en el archivo ```local.properties```
 * [Navigation-component](https://developer.android.com/guide/navigation/navigation-getting-started)
 * [OkHttp](https://square.github.io/okhttp/)
 * [Retrofit](https://square.github.io/retrofit/)
+* [Safe Args](https://developer.android.com/guide/navigation/use-graph/safe-args)
 * [Shimmer layout](https://github.com/facebookarchive/shimmer-android)
 * [ViewModel](https://developer.android.com/jetpack/androidx/releases/lifecycle)
 
