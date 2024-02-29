@@ -24,7 +24,7 @@ To select a variant and work on it, you can do so from the project view, which d
 <p align="left" width="40%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/select_variant.jpg"  alt="drawing" width="40%" height="40%"/></p>
 
 ## Project status
-![Badge Terminado](https://img.shields.io/badge/STATUS-%20TERMINADO-green)
+![Badge Terminado](https://img.shields.io/badge/STATUS-%20FINISHED-green)
 
 ## It was used :wrench:
 
