@@ -1,11 +1,13 @@
 package com.barryzea.androidflavours.data.entities
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 /**
  * Project AndroidFlavours
  * Created by Barry Zea H. on 11/02/2024.
  **/
+
 
 data class CharacterMovie(
     @SerializedName("adult") val adult:Boolean=false,

@@ -16,22 +16,31 @@ import retrofit2.Response
  * Created by Barry Zea H. on 31/01/2024.
  **/
 class FetchMovies(private val repository: Repository):UseCases {
-    override suspend fun fetchMovies(genreId:Int?,page: Int) =  try {
-            val response = repository.fetchMovies(genreId,page)
-            if (response.isSuccessful){ TmdbResponse.Success(response.body()!!.toDomain())}
-            else{ TmdbResponse.Error(response.message())}
-          }catch(e:Exception){
+    override suspend fun fetchMovies(genreId:Int?,page: Int):TmdbResponse<DomainMovie> {
+       return try {
+            val response = repository.fetchMovies(genreId, page)
+            if (response.isSuccessful) {
+               TmdbResponse.Success(response.body()!!.toDomain())
+            } else {
+               TmdbResponse.Error(response.message())
+            }
+        } catch (e: Exception) {
             TmdbResponse.Error(e.message.toString())
         }
-    override suspend fun searchMovie(searchValue: String,page:Int?) = try {
-            val response = repository.searchMovie(searchValue,page)
-            if(response.isSuccessful){TmdbResponse.Success(response.body()!!)}
-            else{TmdbResponse.Error(response.message())}
+    }
+    override suspend fun searchMovie(searchValue: String,page:Int?):TmdbResponse<DomainMovie> {
+        return try {
+            val response = repository.searchMovie(searchValue, page)
+            if (response.isSuccessful) {
+                TmdbResponse.Success(response.body()!!.toDomain())
+            } else {
+                TmdbResponse.Error(response.message())
+            }
 
-        }catch(e:Exception){
+        } catch (e: Exception) {
             TmdbResponse.Error(e.message.toString())
         }
-
+    }
     override suspend fun fetchMoviesSortedBy(
         sortValue: String,
         page: Int

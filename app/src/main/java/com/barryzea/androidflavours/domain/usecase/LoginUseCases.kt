@@ -1,12 +1,9 @@
 package com.barryzea.androidflavours.domain.usecase
 
-import com.barryzea.androidflavours.data.entities.RequestToken
-import com.barryzea.androidflavours.data.entities.Session
 import com.barryzea.androidflavours.data.entities.TmdbResponse
-import com.barryzea.androidflavours.domain.entities.CreateSessionRequest
+import com.barryzea.androidflavours.data.entities.CreateSessionRequest
 import com.barryzea.androidflavours.domain.entities.DomainAuth
-import com.barryzea.androidflavours.domain.entities.ValidateLoginRequest
-import retrofit2.Response
+import com.barryzea.androidflavours.data.entities.ValidateLoginRequest
 
 /**
  * Project AndroidFlavours

@@ -20,10 +20,10 @@ import com.barryzea.androidflavours.ui.adapters.MovieAdapter
 import com.barryzea.androidflavours.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
+    private  val ARG_PARAM1 = "param1"
+    private  val ARG_PARAM2 = "param2"
 
     private var param1: String? = null
     private var param2: String? = null

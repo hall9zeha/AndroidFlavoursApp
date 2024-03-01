@@ -13,7 +13,7 @@ import retrofit2.Response
  **/
 interface Repository {
     suspend fun fetchMovies(genreId:Int?,page:Int):Response<TmdbResult>
-    suspend fun searchMovie(searchValue:String,page:Int?):Response<DomainMovie>
+    suspend fun searchMovie(searchValue:String,page:Int?):Response<TmdbResult>
     suspend fun fetchMoviesSortedBy(sortValue:String, page:Int):Response<TmdbResult>
     suspend fun fetchGenres():Response<Genres>
     suspend fun fetchCredits(idMovie:Int):Response<Cast>

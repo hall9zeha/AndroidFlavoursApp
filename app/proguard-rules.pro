@@ -19,3 +19,11 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep,allowobfuscation,allowshrinking interface retrofit2.Call
+-keep,allowobfuscation,allowshrinking class retrofit2.Response
+-keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
+-keep,allowobfuscation,allowshrinking class com.barryzea.androidflavours.data.entities.TmdbResponse
+# Evitamos que se ofusquen todas las clases dentro del paquete entities, que son las que necesitamos para retrofit
+-keep class com.barryzea.androidflavours.data.entities.** { *; }
+

@@ -4,8 +4,8 @@ import com.barryzea.androidflavours.data.entities.PostResponse
 import com.barryzea.androidflavours.data.entities.RequestToken
 import com.barryzea.androidflavours.data.entities.Session
 import com.barryzea.androidflavours.data.entities.User
-import com.barryzea.androidflavours.domain.entities.CreateSessionRequest
-import com.barryzea.androidflavours.domain.entities.ValidateLoginRequest
+import com.barryzea.androidflavours.data.entities.CreateSessionRequest
+import com.barryzea.androidflavours.data.entities.ValidateLoginRequest
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -31,13 +31,13 @@ interface TmdbLoginService {
     @POST("authentication/token/validate_with_login")
     suspend fun validateWithLogin(
         @Query("api_key")apiKey:String,
-        @Body request:ValidateLoginRequest
+        @Body request: ValidateLoginRequest
     ):Response<RequestToken>
 
     @POST("authentication/session/new")
     suspend fun createSession(
         @Query("api_key")apiKey: String,
-        @Body request:CreateSessionRequest
+        @Body request: CreateSessionRequest
     ):Response<Session>
 
     @DELETE("authentication/session")

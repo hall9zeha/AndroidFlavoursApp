@@ -30,7 +30,7 @@ interface TmdbApiService {
         @Query("api_key") apiKey:String,
         @Query("language")language: String,
         @Query("page")page:Int?
-    ):Response<DomainMovie>
+    ):Response<TmdbResult>
 
     @GET("genre/movie/list")
     suspend fun fetchGenres(

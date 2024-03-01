@@ -9,13 +9,12 @@ import com.barryzea.androidflavours.common.utils.DataStorePreferences
 import com.barryzea.androidflavours.common.utils.SingleMutableLiveData
 import com.barryzea.androidflavours.data.entities.PrefsEntity
 import com.barryzea.androidflavours.data.entities.TmdbResponse
-import com.barryzea.androidflavours.domain.entities.CreateSessionRequest
+import com.barryzea.androidflavours.data.entities.CreateSessionRequest
 import com.barryzea.androidflavours.domain.entities.DomainAuth
-import com.barryzea.androidflavours.domain.entities.ValidateLoginRequest
+import com.barryzea.androidflavours.data.entities.ValidateLoginRequest
 import com.barryzea.androidflavours.domain.usecase.LoginUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -60,7 +59,7 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases, va
     }
 
     // 2- Una vez recibido el token lo enviamos junto a nuestros datos de usuario a validar a la API
-    fun validateWithLogin(requestLogin:ValidateLoginRequest){
+    fun validateWithLogin(requestLogin: ValidateLoginRequest){
         viewModelScope.launch {
             Log.e("VALIDATE", "EJECUTADO" )
             //Ejecutamos la función del paso 1
@@ -87,7 +86,7 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases, va
         }
     }
     // 3- Mandamos una petición para crear la sesión
-    private fun createSession(requestToken:CreateSessionRequest){
+    private fun createSession(requestToken: CreateSessionRequest){
         viewModelScope.launch {
             Log.e("CREATE-SESSION", "EJECUTADO" )
             //Una vez creada la sesión de obtenido el token de sessión, manejamos dicho token como mejor nos convenga

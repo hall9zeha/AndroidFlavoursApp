@@ -2,23 +2,22 @@ package com.barryzea.androidflavours.domain.entities
 
 import com.barryzea.androidflavours.data.entities.TmdbMovie
 import com.barryzea.androidflavours.data.entities.TmdbResult
-import com.google.gson.annotations.SerializedName
 
 /**
  * Project AndroidFlavours
  * Created by Barry Zea H. on 04/02/2024.
  **/
 data class DomainMovie(
-    @SerializedName("page") val page:Int=0,
-    @SerializedName("total_pages") val totalPages:Int=0,
-    @SerializedName("total_results")val totalResult:Int=0,
-    @SerializedName("results") val movies:List<TmdbMovie> = arrayListOf()
+    val page:Int=0,
+    val totalPages:Int=0,
+    val totalResult:Int=0,
+    val movies:List<TmdbMovie> = arrayListOf()
 )
 fun TmdbResult.toDomain()=
     DomainMovie(
         page=page,
-        totalPages = total_pages,
-        totalResult = total_result,
+        totalPages = totalPages,
+        totalResult = totalResult,
         movies=movies
     )
 

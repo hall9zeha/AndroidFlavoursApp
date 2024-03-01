@@ -2,8 +2,8 @@ package com.barryzea.androidflavours.data.repository
 
 import com.barryzea.androidflavours.data.datasource.remote.RetrofitService
 import com.barryzea.androidflavours.data.entities.RequestToken
-import com.barryzea.androidflavours.domain.entities.CreateSessionRequest
-import com.barryzea.androidflavours.domain.entities.ValidateLoginRequest
+import com.barryzea.androidflavours.data.entities.CreateSessionRequest
+import com.barryzea.androidflavours.data.entities.ValidateLoginRequest
 import retrofit2.Response
 import javax.inject.Inject
 

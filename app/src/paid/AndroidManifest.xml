@@ -13,9 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/SplashScreenTheme"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.fragments.AccountMovieListFragment"
-            android:exported="false" />
+
     </application>
 
 </manifest>

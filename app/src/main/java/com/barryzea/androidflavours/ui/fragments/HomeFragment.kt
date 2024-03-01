@@ -1,6 +1,7 @@
 package com.barryzea.androidflavours.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,7 @@ import com.barryzea.androidflavours.common.showSnackbar
 import com.barryzea.androidflavours.common.utils.DotsIndicatorDecoration
 import com.barryzea.androidflavours.common.utils.PaginationRecyclerView
 import com.barryzea.androidflavours.data.entities.Genre
+import com.barryzea.androidflavours.data.entities.Genres
 import com.barryzea.androidflavours.data.entities.TmdbMovie
 import com.barryzea.androidflavours.databinding.FragmentHomeBinding
 import com.barryzea.androidflavours.domain.entities.DomainMovie
@@ -32,10 +34,10 @@ import com.barryzea.androidflavours.ui.adapters.MovieAdapter
 import com.barryzea.androidflavours.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
+    private val ARG_PARAM1 = "param1"
+    private val ARG_PARAM2 = "param2"
 
     private var _bind: FragmentHomeBinding?=null
     private val bind get() = _bind!!
@@ -122,17 +124,20 @@ class HomeFragment : Fragment() {
         }else{
             viewModel.fetchMovies(null,currentPage)
         }
+
         viewModel.fetchGenres()
         viewModel.movies.observe(viewLifecycleOwner, Observer(::updateUi))
         viewModel.infoMsg.observe(viewLifecycleOwner){
             bind.root.showSnackbar(it)
+            Log.e("ERROR_MSG", it )
         }
         viewModel.genres.observe(viewLifecycleOwner){response->
-            genresAdapter?.let{
-                it.add(response.genres)
+            response.genres?.let{
+                    genresAdapter?.add(it)
+                }
             }
         }
-    }
+
     private fun updateUi(domainMovie: DomainMovie?) {
         domainMovie?.let {
             setUpShimmerLayout(false)

@@ -2,7 +2,6 @@ package com.barryzea.androidflavours.ui.fragments
 
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,19 +10,13 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.barryzea.androidflavours.R
-import com.barryzea.androidflavours.common.LogoutCallBack
 import com.barryzea.androidflavours.common.showSnackbar
 import com.barryzea.androidflavours.databinding.FragmentLoginBinding
-import com.barryzea.androidflavours.domain.entities.ValidateLoginRequest
-import com.barryzea.androidflavours.ui.activities.MainActivity
+import com.barryzea.androidflavours.data.entities.ValidateLoginRequest
 import com.barryzea.androidflavours.ui.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.channels.consume
-import kotlinx.coroutines.channels.consumeEach
-import kotlinx.coroutines.launch
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"

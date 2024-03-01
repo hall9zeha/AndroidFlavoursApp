@@ -1,12 +1,13 @@
 package com.barryzea.androidflavours.data.entities
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 /**
  * Project AndroidFlavours
  * Created by Barry Zea H. on 13/02/2024.
- * Copyright (c)  All rights reserved.
  **/
+
 data class TrailerMovie(
     @SerializedName("name")val name:String?="",
     @SerializedName("key")val key:String?="",

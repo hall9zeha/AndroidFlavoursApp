@@ -1,6 +1,7 @@
 package com.barryzea.androidflavours.data.entities
 
 import android.os.Parcelable
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -8,6 +9,18 @@ import kotlinx.parcelize.Parcelize
  * Project AndroidFlavours
  * Created by Barry Zea H. on 03/02/2024.
  **/
+
+/*
+* Si utilizamos ofuscación de código con minifyEnabled=true en el proyecto, debemos evitar que se ofusque esta clase
+* ya que es utilizada como referencia para nuestro tipo de argumento a ser enviado por Safe Args en nuestro NavGraph:
+*
+* app:argType="com.barryzea.androidflavours.data.entities.TmdbMovie"
+*
+* al ofuscar el código el nombre de esta clase cambiará y la referencia hacia la misma se perderá provocando que nuestra
+* app se rompa.
+* Por eso debemos evitar que sea ofuscada agregándola a proguard-rules.pro o con la anotación @Keep
+*
+* */
 
 @Parcelize
 data class TmdbMovie(
