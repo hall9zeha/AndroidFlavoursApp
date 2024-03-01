@@ -75,6 +75,7 @@ class AccountMovieListFragment : Fragment() {
         onMenuItemSelected()
         setUpAdapter()
         setUpToolbar()
+        setUpListeners()
         setUpObservers()
         setUpPagination()
     }
@@ -101,6 +102,12 @@ class AccountMovieListFragment : Fragment() {
             setHasFixedSize(true)
             layoutManager=mLayoutManager
             adapter=mAdapter
+        }
+    }
+    private fun setUpListeners()=with(bind){
+        fabUp.setOnClickListener {
+            rvDetail.scrollToPosition(0)
+
         }
     }
     private fun setUpObservers(){
@@ -140,7 +147,7 @@ class AccountMovieListFragment : Fragment() {
     }
     private fun setUpPagination(){
         val bottomNav = (activity as? MainActivity)?.bind?.bottomNav
-       bind.rvDetail.addOnScrollListener(object: PaginationRecyclerView(bottomNav,mLayoutManager){
+       bind.rvDetail.addOnScrollListener(object: PaginationRecyclerView(bottomNav,bind.fabUp,mLayoutManager){
             override fun loadMoreItems() {
                 isLoading=true
                 currentPage+=1

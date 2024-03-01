@@ -135,6 +135,10 @@ class SearchFragment : Fragment() {
             }
             false
         }
+        bind.fabUp.setOnClickListener {
+            rvSearch.scrollToPosition(0)
+            appBarSearch.setExpanded(true)
+        }
     }
     private fun setUpShimmerLayout(enable:Boolean){
         if(enable){
@@ -168,7 +172,7 @@ class SearchFragment : Fragment() {
         //Obtenemos la referencia a nuestro bottomNavigationView que está en MainActivity para enviarla a nuestro paginador
         //del recyclerView y pueda mostrarlo u ocultarlo mientras nos desplazamos.
         val bottomNav = (activity as? MainActivity)?.bind?.bottomNav
-        bind.rvSearch.addOnScrollListener(object: PaginationRecyclerView(bottomNav,mLayoutManager){
+        bind.rvSearch.addOnScrollListener(object: PaginationRecyclerView(bottomNav,bind.fabUp,mLayoutManager){
             override fun loadMoreItems() {
                 isLoading=true
                 currentPage+=1

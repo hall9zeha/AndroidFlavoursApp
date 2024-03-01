@@ -99,6 +99,10 @@ class HomeFragment : Fragment() {
             movieAdapter?.clear()
             viewModel.fetchMovies(null,1) }
         bind.chipUpcoming.setOnClickListener {fetchMoviesByCategory(UPCOMING) }
+        bind.fabUp.setOnClickListener {
+            bind.rvMovies.scrollToPosition(0)
+            bind.appBarMain.setExpanded(true)
+        }
     }
     private fun fetchMoviesByCategory(category:String){
         fetchBy = BY_CATEGORY
@@ -198,7 +202,7 @@ class HomeFragment : Fragment() {
         //Obtenemos la referencia a nuestro bottomNavigationView que está en MainActivity para enviarla a nuestro paginador
         //del recyclerView y pueda mostrarlo u ocultarlo mientras nos desplazamos.
         val bottomNav = (activity as? MainActivity)?.bind?.bottomNav
-        bind.rvMovies.addOnScrollListener(object: PaginationRecyclerView(bottomNav,mLayoutManager){
+        bind.rvMovies.addOnScrollListener(object: PaginationRecyclerView(bottomNav,bind.fabUp,mLayoutManager){
             override fun loadMoreItems() {
                 isLoading=true
                 currentPage+=1
