@@ -15,7 +15,7 @@ import com.barryzea.androidflavours.domain.entities.DomainAuth
 import com.barryzea.androidflavours.domain.entities.toDomain
 import com.barryzea.androidflavours.domain.usecase.AccountUseCases
 import com.barryzea.androidflavours.domain.usecase.LoginUseCases
-import com.barryzea.androidflavours.domain.usecase.UseCases
+import com.barryzea.androidflavours.domain.usecase.MovieUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -30,7 +30,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(private val preferences: DataStorePreferences,
                                           private val loginUseCases: LoginUseCases,
-                                          private val useCases: UseCases,
+                                          private val useCases: MovieUseCases,
                                           private val accountUseCase:AccountUseCases) :ViewModel() {
     private var mSessionId:String?=null
 

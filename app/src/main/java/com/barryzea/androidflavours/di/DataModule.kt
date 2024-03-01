@@ -5,19 +5,16 @@ import com.barryzea.androidflavours.data.repository.LoginRepository
 import com.barryzea.androidflavours.data.repository.Repository
 import com.barryzea.androidflavours.domain.usecase.AccountUseCases
 import com.barryzea.androidflavours.domain.usecase.AccountUseCasesImpl
-import com.barryzea.androidflavours.domain.usecase.FetchMovies
+import com.barryzea.androidflavours.domain.usecase.MovieUseCasesImpl
 import com.barryzea.androidflavours.domain.usecase.LoginUseCases
 import com.barryzea.androidflavours.domain.usecase.LoginUseCasesImpl
-import com.barryzea.androidflavours.domain.usecase.UseCases
-import dagger.Binds
+import com.barryzea.androidflavours.domain.usecase.MovieUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
-import dagger.hilt.components.SingletonComponent
 import javax.inject.Named
-import javax.inject.Singleton
 
 /**
  * Project AndroidFlavours
@@ -29,7 +26,7 @@ import javax.inject.Singleton
 class DataModule {
     @ViewModelScoped
     @Provides
-    fun useCaseProvides(repository:Repository):UseCases = FetchMovies(repository)
+    fun useCaseProvides(repository:Repository):MovieUseCases = MovieUseCasesImpl(repository)
 
     @ViewModelScoped
     @Provides

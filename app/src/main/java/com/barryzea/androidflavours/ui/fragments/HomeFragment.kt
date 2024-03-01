@@ -129,7 +129,6 @@ class HomeFragment : Fragment() {
         viewModel.movies.observe(viewLifecycleOwner, Observer(::updateUi))
         viewModel.infoMsg.observe(viewLifecycleOwner){
             bind.root.showSnackbar(it)
-            Log.e("ERROR_MSG", it )
         }
         viewModel.genres.observe(viewLifecycleOwner){response->
             response.genres?.let{

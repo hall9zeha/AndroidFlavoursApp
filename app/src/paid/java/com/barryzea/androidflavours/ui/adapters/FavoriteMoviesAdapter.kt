@@ -32,7 +32,6 @@ class FavoriteMoviesAdapter(private val onItemClick:(TmdbMovie)->Unit):RecyclerV
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.onBind(moviesList[position])
     }
-
     override fun getItemCount() = moviesList.size
     inner class ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
         val bind= ItemMovieThumbnailBinding.bind(itemView)

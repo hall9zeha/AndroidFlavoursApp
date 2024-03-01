@@ -1,6 +1,7 @@
 package com.barryzea.androidflavours.common.utils
 
 import android.content.Context
+import android.util.Log
 import com.barryzea.androidflavours.R
 import okhttp3.Interceptor
 import okhttp3.Protocol
@@ -17,8 +18,8 @@ class MyInterceptor @Inject constructor(private val context:Context):Interceptor
     private var tryCount = 0
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val request:Request = chain.request()
-        val response = chain.proceed(request)
+        var request:Request = chain.request()
+        var response = chain.proceed(request)
         return when(response.code){
             400->{setResponse(response,chain,400, context.getString(R.string.msg_code_400))}
             401->{setResponse(response,chain,401, context.getString(R.string.msg_code_401))}
@@ -37,7 +38,6 @@ class MyInterceptor @Inject constructor(private val context:Context):Interceptor
                     tryCount++
                     response.close()
                     chain.call().clone().execute()
-
                 }
                 //Después de cumplir las cinco llamadas y no obtener un respuesta satisfactoria
                 //posteamos el mensaje recibido

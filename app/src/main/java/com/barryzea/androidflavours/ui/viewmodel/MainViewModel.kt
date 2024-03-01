@@ -11,9 +11,8 @@ import com.barryzea.androidflavours.data.entities.PrefsEntity
 import com.barryzea.androidflavours.data.entities.TmdbResponse
 import com.barryzea.androidflavours.domain.entities.DomainMovie
 import com.barryzea.androidflavours.domain.entities.toDomain
-import com.barryzea.androidflavours.domain.usecase.UseCases
+import com.barryzea.androidflavours.domain.usecase.MovieUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,7 +22,7 @@ import javax.inject.Inject
  **/
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val useCases: UseCases, private val prefs:DataStorePreferences) :ViewModel() {
+class MainViewModel @Inject constructor(private val useCases: MovieUseCases, private val prefs:DataStorePreferences) :ViewModel() {
 
     private var _movies:SingleMutableLiveData<DomainMovie> = SingleMutableLiveData()
     val  movies:SingleMutableLiveData<DomainMovie> = _movies
