@@ -8,6 +8,7 @@ import com.barryzea.androidflavours.common.utils.SingleMutableLiveData
 import com.barryzea.androidflavours.data.entities.TmdbMovie
 import com.barryzea.androidflavours.data.entities.TmdbResponse
 import com.barryzea.androidflavours.domain.entities.DomainMovie
+import com.barryzea.androidflavours.domain.entities.toDomain
 import com.barryzea.androidflavours.domain.usecase.AccountUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
@@ -33,7 +34,7 @@ class AccountViewModel @Inject constructor(private val useCases: AccountUseCases
     fun fetchMyFavoriteMovies(accountId:String,sessionId:String, page:Int){
         viewModelScope.launch {
             when(val response = useCases.fetchMyFavoriteMovies(accountId,sessionId, page)){
-                is TmdbResponse.Success->_favoriteList.value = response.tmdbResult
+                is TmdbResponse.Success->_favoriteList.value = response.tmdbResult.toDomain()
                 is TmdbResponse.Error->_msgInfo.value = response.msg
             }
         }
@@ -41,7 +42,7 @@ class AccountViewModel @Inject constructor(private val useCases: AccountUseCases
     fun fetchMyWatchlistMovies(accountId:String,sessionId:String, page:Int){
         viewModelScope.launch {
             when(val response = useCases.fetchMyWatchlistMovies(accountId,sessionId, page)){
-                is TmdbResponse.Success->_watchlist.value = response.tmdbResult
+                is TmdbResponse.Success->_watchlist.value = response.tmdbResult.toDomain()
                 is TmdbResponse.Error->_msgInfo.value = response.msg
             }
         }

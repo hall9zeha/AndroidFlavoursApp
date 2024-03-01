@@ -10,6 +10,7 @@ import com.barryzea.androidflavours.data.entities.Genres
 import com.barryzea.androidflavours.data.entities.PrefsEntity
 import com.barryzea.androidflavours.data.entities.TmdbResponse
 import com.barryzea.androidflavours.domain.entities.DomainMovie
+import com.barryzea.androidflavours.domain.entities.toDomain
 import com.barryzea.androidflavours.domain.usecase.UseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -57,7 +58,7 @@ class MainViewModel @Inject constructor(private val useCases: UseCases, private 
         viewModelScope.launch {
             when(val response = useCases.fetchMovies(genreId,page)){
                 is TmdbResponse.Success ->{
-                    _movies.value= response.tmdbResult
+                    _movies.value= response.tmdbResult.toDomain()
                 }
                 is TmdbResponse.Error->{
                     _infoMsg.value = response.msg
@@ -69,7 +70,7 @@ class MainViewModel @Inject constructor(private val useCases: UseCases, private 
         viewModelScope.launch {
             when(val response = useCases.fetchMoviesSortedBy(sortedValue,page)){
                 is TmdbResponse.Success ->{
-                    _movies.value=response.tmdbResult
+                    _movies.value=response.tmdbResult.toDomain()
                 }
                 is TmdbResponse.Error->{
                     _infoMsg.value = response.msg
@@ -81,7 +82,7 @@ class MainViewModel @Inject constructor(private val useCases: UseCases, private 
         viewModelScope.launch{
             when(val response = useCases.searchMovie(searchValue,page)){
                 is TmdbResponse.Success->{
-                    _moviesFound.value= response.tmdbResult
+                    _moviesFound.value= response.tmdbResult.toDomain()
                 }
                 is TmdbResponse.Error->{
                     _infoMsg.value = response.msg

@@ -12,6 +12,7 @@ import com.barryzea.androidflavours.data.entities.TmdbResponse
 import com.barryzea.androidflavours.data.entities.CreateSessionRequest
 import com.barryzea.androidflavours.domain.entities.DomainAuth
 import com.barryzea.androidflavours.data.entities.ValidateLoginRequest
+import com.barryzea.androidflavours.domain.entities.toDomain
 import com.barryzea.androidflavours.domain.usecase.LoginUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -52,7 +53,7 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases, va
             when (val response = useCases.getRequestToken()) {
                 is TmdbResponse.Success-> if(response.tmdbResult.success){
                     //Si se recibió el token lo enviamos a través de nuestro canal a las corrutinas que lo observan
-                   sessionTokenChannel.send(response.tmdbResult.token!!)}
+                   sessionTokenChannel.send(response.tmdbResult.toDomain().token!!)}
                 is TmdbResponse.Error-> _msgInfo.value = response.msg
             }
         }
@@ -76,7 +77,7 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases, va
                 when (val response = useCases.validateWithLogin(requestUser)) {
                     is TmdbResponse.Success -> {
                         if (response.tmdbResult.success) {
-                            createSession(CreateSessionRequest(response.tmdbResult.token))
+                            createSession(CreateSessionRequest(response.tmdbResult.toDomain().token))
                         } else _msgInfo.value = "Usuario o password incorrectos"
                     }
 
@@ -93,7 +94,7 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases, va
             //En este caso se guardará en preferencias
             when(val response = useCases.createSession(requestToken)){
                 is TmdbResponse.Success-> if(response.tmdbResult.success){
-                    _createdSessionId.value=response.tmdbResult.token!!
+                    _createdSessionId.value=response.tmdbResult.toDomain().token!!
                 }
                 is TmdbResponse.Error-> _msgInfo.value = response.msg
             }
@@ -118,7 +119,7 @@ class LoginViewModel @Inject constructor(private val useCases: LoginUseCases, va
     fun fetchUserDetail(sessionId: String){
         viewModelScope.launch {
             when(val response = useCases.fetchUserDetails(sessionId)){
-                is TmdbResponse.Success->_userDetail.value=response.tmdbResult
+                is TmdbResponse.Success->_userDetail.value=response.tmdbResult.toDomain()
                 is TmdbResponse.Error->_msgInfo.value=response.msg
             }
         }

@@ -13,9 +13,9 @@ import com.barryzea.androidflavours.domain.entities.DomainMovie
 * de código más agresiva, por eso debemos evitar que las clases que tendrán cambios en tiempo de ejecución (Reflection)
 * así como las llamadas a cuaquier API que tengan el mismo comportamiento no sean ofuscadas.
 *
-* O simplemente puede colocarse android.enableR8.fullMode en gradle.properties
+* O simplemente puede colocarse "android.enableR8.fullMode = false" en gradle.properties
 *
-* (revisar el archivo de proguard para ver algunas clases de retrofit agregadas)
+* (revisar el archivo de proguard para ver las reglas agregadas)
 * */
 @Keep
 sealed class TmdbResponse<out T:Any> {

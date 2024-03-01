@@ -4,9 +4,11 @@ import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import com.barryzea.androidflavours.R
+import com.barryzea.androidflavours.data.entities.TmdbResponse
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.snackbar.Snackbar
+import retrofit2.Response
 
 /**
  * Project AndroidFlavours
@@ -31,3 +33,5 @@ fun ImageView.loadRes(resource:Int,placeholder:Int=R.drawable.placeholder_movie)
         .into(this)
 fun View.showSnackbar(msg:String, duration:Int=Snackbar.LENGTH_SHORT)=
     run { Snackbar.make(this,msg,duration).show() }
+
+

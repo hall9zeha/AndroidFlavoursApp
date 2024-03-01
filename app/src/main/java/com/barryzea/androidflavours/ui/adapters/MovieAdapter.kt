@@ -66,10 +66,12 @@ class MovieAdapter(private val onItemClick:(TmdbMovie)->Unit): RecyclerView.Adap
         listMovies.add(TmdbMovie())
     }
     fun removeLoadingItem(){
-        isLoading=false
-        val position = listMovies.size-1
-        listMovies.removeAt(position)
-        notifyItemRemoved(position)
+        if(listMovies.isNotEmpty()) {
+            isLoading = false
+            val position = listMovies.size - 1
+            listMovies.removeAt(position)
+            notifyItemRemoved(position)
+        }
     }
     override fun getItemCount()=listMovies.size
 

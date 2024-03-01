@@ -6,10 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.barryzea.androidflavours.common.utils.DataStorePreferences
 import com.barryzea.androidflavours.common.utils.SingleMutableLiveData
+import com.barryzea.androidflavours.data.entities.Cast
 import com.barryzea.androidflavours.data.entities.CharacterMovie
 import com.barryzea.androidflavours.data.entities.TmdbResponse
 import com.barryzea.androidflavours.data.entities.TrailerMovie
+import com.barryzea.androidflavours.data.entities.Trailers
 import com.barryzea.androidflavours.domain.entities.DomainAuth
+import com.barryzea.androidflavours.domain.entities.toDomain
 import com.barryzea.androidflavours.domain.usecase.AccountUseCases
 import com.barryzea.androidflavours.domain.usecase.LoginUseCases
 import com.barryzea.androidflavours.domain.usecase.UseCases
@@ -64,7 +67,7 @@ class DetailViewModel @Inject constructor(private val preferences: DataStorePref
     private fun fetUserDetail(sessionId:String){
         viewModelScope.launch {
             when(val response = loginUseCases.fetchUserDetails(sessionId)){
-                is TmdbResponse.Success->_userDetail.value=response.tmdbResult
+                is TmdbResponse.Success->_userDetail.value=response.tmdbResult.toDomain()
                 is TmdbResponse.Error->_infoMsg.value=response.msg
             }
         }
@@ -92,14 +95,16 @@ class DetailViewModel @Inject constructor(private val preferences: DataStorePref
             when {
                 credits is TmdbResponse.Success ->{
                     //A causa de que nuestra clase TmdbResponse es de tipo genérico debemos castear al tipo  de dato esperado, según corresponda
-                    _credits.value = credits.tmdbResult as List<CharacterMovie>
+                    //_credits.value = (credits.tmdbResult as List<CharacterMovie>)
+                    _credits.value = (credits.tmdbResult as Cast).cast
                 }
                 trailers is TmdbResponse.Success -> {
 
                     //Para reproducir los trailers de youtube se debe de obtener una key al registrar la app en nuestra cuenta
                     //de desarrollador e implementado la librería de youtube, ya que VideoView  no reproduce videos de youtube
                     //como si lo hacía antiguamente.
-                    _trailers.value = trailers.tmdbResult as List<TrailerMovie>
+                    //_trailers.value = trailers.tmdbResult as List<TrailerMovie>
+                    _trailers.value = (trailers.tmdbResult as Trailers).trailers
                 }
 
                 credits is TmdbResponse.Error -> {
@@ -116,7 +121,7 @@ class DetailViewModel @Inject constructor(private val preferences: DataStorePref
             mSessionId?.let{sessionId->
                 val response = accountUseCase.addToFavorite(_userDetail.value?.id!!, sessionId,idMovie)
                 when(response){
-                    is TmdbResponse.Success->_favoriteAdded.value=response.tmdbResult
+                    is TmdbResponse.Success->_favoriteAdded.value=response.tmdbResult.toDomain()
                     is TmdbResponse.Error->_infoMsg.value=response.msg
                 }
             }
@@ -127,7 +132,7 @@ class DetailViewModel @Inject constructor(private val preferences: DataStorePref
             mSessionId?.let{sessionId->
                 val response = accountUseCase.addToWatchlist(_userDetail.value?.id!!, sessionId,idMovie)
                 when(response){
-                    is TmdbResponse.Success->_watchlistAdded.value=response.tmdbResult
+                    is TmdbResponse.Success->_watchlistAdded.value=response.tmdbResult.toDomain()
                     is TmdbResponse.Error->_infoMsg.value=response.msg
                 }
             }
