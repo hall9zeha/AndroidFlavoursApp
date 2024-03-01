@@ -26,4 +26,5 @@
 -keep,allowobfuscation,allowshrinking class com.barryzea.androidflavours.data.entities.TmdbResponse
 # Evitamos que se ofusquen todas las clases dentro del paquete entities, que son las que necesitamos para retrofit
 -keep class com.barryzea.androidflavours.data.entities.** { *; }
+-keep class com.barryzea.androidflavours.common.HelpersKt
 
