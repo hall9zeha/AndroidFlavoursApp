@@ -31,3 +31,9 @@ inline fun <reified T:Any> handleRequest(block: () -> Response<T>): TmdbResponse
         TmdbResponse.Error(e.message.toString())
     }
 }
+fun getYoutubeVideoPath(videoPath: String): String {
+    return YOUTUBE_VIDEO_URL + videoPath
+}
+fun getYoutubeThumbnailPath(thumbnailPath: String): String {
+    return "$YOUTUBE_THUMBNAIL_URL$thumbnailPath/default.jpg"
+}

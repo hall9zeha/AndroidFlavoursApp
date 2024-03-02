@@ -17,3 +17,6 @@ const val NONE =0
 // Para identificar el tipo de lista a mostrar, referido a las listas de películas del usuario
 const val FAVORITES_LIST = 1
 const val WATCH_LIST = 2
+
+const val YOUTUBE_VIDEO_URL = "https://www.youtube.com/watch?v="
+const val YOUTUBE_THUMBNAIL_URL = "https://img.youtube.com/vi/"

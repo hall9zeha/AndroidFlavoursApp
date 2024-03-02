@@ -202,6 +202,7 @@ class HomeFragment : Fragment() {
         //Obtenemos la referencia a nuestro bottomNavigationView que está en MainActivity para enviarla a nuestro paginador
         //del recyclerView y pueda mostrarlo u ocultarlo mientras nos desplazamos.
         val bottomNav = (activity as? MainActivity)?.bind?.bottomNav
+
         bind.rvMovies.addOnScrollListener(object: PaginationRecyclerView(bottomNav,bind.fabUp,mLayoutManager){
             override fun loadMoreItems() {
                 isLoading=true
