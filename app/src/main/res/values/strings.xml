@@ -52,4 +52,5 @@
     <string name="session_created">Session created</string>
     <string name="miscellany">Miscellany</string>
     <string name="about_this_msg">"TMDB App \n An example application that implements flavors or variants in Android and displays a large collection of movies \n with the power of the Tmdb movies API \n \n \n Version %s"</string>
+    <string name="trailers">Trailers</string>
 </resources>

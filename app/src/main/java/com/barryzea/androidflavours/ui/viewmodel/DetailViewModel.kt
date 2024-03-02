@@ -1,5 +1,6 @@
 package com.barryzea.androidflavours.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -93,21 +94,13 @@ class DetailViewModel @Inject constructor(private val preferences: DataStorePref
             val (credits, trailers) = awaitAll(creditsDef, trailersDef)
 
             when {
-                credits is TmdbResponse.Success ->{
+                (credits is TmdbResponse.Success && trailers is TmdbResponse.Success) ->{
                     //A causa de que nuestra clase TmdbResponse es de tipo genérico debemos castear al tipo  de dato esperado, según corresponda
                     //_credits.value = (credits.tmdbResult as List<CharacterMovie>)
                     _credits.value = (credits.tmdbResult as Cast).cast
-                }
-                trailers is TmdbResponse.Success -> {
-
-                    //Para reproducir los trailers de youtube se debe de obtener una key al registrar la app en nuestra cuenta
-                    //de desarrollador e implementado la librería de youtube, ya que VideoView  no reproduce videos de youtube
-                    //como si lo hacía antiguamente.
-                    //_trailers.value = trailers.tmdbResult as List<TrailerMovie>
                     _trailers.value = (trailers.tmdbResult as Trailers).trailers
                 }
-
-                credits is TmdbResponse.Error -> {
+               credits is TmdbResponse.Error -> {
                     _infoMsg.value = credits.msg
                 }
 
@@ -115,6 +108,7 @@ class DetailViewModel @Inject constructor(private val preferences: DataStorePref
                     _infoMsg.value=trailers.msg
                 }
             }
+
         }}
     fun addToFavorite(idMovie:Int){
         viewModelScope.launch {

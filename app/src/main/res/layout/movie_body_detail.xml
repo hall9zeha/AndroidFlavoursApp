@@ -27,4 +27,22 @@
         tools:listitem="@layout/character_item"
         tools:orientation="horizontal"
         tools:visibility="visible" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTrailersTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_padding_default"
+        android:text="@string/trailers"
+        android:textAppearance="?attr/textAppearanceTitleLarge"
+         />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTrailers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_padding_min"
+        android:visibility="gone"
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_video"
+        tools:orientation="horizontal"
+        tools:visibility="visible" />
 </LinearLayout>

@@ -15,6 +15,7 @@ import com.barryzea.androidflavours.common.loadUrl
 import com.barryzea.androidflavours.common.showSnackbar
 import com.barryzea.androidflavours.databinding.ActivityDetailBinding
 import com.barryzea.androidflavours.ui.adapters.CharacterAdapter
+import com.barryzea.androidflavours.ui.adapters.VideoAdapter
 import com.barryzea.androidflavours.ui.viewmodel.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +27,7 @@ class DetailActivity : AppCompatActivity() {
     private val args:DetailActivityArgs by navArgs()
     private val detailViewModel:DetailViewModel by viewModels()
     private var characterAdapter:CharacterAdapter?=null
+    private var videoAdapter:VideoAdapter?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = ActivityDetailBinding.inflate(layoutInflater)
@@ -72,10 +74,16 @@ class DetailActivity : AppCompatActivity() {
     }
     private fun setUpAdapter(){
         characterAdapter= CharacterAdapter()
+        videoAdapter = VideoAdapter()
         bind.body.rvCharacters.apply {
             layoutManager = LinearLayoutManager(this@DetailActivity, LinearLayoutManager.HORIZONTAL,false)
             setHasFixedSize(true)
             adapter = characterAdapter
+        }
+        bind.body.rvTrailers.apply {
+            layoutManager = LinearLayoutManager(this@DetailActivity, LinearLayoutManager.HORIZONTAL,false)
+            setHasFixedSize(true)
+            adapter = videoAdapter
         }
     }
     private fun setUpObservers(){
@@ -93,6 +101,14 @@ class DetailActivity : AppCompatActivity() {
                 //prácticamente imperceptible
                 bind.scrollViewMain.scrollTo(0,0)
             }
+        }
+        detailViewModel.trailers.observe(this){trailers->
+            trailers?.let {
+                bind.body.rvTrailers.visibility = View.VISIBLE
+                videoAdapter?.addAll(trailers)
+                bind.scrollViewMain.scrollTo(0, 0)
+            }
+
         }
         detailViewModel.infoMsg.observe(this){
             bind.root.showSnackbar(it)
