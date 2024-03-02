@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: set up JDK 17
+      - name: set up JDK
         uses: actions/setup-java@v3
         with:
           java-version: '17'
@@ -24,5 +24,12 @@ jobs:
       - name: Make gradle executable
         run: chmod +x ./gradlew
 
+      - name: Touch local properties
+        run: touch local.properties
+
+      - name: Add Api Key
+        run: echo "MY_API_KEY=\"\"" >> local.properties
+
       - name: Build App
         run: ./gradlew assemble
+
