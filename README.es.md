@@ -75,7 +75,7 @@ La vista de Android solo mostrará la variante seleccionada por defecto, así qu
 |<p align="center">Paid</p>|<p align="center">Paid</p>||
 |<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen10.jpg"  alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen11.jpg"  alt="drawing" width="70%" height="70%"/></p>
 
-# License
+# Licencia
 ```xml
 The MIT License (MIT)
 
