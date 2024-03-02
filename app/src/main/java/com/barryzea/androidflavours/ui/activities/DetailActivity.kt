@@ -54,7 +54,7 @@ class DetailActivity : AppCompatActivity() {
         movInfo.tvTitle.text=m?.originalTitle
         movInfo.tvRelease.text = m?.releaseDate
         movInfo.tvPopularity.text=getString(R.string.popularity) + m?.popularity.toString()
-        movInfo.ratingDetail.rating=m?.voteAverage!!.toFloat()
+        movInfo.ratingDetail.rating=m?.voteAverage!!.toFloat() / 2
         //detailViewModel.fetchMovieCredits(m!!.id)
         detailViewModel.fetchCreditsAndTrailer(m!!.id)
 
