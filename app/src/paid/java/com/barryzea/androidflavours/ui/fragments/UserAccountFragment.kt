@@ -96,7 +96,7 @@ class UserAccountFragment : Fragment() {
     }
 
     private fun setUpObservers(){
-        loginViewModel.checkIfSessionIsCreated()
+        //loginViewModel.checkIfSessionIsCreated()
         loginViewModel.sessionIdPrefs.observe(viewLifecycleOwner){sessionIdSaved->
             if(sessionIdSaved.isNotEmpty()){
                 isLogin = true
@@ -112,12 +112,14 @@ class UserAccountFragment : Fragment() {
             favorites?.let{
                 bind.shimmerLoader.shimmerHorizontalLoader.visibility=View.GONE
                 mFavoritesAdapter?.addAll(it.movies)
+                bind.rvFavorites.scrollToPosition(0)
             }
         }
         accountViewModel.watchlist.observe(viewLifecycleOwner){watchlist->
             watchlist?.let{
                 bind.shimmerLoader.shimmerHorizontalLoader.visibility=View.GONE
                 mWatchListAdapter?.addAll(it.movies)
+                bind.rvWatchList.scrollToPosition(0)
             }
         }
         accountViewModel.msgInfo.observe(viewLifecycleOwner){
@@ -125,6 +127,11 @@ class UserAccountFragment : Fragment() {
         }
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loginViewModel.checkIfSessionIsCreated()
     }
     override fun onDestroyView() {
         super.onDestroyView()

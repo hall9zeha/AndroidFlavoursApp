@@ -24,15 +24,16 @@ class FavoriteMoviesAdapter(private val onItemClick:(TmdbMovie)->Unit):RecyclerV
     fun addAll(movies:List<TmdbMovie>){
         movies.forEach {movie->
             if(!moviesList.contains(movie)){
-                moviesList.add(movie)
-                notifyItemInserted(moviesList.size-1)
+                moviesList.add(0,movie)
+                notifyItemInserted(0)
             }
         }
     }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.onBind(moviesList[position])
     }
-    override fun getItemCount() = moviesList.size
+    override fun getItemCount() = if(moviesList.size > 0) 6 else 0
     inner class ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
         val bind= ItemMovieThumbnailBinding.bind(itemView)
         fun onBind(movie:TmdbMovie)=with(bind){

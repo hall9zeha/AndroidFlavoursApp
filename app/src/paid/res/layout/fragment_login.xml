@@ -5,6 +5,17 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.LoginFragment">
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivAppIcon"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tmdb_splash_letters"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tilUserName"
+        android:layout_marginBottom="@dimen/common_padding_default"
+        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilUserName"
