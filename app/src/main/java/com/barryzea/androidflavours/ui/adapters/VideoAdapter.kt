@@ -1,6 +1,8 @@
 package com.barryzea.androidflavours.ui.adapters
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +45,11 @@ class VideoAdapter:RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
         val bind = ItemVideoBinding.bind(itemView)
         fun onBind(trailer:TrailerMovie) = with(bind){
             itemVideoCover.loadUrl(getYoutubeThumbnailPath(trailer.key.toString()))
+            root.setOnClickListener {
+                root.context.startActivity(
+                    Intent(Intent.ACTION_VIEW, Uri.parse(getYoutubeVideoPath(trailer.key.toString())))
+                )
+            }
         }
     }
 }
