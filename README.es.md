@@ -1,5 +1,7 @@
 # AndroidFlavoursApp
-<img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/app/src/free/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/>|<img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/app/src/paid/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/>
+<div align="center">
+<img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/app/src/free/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/app/src/paid/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/>
+</div>
 
 <p align="center">
   <a href="https://opensource.org/licenses/mit"><img alt="License" src="https://img.shields.io/badge/License-MIT-yellow.svg"/></a>
@@ -86,7 +88,7 @@ La vista de Android solo mostrará la variante seleccionada por defecto, así qu
 ```xml
 The MIT License (MIT)
 
-Copyright (c) 2024 Barry zea H.
+Copyright (c) 2024 Barry Zea H.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
