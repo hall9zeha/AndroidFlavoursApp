@@ -44,7 +44,6 @@ La vista de Android solo mostrará la variante seleccionada por defecto, así qu
 * [Android-splash-screen](https://developer.android.com/develop/ui/views/launch/splash-screen)
 * [API TMDB movies](https://developer.themoviedb.org/reference/intro/getting-started)
 * [Clean code](https://developer.android.com/topic/architecture)
-* [ColorPickerView](https://github.com/skydoves/ColorPickerView)
 * [Data-store-preferences](https://developer.android.com/topic/libraries/architecture/datastore)
 * [Glide](https://developer.android.com/training/dependency-injection/hilt-android)
 * [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
