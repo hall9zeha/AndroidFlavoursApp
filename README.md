@@ -1,6 +1,6 @@
 # AndroidFlavoursApp
 <div align="center">
-<img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/app/src/free/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/app/src/paid/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%" height="24%"/>
+<img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/app/src/free/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%"/><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/app/src/paid/res/mipmap-xxxhdpi/ic_launcher.webp"  alt="drawing" width="24%"/>
 </div>
 <p align="center">
   <a href="https://opensource.org/licenses/mit"><img alt="License" src="https://img.shields.io/badge/License-MIT-yellow.svg"/></a>
@@ -28,7 +28,7 @@ Important: Don't forget to add your API key in the ```local.properties``` file i
 ```
 To select a variant and work on it, you can do so from the project view, which displays all the packages. The Android view will only show the default selected variant. To display the packages and resources of a specific variant, select it from the "Build Variants" tab in Android Studio.
 
-<p align="left" width="40%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/select_variant.jpg"  alt="drawing" width="40%" height="40%"/></p>
+<p align="left" width="40%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/select_variant.jpg"  alt="drawing" width="40%"/></p>
 
 ## Download apk demo 📂 [click here](https://github.com/hall9zeha/AndroidFlavoursApp/raw/main/docs/demo/tmdb-pro.apk)
 
@@ -72,13 +72,13 @@ Settings
 
 |<p align="center">Free(splash screen)</p>|<p align="center">Paid(splash screen)</p>|<p align="center">Free</p>|
 |--|--|--|
-|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen1.jpg"  alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen2.jpg" alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen3.jpg"  alt="drawing" width="70%" height="70%"/></p>
+|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen1.jpg"  alt="drawing" width="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen2.jpg" alt="drawing" width="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen3.jpg"  alt="drawing" width="70%"/></p>
 |<p align="center">Paid</p>|<p align="center">Free/Paid</p>|<p align="center">Free/Paid</p>|
-|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen4.jpg"  alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen5.jpg"  alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen6.jpg"  alt="drawing" width="70%" height="70%"/></p>
+|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen4.jpg"  alt="drawing" width="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen5.jpg"  alt="drawing" width="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen6.jpg"  alt="drawing" width="70%"/></p>
 |<p align="center">Free/Paid</p>|<p align="center">Paid</p>|<p align="center">Paid</p>|
-|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen7.jpg"  alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen8.jpg"  alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen9.jpg"  alt="drawing" width="70%" height="70%"/></p>
+|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen7.jpg"  alt="drawing" width="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen8.jpg"  alt="drawing" width="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen9.jpg"  alt="drawing" width="70%"/></p>
 |<p align="center">Paid</p>|<p align="center">Paid</p>||
-|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen10.jpg"  alt="drawing" width="70%" height="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen11.jpg"  alt="drawing" width="70%" height="70%"/></p>
+|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen10.jpg"  alt="drawing" width="70%"/></p>|<p align="center" width="70%"><img src="https://github.com/hall9zeha/AndroidFlavoursApp/blob/main/docs/screenshots/screen11.jpg"  alt="drawing" width="70%"/></p>
 
 # License
 ```xml
